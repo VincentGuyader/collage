@@ -42,6 +42,7 @@ print.unebase<- function(x,...){
 
   cat( "base de ",nrow(bb$base)," tuiles \n")
 
+
 }
 
 
