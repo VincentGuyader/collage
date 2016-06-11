@@ -8,3 +8,4 @@ t_array<-function(ttuc){
   ttuc[,,3]<-t(ttuc[,,3])
   return(ttuc)
 }
+
