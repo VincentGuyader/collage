@@ -67,7 +67,9 @@ pixel<-function(file,lig,col,base,target=NULL){
   liste<-    base$read[as.character(corresp$pict)]
   # base$read["base/base-1-1-0.45.jpg"]
 
-  out<-t_array(prodgrille(liste,lig,col))
+  # out<-t_array(prodgrille(liste,lig,col))
+
+  out<-prodgrille(liste,lig,col)
 
   if (length(target)!=0){
     print(target)
