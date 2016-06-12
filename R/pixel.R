@@ -107,21 +107,22 @@ pixel<-function(file,lig,col,base,target=NULL){
     V2()->BONdist
   }
   print("fin calcul distance")
+# microbenchmark::microbenchmark(
+#   correspA<-cbind(test,pict=apply(test,MARGIN=1,FUN=function(vec){names(which.min(BONdist[rownames(BONdist)==vec$nom,]))})),
+#   correspB<-cbind(test,pict=colnames(BONdist)[BONdist %>% t() %>% as.data.frame() %>% sapply(which.min)]),
+#   correspC<-cbind(test,pict=colnames(BONdist)[sapply(as.data.frame(t(BONdist)),which.min)])
+# ,times = 10)# 245
 
-  corresp<-cbind(test,pict=apply(test,MARGIN=1,FUN=function(vec){names(which.min(BONdist[rownames(BONdist)==vec$nom,]))}))
+corresp<-cbind(test,pict=colnames(BONdist)[sapply(as.data.frame(t(BONdist)),which.min)])
 
   print("on plot")
   print(dim(corresp))
-  # plotcorresp(corresp,img,lesread=base$read)
-
-  #     return(list(corresp=corresp,img=img,lesread=base$read))
-  #     plotcorresp(corresp,img,lesread=base$read)
-
   liste<-    base$read[as.character(corresp$pict)]
   # base$read["base/base-1-1-0.45.jpg"]
   # out<-t_array(prodgrille(liste,lig,col))
-  out<-aperm(prodgrille(liste,lig,col),c(2,1,3))
-
+  microbenchmark::microbenchmark(
+  out<-aperm(prodgrille(liste,lig,col),c(2,1,3)),times=10
+)#861
   # out<-prodgrille(liste,lig,col)
 
   if (length(target)!=0){

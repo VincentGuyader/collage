@@ -22,7 +22,7 @@ out<-setNames(cbind(1,1,1,data.frame(matrix(mc$rgb,nrow=1)),mc$html),c("nom","li
 
 if (length(redim)!=0){
   out<-list(tab=out,read=
-              monsize(lim,redim[1],redim[2])
+              resize(lim,redim[1],redim[2])
   )
   class(out)<-"tuile"
   return(out)
@@ -67,7 +67,7 @@ decoupsynth<-function(img,lig=10,col=10,redim=NULL){
   if (length(redim)!=0){
 
     return(list(tab=out,read=
-                  monsize(img,redim[1],redim[2])
+                  resize(img,redim[1],redim[2])
                 ))
   }
 out<- list(tab=out,read=img)

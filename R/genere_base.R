@@ -8,21 +8,18 @@
 #' @export
 
 
-genre_base<-function(chemin="base",redim=NULL){
+genre_base<-function(chemin="base",redim=NULL,verbose=FALSE){
+  # elle charge tout en RAM
   print("A")
   nom<-list.files(chemin,full.names = TRUE)
-  tout<-lapply(nom,FUN=decoupsynthpath,redim=redim)
+  tout<-lapply(nom,FUN=decoupsynthpath,redim=redim,verbose=verbose)
   print("B")
   LABASE<-cbind(nom,dplyr::bind_rows(lapply(tout,FUN=function(x){x$tab}))[,-1])
-
   LABASE$nom<-as.character(LABASE$nom)
   print("C")
   lesREAD<-lapply(tout,FUN=function(x){x$read})
   print("D")
-  #     lesRASTER<-lapply(nom, raster)
   names(lesREAD)<-LABASE$nom
-  #     return(list(base=LABASE,read=lesREAD,lesRASTER=lesRASTER))
-
 
   # on supprime de LABASE les truc vides
   LABASE$read <-  LABASE$read[!is.na(LABASE$read)]
