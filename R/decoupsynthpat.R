@@ -51,10 +51,15 @@ return(out)
 #'
 
 decoupsynth<-function(img,lig=10,col=10,redim=NULL){
+
   a<-lapply(1:(lig),FUN=prout,base=round(seq.int(1,dim(img)[1],length.out=lig+1)))
   b<-lapply(1:(col),FUN=prout,base=round(seq.int(1,dim(img)[2],length.out=col+1)))
   tt<-expand.grid(x=a,y=b)
   ok<-apply(tt,MARGIN=1,FUN=extr,img=img)
+
+  # ce qui est au dessus ne semble pas bloquant, mais peut etre optimisable ?
+
+
   # sapply(ok,FUN=function(x)x$html)
   out<-cbind(1:dim(tt)[1],tt,t(sapply(ok,FUN=function(x)x$rgb)),html=sapply(ok,FUN=function(x)x$html))
   names(out)<-c("nom","lig","col","R","G","B","html")
@@ -75,13 +80,11 @@ class(out)<-"tuile"
 
 extr<-function(vec,img){
   #     save(vec,img,file="TRIC")
-  return(
     moycoul(
       img[seq(vec$x[1],vec$x[2]),seq(vec$y[1],vec$y[2]),]
     )
 
-
-  )}
+}
 
 prout<-function(t,base){return(base[t:(t+1)])}
 

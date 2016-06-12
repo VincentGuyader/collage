@@ -18,11 +18,14 @@
 
 #' @export
 
-
+# file="646_220.jpg";lig=100;col=100;base=les_tuiles50;target="dessin3a.jpg"
 pixel<-function(file,lig,col,base,target=NULL){
   # on enchaine tout
   img<-jpeg::readJPEG(file)
   test<-decoupsynth(img=img,lig=lig,col=col)$tab
+  # microbenchmark::microbenchmark(test<-decoupsynth(img=img,lig=lig,col=col)$tab,times=15)
+  # 490/520 file="646_220.jpg";lig=100;col=100;base=les_tuiles50
+# 5 sec unix 300 300
   test$nom<-as.character(test$nom)
   print("debut calcul distance (etape optimisable) penser vectorisation")
 
@@ -30,6 +33,7 @@ pixel<-function(file,lig,col,base,target=NULL){
   V1<-function(){
     lesbase<-base$base[,c("R","G","B")]
     rownames(lesbase)<-base$base$nom
+    lesbase<-na.omit(lesbase)
     lestruc<-test[,c("R","G","B")]
     OK<-apply(lesbase,MARGIN=1,mondist,lestruc)
     return(OK)
@@ -44,6 +48,55 @@ pixel<-function(file,lig,col,base,target=NULL){
     BONdist<-lesdist[test$nom,setdiff(colnames(lesdist),test$nom)]
     return(BONdist)
   }
+
+  V3<-function(){
+    prdist<-rbind(base$base,test)
+
+
+    prdist_base<-na.omit(base$base)
+    rownames(prdist_base)<-prdist_base[,1]
+    prdist_base<- prdist_base[,4:6]
+    distance_base <- as.matrix(dist(prdist_base))
+    # ce truc pourrait etre calculé qu'une seule fois, pendant la creation de la base !! TODO
+
+
+    # on prend 3 tuile dans la base dont la disntace est différentes
+    dim(distance_base)
+    ech<-1:3
+    # ech<-sample(seq_len(nrow(distance_base)),3)
+
+    while(sum((repere<-distance_base[ech,ech])==0)!=3){
+      ech<-sample(seq_len(nrow(distance_base)),3)
+
+    }
+    ech
+    rbind(prdist_base[ech,],test)
+    # si je connais la distance par rapport auX 3 tuile de repere, je peux avoir les distance sur TOUTES les tuiles
+
+
+    prdist_test<-na.omit(test)
+    rownames(prdist_test)<-prdist_test[,1]
+    prdist_test<- prdist_test[,4:6]
+    distance_test <- as.matrix(dist(prdist_test))
+
+ AA<- as.matrix(dist(rbind(prdist_base[ech,],prdist_test)),diag = TRUE)
+ AA[as.character(test$nom),setdiff(colnames(AA),as.character(test$nom))]
+    # peut on réduire la taille des matrice grace au 0 ?, ce sont les meme pixel
+    # ca permettrait de limiter le nombre de calcul. TODO
+
+
+    # chaque truc de test doit avoir sa correspondance dans basebase
+    # les distance intra base sont useless
+    # les distance intra test.. aussi
+
+    rownames(prdist)<-prdist[,1]
+    lesnoms<-prdist[,1]
+    prdist<-as.matrix(prdist[,4:6])
+    lesdist<-as.matrix(dist(prdist))
+    BONdist<-lesdist[test$nom,setdiff(colnames(lesdist),test$nom)]
+    return(BONdist)
+  }
+
   dim(base$base)
   # library(rbenchmark)
   # benchmark(oo<-V2(),ss<-V1(),replications = 100)
