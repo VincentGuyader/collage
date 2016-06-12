@@ -27,7 +27,7 @@ genere_tiles(lescomb,dossier="base")
 les_tuiles <- genre_base("base",redim=c(25,25))
 
 A3<-pixel(file="plot.jpg",lig=5,col=5,base=les_tuiles)
-A<-pixel(file="plot.jpg",lig=50,col=50,base=bb,target="dessin.jpg")
+A<-pixel(file="plot.jpg",lig=50,col=50,base=les_tuiles,target="dessin.jpg")
 ## End(Not run)
 }
 

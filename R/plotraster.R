@@ -7,6 +7,7 @@ plotraster<-function(a){
   par(bg="white")
   plot(c(0,xdim), c(0,ydim), type='n',xlab="",ylab="",bty="n",axes = FALSE)
   print("masque OK")
+  a[a>1]<-1
   rasterImage(a,0,0,xdim,ydim)
   print("plot fait")
 }
