@@ -1,7 +1,7 @@
 
 plotraster<-function(a){
   #     print("on plot")
-  a<-t_array(a)
+  a<-aperm(a,c(2,1,3))
   ydim <- attributes(a)$dim[1] # Image dimension y-axis
   xdim <- attributes(a)$dim[2] # Image dimension x-axis
   par(bg="white")

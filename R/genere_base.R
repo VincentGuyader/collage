@@ -9,17 +9,12 @@
 
 
 genre_base<-function(chemin="base",redim=NULL){
-  # on va parcourir chaque image et faire un mycoul
-  # faut stocker l import readjpg
-  # trop long, le decoupsynthpth est trop longpour un simple truc comme ca.
-  # ou alors la vectorisation ne fonctionn pas pour une chose etrange.
   print("A")
   nom<-list.files(chemin,full.names = TRUE)
-  # decoupsynthpath(nom[[1]])
-  # peut etre qu'il est plus rentable de tout lire, en une passe, puis comme il n ya plus de osucis de disque, de faire les redim
-  tout<-lapply(nom,FUN=decoupsynthpath,lig=1,col=1,redim=redim)
+  tout<-lapply(nom,FUN=decoupsynthpath,redim=redim)
   print("B")
-  LABASE<-cbind(nom,do.call(rbind,lapply(tout,FUN=function(x){x$tab}))[,-1])
+  LABASE<-cbind(nom,dplyr::bind_rows(lapply(tout,FUN=function(x){x$tab}))[,-1])
+
   LABASE$nom<-as.character(LABASE$nom)
   print("C")
   lesREAD<-lapply(tout,FUN=function(x){x$read})
@@ -34,13 +29,14 @@ genre_base<-function(chemin="base",redim=NULL){
   LABASE$base<- na.omit(LABASE$base)
   out<-list(base=LABASE,read=lesREAD)
   class(out)<-"unebase"
-  return(out)
+out
 
 }
 
+#' @export
 print.unebase<- function(x,...){
 
-  cat( "base de ",nrow(bb$base)," tuiles \n")
+  cat( "base de ",nrow(x$base)," tuiles \n")
 
 
 }

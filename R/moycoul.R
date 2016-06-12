@@ -10,8 +10,9 @@ moycoul<-function(img){
     val<-img
 
   }else{
-    val<-c(mean(img[,,1]),mean(img[,,2]),mean(img[,,3]))
-  }
-  return(list(rgb=val,html=grDevices::rgb(val[1],val[2],val[3])))
+    val<-colMeans(img,dims=2)
 
+  }
+list(rgb=val,html=grDevices::rgb(val[1],val[2],val[3]))
 }
+

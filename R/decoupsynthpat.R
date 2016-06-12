@@ -2,24 +2,44 @@
 #' @title decoupsynthpath
 #' @description decoupe et synthétise une image depuis son chemin
 #' @param path chemin de l'image
-#' @param lig nombre de ligne
-#' @param col nombre de colonne
 #' @param redim dimension finale de l'image
 #' @examples decoupsynthpath("base/base-0.15-0-0.jpg")
 #' @export
 #'
-decoupsynthpath<-function(path,lig=1,col=1,redim=NULL){
+decoupsynthpath<-function(path,redim=NULL,verbose=FALSE){
   lim<-NULL
-  print(path)
-  try(lim<-jpeg::readJPEG(path),silent=F)
+  if (verbose) {message(path)}
+  try(lim<- aperm(jpeg::readJPEG(path),c(2,1,3)))
+  # microbenchmark(aperm(lim,c(2,1,3)),t_array(lim))
+
   if (length(lim)==0){
     out<-list(tab=  data.frame(nom=NA,lig=NA,col=NA,R=NA,G=NA,B=NA,html=NA),     read=NA)
+    class(out)<-"tuile"
     return(out)}
-  return(
-    decoupsynth(lim,lig=lig,col=col,redim=redim)
+# decoupsynth_one(lim,redim=redim)
+mc<-moycoul(lim)
+out<-setNames(cbind(1,1,1,data.frame(matrix(mc$rgb,nrow=1)),mc$html),c("nom","lig","col","R","G","B","html"))
+
+if (length(redim)!=0){
+  out<-list(tab=out,read=
+              monsize(lim,redim[1],redim[2])
   )
+  class(out)<-"tuile"
+  return(out)
+}
+out<- list(tab=out,read=lim)
+class(out)<-"tuile"
+return(out)
+
+
+
 
 }
+
+# microbenchmark(decoupsynth_one(lim,redim=redim),
+#                decoupsynth(lim,1,1,redim),times=30
+#                )
+
 
 #' @title decoupsynth
 #' @description decoupe et synthétise une image
@@ -49,6 +69,7 @@ out<- list(tab=out,read=img)
 class(out)<-"tuile"
   return(out)
 }
+
 
 
 

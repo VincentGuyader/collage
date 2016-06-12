@@ -5,13 +5,14 @@
 #' @export
 #'
 #'
-
+#
+# load("arr.RData")
+# microbenchmark(arr2<-monsize(arr,100,100),times=150)
+# # 350/296 sur 15. 433 sur 150
 
 monsize<-function(arr,x,y){
   #     print("debut")
   ss <- raster::raster(ncol=x,  nrow=y)
-
-
   arr2<-array(dim=c(x,y,3))
   arr2[,,1]<-bim(arr[,,1],ss)
   arr2[,,2]<-bim(arr[,,2],ss)
@@ -29,3 +30,6 @@ bim<-function(lay,ss){
     )
   return(rr)
 }
+
+
+

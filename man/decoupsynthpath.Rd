@@ -4,14 +4,10 @@
 \alias{decoupsynthpath}
 \title{decoupsynthpath}
 \usage{
-decoupsynthpath(path, lig = 1, col = 1, redim = NULL)
+decoupsynthpath(path, redim = NULL, verbose = FALSE)
 }
 \arguments{
 \item{path}{chemin de l'image}
-
-\item{lig}{nombre de ligne}
-
-\item{col}{nombre de colonne}
 
 \item{redim}{dimension finale de l'image}
 }
