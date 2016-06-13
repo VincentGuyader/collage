@@ -120,9 +120,10 @@ corresp<-cbind(test,pict=colnames(BONdist)[sapply(as.data.frame(t(BONdist)),whic
   liste<-    base$read[as.character(corresp$pict)]
   # base$read["base/base-1-1-0.45.jpg"]
   # out<-t_array(prodgrille(liste,lig,col))
-  microbenchmark::microbenchmark(
-  out<-aperm(prodgrille(liste,lig,col),c(2,1,3)),times=10
-)#861
+  out<-aperm(prodgrille(liste,lig,col),c(2,1,3))
+#   microbenchmark::microbenchmark(
+#   out<-aperm(prodgrille(liste,lig,col),c(2,1,3)),times=10
+# )#861
   # out<-prodgrille(liste,lig,col)
 
   if (length(target)!=0){

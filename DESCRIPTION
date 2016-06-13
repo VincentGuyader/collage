@@ -11,5 +11,6 @@ Imports:
     grDevices,
     jpeg,
     raster,
-    abind
+    abind,
+    plyr
 RoxygenNote: 5.0.1

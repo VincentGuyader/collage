@@ -12,7 +12,8 @@ genre_base<-function(chemin="base",redim=NULL,verbose=FALSE){
   # elle charge tout en RAM
   print("A")
   nom<-list.files(chemin,full.names = TRUE)
-  tout<-lapply(nom,FUN=decoupsynthpath,redim=redim,verbose=verbose)
+  # tout<-lapply(nom,FUN=decoupsynthpath,redim=redim,verbose=verbose)
+  tout<-plyr::llply(nom,.fun=decoupsynthpath,redim=redim,verbose=verbose,.progress = "text")
   print("B")
   LABASE<-cbind(nom,dplyr::bind_rows(lapply(tout,FUN=function(x){x$tab}))[,-1])
   LABASE$nom<-as.character(LABASE$nom)
