@@ -1,5 +1,6 @@
 library(tipixel)
 
+
 lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
 genere_tiles(lescomb,dossier="base")
 les_tuiles2 <- genre_base("base",redim=c(25,25))
