@@ -8,17 +8,17 @@
 #' @export
 
 
-genre_base<-function(chemin="base",redim=NULL,verbose=FALSE){
+genre_base<-function(chemin="base",redim=NULL,verbose=FALSE,preload=TRUE){
   # elle charge tout en RAM
   print("A")
   nom<-list.files(chemin,full.names = TRUE)
   # tout<-lapply(nom,FUN=decoupsynthpath,redim=redim,verbose=verbose)
-  tout<-plyr::llply(nom,.fun=decoupsynthpath,redim=redim,verbose=verbose,.progress = "text")
+  tout<-plyr::llply(nom,.fun=decoupsynthpath,redim=redim,verbose=verbose,.progress = "text",preload=preload)
   print("B")
   LABASE<-cbind(nom,dplyr::bind_rows(lapply(tout,FUN=function(x){x$tab}))[,-1])
   LABASE$nom<-as.character(LABASE$nom)
   print("C")
-  lesREAD<-lapply(tout,FUN=function(x){x$read})
+  if (preload){  lesREAD<-lapply(tout,FUN=function(x){x$read})}
   print("D")
   names(lesREAD)<-LABASE$nom
 

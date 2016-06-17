@@ -1,17 +1,18 @@
 
-prodgrille<-function(liste,lig,col){
-  print("on prod")
+prodgrille<-function(liste,lig,col,verbose=TRUE,affich=TRUE){
+  if (verbose){ message(paste("    lecture "))}
   test<-lapply(
     mapply(seq,seq(1,lig*col,by=lig),seq(col,lig*col,by=col), SIMPLIFY = FALSE)
     ,funccolle2,liste=liste)
 
 
-  print("on continue")
-  # test<-Reduce(colle2r,test)
+  if (verbose){ message(paste("    collage "))}
   test<-abind::abind(test,along=1)
-  print("on envoie au plot")
+  if ( affich){
+  if (verbose){ message(paste("    affichage "))}
   # gc()
-  plotraster(test)
+  plotraster(test,verbose=verbose)
+  }
   return(test)
 }
 

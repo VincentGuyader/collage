@@ -12,5 +12,8 @@ Imports:
     jpeg,
     raster,
     abind,
-    plyr
+    plyr,
+    doSNOW,
+    foreach
 RoxygenNote: 5.0.1
+Depends: foreach

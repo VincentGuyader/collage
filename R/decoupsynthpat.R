@@ -6,7 +6,7 @@
 #' @examples decoupsynthpath("base/base-0.15-0-0.jpg")
 #' @export
 #'
-decoupsynthpath<-function(path,redim=NULL,verbose=FALSE){
+decoupsynthpath<-function(path,redim=NULL,verbose=FALSE,preload=TRUE){
   lim<-NULL
   if (verbose) {message(path)}
   try(lim<- aperm(jpeg::readJPEG(path),c(2,1,3)))
@@ -20,6 +20,7 @@ decoupsynthpath<-function(path,redim=NULL,verbose=FALSE){
 mc<-moycoul(lim)
 out<-setNames(cbind(1,1,1,data.frame(matrix(mc$rgb,nrow=1)),mc$html),c("nom","lig","col","R","G","B","html"))
 
+if (preload){
 if (length(redim)!=0){
   out<-list(tab=out,read=
               resize(lim,redim[1],redim[2])
@@ -30,7 +31,12 @@ if (length(redim)!=0){
 out<- list(tab=out,read=lim)
 class(out)<-"tuile"
 return(out)
+}else{
 
+  out<- list(tab=out,read=NA)
+  class(out)<-"tuile"
+  return(out)
+}
 
 
 
