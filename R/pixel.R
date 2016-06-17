@@ -31,6 +31,7 @@ pixel<-function(file,lig,col,base,target=NULL,paralell=FALSE,threat=2,open=TRUE,
 
 if ( !doublon){
   if (verbose){ message(paste("suppression doublon..."))}
+  test_orig<-test
   test<-test[!duplicated(test$html),] # a voir si c 'est mieux ou différent avec RVB
 }
   if (verbose){ message(paste("calcul des distances..."))}
@@ -51,7 +52,7 @@ corresp<-cbind(test,pict=colnames(BONdist)[sapply(as.data.frame(t(BONdist)),whic
 if ( !doublon){
   if (verbose){ message(paste("recompose doublon..."))}
 
-  corresp<-merge(test,corresp,by=c("html"),all.x=TRUE)
+  corresp<-merge(test_orig,corresp,by=c("html"),all.x=TRUE)
   corresp<-corresp[order(as.numeric(corresp$nom.x)),]
 }
 
@@ -65,7 +66,6 @@ if (verbose){ message(paste("preparation plot"))}
 
   if (length(target)!=0){
     if (verbose){ message(paste("export dans ",target))}
-        print(target)
     jpeg::writeJPEG(out, target=target, quality=1)
     if (open){
       if (verbose){ message(paste("ouverture de",target))}

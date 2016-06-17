@@ -13,7 +13,7 @@ prodgrille<-function(liste,lig,col,verbose=TRUE,affich=TRUE){
   # gc()
   plotraster(test,verbose=verbose)
   }
-  return(test)
+  test
 }
 
 
