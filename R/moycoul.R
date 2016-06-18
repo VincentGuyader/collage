@@ -5,14 +5,13 @@
 #' @export
 
 
-moycoul<-function(img){
-  if (is.null(dim(img))){
-    val<-img
-
-  }else{
-    val<-colMeans(img,dims=2)
-
-  }
-list(rgb=val,html=grDevices::rgb(val[1],val[2],val[3]))
-}
-
+moycoul <- function(img) {
+    if (is.null(dim(img))) {
+        val <- img
+        
+    } else {
+        val <- colMeans(img, dims = 2)
+        
+    }
+    list(rgb = val, html = grDevices::rgb(val[1], val[2], val[3]))
+} 
