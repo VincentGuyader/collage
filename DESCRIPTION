@@ -1,11 +1,11 @@
 Package: tipixel
 Type: Package
-Title: What the Package Does (Title Case)
+Title: fabrique une image a partir d 'autre images
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: vincent Guyader [aut, cre]
+Maintainer: vincent guyader <vincent@thinkr.fr>
+Description: fabrique une image en mosaique à partir d 'autres images
+License: GPL-3
 LazyData: TRUE
 Imports:
     grDevices,
@@ -13,7 +13,7 @@ Imports:
     raster,
     abind,
     plyr,
-    doSNOW,
-    foreach
+    doSNOW
 RoxygenNote: 5.0.1
 Depends: foreach
+URL: https://github.com/ThinkRstat/tipixel

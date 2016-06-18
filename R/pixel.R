@@ -1,26 +1,38 @@
 # -*- coding: utf-8 -*-
 #' @title pixel
 #' @description fonction a lancer
-#' @param file fichier d origine a decouper
+#' @param file fichier jpg d origine a decouper
 #' @param lig nombre de ligne
 #' @param col nombre de colonne
 #' @param base la base de tuile a utiliser
 #' @param target fichier de sortie
+#' @param paralell si oui le calcul en paralell sera utilisé
+#' @param threat nombre de coeur a utilisé si paralell =TRUE
+#' @param doublon si FAUX on supprime les doublon avant de calculer les distances
+#' @param open si VRAI le fichier target est ouvert en fin de creation
+#' @param verbose si VRAI rend la fonction bavarde
+#' @param redim utile si la base ne contient pas les images perchargée, precise les dimension des tuiles
+#' @param affich booleen si vrai le resultat est affiché en tant que graphique dans R
 #' @examples
 #' ## Not run:
+#' library(tipixel)
 #' lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-#' genere_tiles(lescomb,dossier="base")
-#' les_tuiles <- genre_base("base",redim=c(25,25))
-#' les_tuiles
-#' A3<-pixel(file="plot.jpg",lig=5,col=5,base=les_tuiles)
-#' A<-pixel(file="plot.jpg",lig=50,col=50,base=les_tuiles,target="dessin.jpg")
-#' A<-pixel(file="plot.jpg",lig=100,col=100,base=les_tuiles,target="dessin2.jpg")
+#' genere_tuiles(lescomb,dossier="my_pict")
+#' base <- file.path(find.package("tipixel"),"base")
+#' img <- sample(list.files(base,full.names = TRUE),1)
+#' les_tuiles <- genre_base(base,redim=c(25,25))
+#' les_tuiles2 <- genre_base("my_pict",redim=c(25,25))
+#' pixel(file=img,lig=5,col=5,base=les_tuiles,target="dessin.jpg",open=TRUE,affich = TRUE)
+#' pixel(file=img,lig=50,col=50,base=les_tuiles,target="dessin2.jpg",open=TRUE)
+#' pixel(file=img,lig=100,col=100,base=les_tuiles,target="dessin3.jpg",open=TRUE)
+#' pixel(file=img,lig=100,col=100,base=les_tuiles2,target="dessin4.jpg",open=TRUE)
+#' pixel(file=img,lig=200,col=200,base=les_tuiles,target="dessin4.jpg",open=TRUE,paralell = TRUE,threat = 2)
 #' ## End(Not run)
 
 #' @export
 
 # file="646_220.jpg";lig=200;col=200;base=les_tuiles;target="dessin3a.jpg"
-pixel<-function(file,lig,col,base,target=NULL,paralell=FALSE,threat=2,open=TRUE,verbose=TRUE,affich=FALSE,doublon=FALSE){
+pixel<-function(file,lig,col,base,target=NULL,paralell=FALSE,threat=2,open=FALSE,verbose=TRUE,affich=FALSE,doublon=FALSE,redim=NULL){
  if (verbose){ message("chargement de l'image")}
   img<-jpeg::readJPEG(file)
   if (verbose){ message(paste("découpage de l'image en ",lig," x ",col))}
@@ -60,9 +72,26 @@ if ( !doublon){
 
 if (verbose){ message(paste("preparation plot"))}
   # print(dim(corresp))
+
+if (!is.na(base$read) ){
+  if (verbose){ message(paste("   lecture depuis base"))}
+
   liste<-    base$read[as.character(corresp$pict)]
-  if (verbose){ message(paste("reconstruction image "))}
-  out<-aperm(prodgrille(liste,lig,col,verbose=verbose,affich=affich),c(2,1,3))
+
+}else{
+  if (verbose){ message(paste("   lecture depuis fichiers"))}
+
+tout<-plyr::llply(as.character(levels(corresp$pict)),.fun=decoupsynthpath,redim=redim,verbose=verbose,.progress = "text",preload=TRUE)
+names(tout) <- as.character(levels(corresp$pict))
+lesREAD<-lapply(tout,FUN=function(x){x$read})
+liste<-    lesREAD[as.character(corresp$pict)]
+
+
+}
+if (verbose){ message(paste("reconstruction image "))}
+out<-aperm(
+  prodgrille(liste,lig,col,verbose=verbose,affich=affich)
+  ,c(2,1,3))
 
   if (length(target)!=0){
     if (verbose){ message(paste("export dans ",target))}

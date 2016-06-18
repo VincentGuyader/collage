@@ -1,24 +1,22 @@
 # -*- coding: utf-8 -*-
-#' @title genere_tiles
+#' @title genere_tuiles
 #' @description genere des image mono couleurs
 #' @param combinaisons data.frame avec 1 line = une combinaison R V B
 #' @param dossier chemin du dossier de cretion des tuiles
 #' @param dim, dimension en pixel des tuiles
 #' @examples
 #' lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-#' genere_tiles(lescomb,dossier="base")
+#' genere_tuiles(lescomb,dossier="base")
 #' @export
 
 
-genere_tiles<-function(combinaisons,dossier,dim=c(100,100)){
+genere_tuiles<-function(combinaisons,dossier,dim=c(100,100)){
 
   try(dir.create(dossier))
-apply(combinaisons,MARGIN=1,FUN=gendess,dossier=dossier,dim=dim)
+invisible(apply(combinaisons,MARGIN=1,FUN=gendess,dossier=dossier,dim=dim))
 }
 
-#' @export
 gendess<-function(vec,dossier="base",dim=c(10,10)){
-  #     print(vec)
   agen<-array(dim=c(1,1,3))
   agen[,,1]<-vec[1]
   agen[,,2]<-vec[2]

@@ -2,12 +2,7 @@
 
 S3method(print,unebase)
 export(decoupsynth)
-export(decoupsynthpath)
-export(gendess)
-export(genere_tiles)
+export(genere_tuiles)
 export(genre_base)
-export(mondist)
-export(mondist_global)
 export(moycoul)
 export(pixel)
-export(resize)

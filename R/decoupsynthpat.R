@@ -3,8 +3,9 @@
 #' @description decoupe et synthétise une image depuis son chemin
 #' @param path chemin de l'image
 #' @param redim dimension finale de l'image
+#' @param verbose booleen rend la fonction bavarde
+#' @param preload booleen si VRAI les images sont préchargée
 #' @examples decoupsynthpath("base/base-0.15-0-0.jpg")
-#' @export
 #'
 decoupsynthpath<-function(path,redim=NULL,verbose=FALSE,preload=TRUE){
   lim<-NULL
@@ -85,7 +86,6 @@ class(out)<-"tuile"
 
 
 extr<-function(vec,img){
-  #     save(vec,img,file="TRIC")
     moycoul(
       img[seq(vec$x[1],vec$x[2]),seq(vec$y[1],vec$y[2]),]
     )

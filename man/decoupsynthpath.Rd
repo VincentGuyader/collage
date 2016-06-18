@@ -4,17 +4,22 @@
 \alias{decoupsynthpath}
 \title{decoupsynthpath}
 \usage{
-decoupsynthpath(path, redim = NULL, verbose = FALSE)
+decoupsynthpath(path, redim = NULL, verbose = FALSE, preload = TRUE)
 }
 \arguments{
 \item{path}{chemin de l'image}
 
 \item{redim}{dimension finale de l'image}
+
+\item{verbose}{booleen rend la fonction bavarde}
+
+\item{preload}{booleen si VRAI les images sont préchargée}
 }
 \description{
 decoupe et synthétise une image depuis son chemin
 }
 \examples{
 decoupsynthpath("base/base-0.15-0-0.jpg")
+
 }
 

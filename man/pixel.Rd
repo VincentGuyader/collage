@@ -4,10 +4,12 @@
 \alias{pixel}
 \title{pixel}
 \usage{
-pixel(file, lig, col, base, target = NULL)
+pixel(file, lig, col, base, target = NULL, paralell = FALSE, threat = 2,
+  open = FALSE, verbose = TRUE, affich = FALSE, doublon = FALSE,
+  redim = NULL)
 }
 \arguments{
-\item{file}{fichier d origine a decouper}
+\item{file}{fichier jpg d origine a decouper}
 
 \item{lig}{nombre de ligne}
 
@@ -16,18 +18,37 @@ pixel(file, lig, col, base, target = NULL)
 \item{base}{la base de tuile a utiliser}
 
 \item{target}{fichier de sortie}
+
+\item{paralell}{si oui le calcul en paralell sera utilisé}
+
+\item{threat}{nombre de coeur a utilisé si paralell =TRUE}
+
+\item{open}{si VRAI le fichier target est ouvert en fin de creation}
+
+\item{verbose}{si VRAI rend la fonction bavarde}
+
+\item{affich}{booleen si vrai le resultat est affiché en tant que graphique dans R}
+
+\item{doublon}{si FAUX on supprime les doublon avant de calculer les distances}
+
+\item{redim}{utile si la base ne contient pas les images perchargée, precise les dimension des tuiles}
 }
 \description{
 fonction a lancer
 }
 \examples{
 ## Not run:
+library(tipixel)
 lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-genere_tiles(lescomb,dossier="base")
-les_tuiles <- genre_base("base",redim=c(25,25))
-
-A3<-pixel(file="plot.jpg",lig=5,col=5,base=les_tuiles)
-A<-pixel(file="plot.jpg",lig=50,col=50,base=les_tuiles,target="dessin.jpg")
+genere_tiles(lescomb,dossier="my_pict")
+base <- file.path(find.package("tipixel"),"base")
+img <- file.path(find.package("tipixel"),"img/plot.jpg")
+les_tuiles <- genre_base(base,redim=c(25,25))
+les_tuiles2 <- genre_base("my_pict",redim=c(25,25))
+pixel(file=img,lig=5,col=5,base=les_tuiles,target="dessin.jpg",open=TRUE,affich = TRUE)
+pixel(file=img,lig=50,col=50,base=les_tuiles,target="dessin2.jpg",open=TRUE)
+pixel(file=img,lig=100,col=100,base=les_tuiles,target="dessin3.jpg",open=TRUE)
+pixel(file=img,lig=100,col=100,base=les_tuiles2,target="dessin4.jpg",open=TRUE)
 ## End(Not run)
 }
 

@@ -4,18 +4,25 @@
 \alias{genre_base}
 \title{genre_base}
 \usage{
-genre_base(chemin = "base", redim = NULL)
+genre_base(chemin = "base", redim = NULL, verbose = FALSE,
+  preload = TRUE)
 }
 \arguments{
 \item{chemin}{le chemin du dosier de tuiles}
 
 \item{redim}{permet de redimensionner les tuiles}
+
+\item{verbose}{rend la fonction bavarde}
+
+\item{preload}{pre charge les images et rend la base indépendante des fichierrs.. mais prend de la place en ram}
 }
 \description{
 li le contenu du dossier de tuiles et genere un objet base
 }
 \examples{
 les_tuiles <- genre_base("base",redim=c(25,25))
-
+genre_base("base3")
+genre_base("base3",redim=c(25,25))
+genre_base("base3",redim=c(25,25),preload = FALSE)
 }
 
