@@ -40,15 +40,16 @@ fonction a lancer
 ## Not run:
 library(tipixel)
 lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-genere_tiles(lescomb,dossier="my_pict")
+genere_tuiles(lescomb,dossier="my_pict")
 base <- file.path(find.package("tipixel"),"base")
-img <- file.path(find.package("tipixel"),"img/plot.jpg")
+img <- sample(list.files(base,full.names = TRUE),1)
 les_tuiles <- genre_base(base,redim=c(25,25))
 les_tuiles2 <- genre_base("my_pict",redim=c(25,25))
 pixel(file=img,lig=5,col=5,base=les_tuiles,target="dessin.jpg",open=TRUE,affich = TRUE)
 pixel(file=img,lig=50,col=50,base=les_tuiles,target="dessin2.jpg",open=TRUE)
 pixel(file=img,lig=100,col=100,base=les_tuiles,target="dessin3.jpg",open=TRUE)
 pixel(file=img,lig=100,col=100,base=les_tuiles2,target="dessin4.jpg",open=TRUE)
+pixel(file=img,lig=200,col=200,base=les_tuiles,target="dessin4.jpg",open=TRUE,paralell = TRUE,threat = 2)
 ## End(Not run)
 }
 
