@@ -5,7 +5,6 @@
 #' @param redim dimension finale de l'image
 #' @param verbose booleen rend la fonction bavarde
 #' @param preload booleen si VRAI les images sont préchargée
-#' @examples decoupsynthpath('base/base-0.15-0-0.jpg')
 #'
 decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE) {
     lim <- NULL
@@ -14,7 +13,7 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
     }
     try(lim <- aperm(jpeg::readJPEG(path), c(2, 1, 3)))
     # microbenchmark(aperm(lim,c(2,1,3)),t_array(lim))
-    
+
     if (length(lim) == 0) {
         out <- list(tab = data.frame(nom = NA, lig = NA, col = NA, R = NA, G = NA, B = NA, html = NA), read = NA)
         class(out) <- "tuile"
@@ -22,9 +21,9 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
     }
     # decoupsynth_one(lim,redim=redim)
     mc <- moycoul(lim)
-    out <- setNames(cbind(1, 1, 1, data.frame(matrix(mc$rgb, nrow = 1)), mc$html), c("nom", "lig", "col", "R", "G", 
+    out <- setNames(cbind(1, 1, 1, data.frame(matrix(mc$rgb, nrow = 1)), mc$html), c("nom", "lig", "col", "R", "G",
         "B", "html"))
-    
+
     if (preload) {
         if (length(redim) != 0) {
             out <- list(tab = out, read = resize(lim, redim[1], redim[2]))
@@ -35,14 +34,14 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
         class(out) <- "tuile"
         return(out)
     } else {
-        
+
         out <- list(tab = out, read = NA)
         class(out) <- "tuile"
         return(out)
     }
-    
-    
-    
+
+
+
 }
 
 # microbenchmark(decoupsynth_one(lim,redim=redim), decoupsynth(lim,1,1,redim),times=30 )
@@ -58,21 +57,21 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
 #'
 
 decoupsynth <- function(img, lig = 10, col = 10, redim = NULL) {
-    
+
     a <- lapply(1:(lig), FUN = prout, base = round(seq.int(1, dim(img)[1], length.out = lig + 1)))
     b <- lapply(1:(col), FUN = prout, base = round(seq.int(1, dim(img)[2], length.out = col + 1)))
     tt <- expand.grid(x = a, y = b)
     ok <- apply(tt, MARGIN = 1, FUN = extr, img = img)
-    
+
     # ce qui est au dessus ne semble pas bloquant, mais peut etre optimisable ?
-    
-    
+
+
     # sapply(ok,FUN=function(x)x$html)
     out <- cbind(1:dim(tt)[1], tt, t(sapply(ok, FUN = function(x) x$rgb)), html = sapply(ok, FUN = function(x) x$html))
     names(out) <- c("nom", "lig", "col", "R", "G", "B", "html")
-    
+
     if (length(redim) != 0) {
-        
+
         return(list(tab = out, read = resize(img, redim[1], redim[2])))
     }
     out <- list(tab = out, read = img)
@@ -85,7 +84,7 @@ decoupsynth <- function(img, lig = 10, col = 10, redim = NULL) {
 
 extr <- function(vec, img) {
     moycoul(img[seq(vec$x[1], vec$x[2]), seq(vec$y[1], vec$y[2]), ])
-    
+
 }
 
 prout <- function(t, base) {
@@ -94,8 +93,8 @@ prout <- function(t, base) {
 
 
 print.tuile <- function(x, ...) {
-    
+
     cat(" une tuile de ", dim(x$read), " \n")
     print(x$tab)
     cat("\n\n")
-} 
+}

@@ -18,6 +18,6 @@ genere des image mono couleurs
 }
 \examples{
 lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-genere_tuiles(lescomb,dossier="base")
+genere_tuiles(lescomb,dossier='base')
 }
 

@@ -18,8 +18,4 @@ decoupsynthpath(path, redim = NULL, verbose = FALSE, preload = TRUE)
 \description{
 decoupe et synthétise une image depuis son chemin
 }
-\examples{
-decoupsynthpath("base/base-0.15-0-0.jpg")
-
-}
 

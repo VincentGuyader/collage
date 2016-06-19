@@ -6,7 +6,7 @@
 \usage{
 pixel(file, lig, col, base, target = NULL, paralell = FALSE, threat = 2,
   open = FALSE, verbose = TRUE, affich = FALSE, doublon = FALSE,
-  redim = NULL)
+  redim = NULL, random = 1)
 }
 \arguments{
 \item{file}{fichier jpg d origine a decouper}
@@ -32,6 +32,8 @@ pixel(file, lig, col, base, target = NULL, paralell = FALSE, threat = 2,
 \item{doublon}{si FAUX on supprime les doublon avant de calculer les distances}
 
 \item{redim}{utile si la base ne contient pas les images perchargée, precise les dimension des tuiles}
+
+\item{random}{tire au hasard la vignette parmi les meilleur tuiles disponible, random precise ce nombre}
 }
 \description{
 fonction a lancer
@@ -40,16 +42,17 @@ fonction a lancer
 ## Not run:
 library(tipixel)
 lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-genere_tuiles(lescomb,dossier="my_pict")
-base <- file.path(find.package("tipixel"),"base")
+genere_tuiles(lescomb,dossier='my_pict')
+base <- file.path(find.package('tipixel'),'base')
 img <- sample(list.files(base,full.names = TRUE),1)
 les_tuiles <- genre_base(base,redim=c(25,25))
-les_tuiles2 <- genre_base("my_pict",redim=c(25,25))
-pixel(file=img,lig=5,col=5,base=les_tuiles,target="dessin.jpg",open=TRUE,affich = TRUE)
-pixel(file=img,lig=50,col=50,base=les_tuiles,target="dessin2.jpg",open=TRUE)
-pixel(file=img,lig=100,col=100,base=les_tuiles,target="dessin3.jpg",open=TRUE)
-pixel(file=img,lig=100,col=100,base=les_tuiles2,target="dessin4.jpg",open=TRUE)
-pixel(file=img,lig=200,col=200,base=les_tuiles,target="dessin4.jpg",open=TRUE,paralell = TRUE,threat = 2)
+les_tuiles2 <- genre_base('my_pict',redim=c(25,25))
+pixel(file=img,lig=5,col=5,base=les_tuiles,target='dessin.jpg',open=TRUE,affich = TRUE)
+pixel(file=img,lig=50,col=50,base=les_tuiles,target='dessin2.jpg',open=TRUE)
+pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin3.jpg',open=TRUE)
+pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
+pixel(file=img,lig=200,col=200,base=les_tuiles,target='dessin4.jpg'
+,open=TRUE,paralell = TRUE,threat = 2)
 ## End(Not run)
 }
 

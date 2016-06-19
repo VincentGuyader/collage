@@ -11,7 +11,7 @@
 
 
 genere_tuiles <- function(combinaisons, dossier, dim = c(100, 100)) {
-    
+
     try(dir.create(dossier))
     invisible(apply(combinaisons, MARGIN = 1, FUN = gendess, dossier = dossier, dim = dim))
 }
@@ -21,8 +21,8 @@ gendess <- function(vec, dossier = "base", dim = c(10, 10)) {
     agen[, , 1] <- vec[1]
     agen[, , 2] <- vec[2]
     agen[, , 3] <- vec[3]
-    jpeg::jpeg(filename = paste0(dossier, "/base-", vec[1], "-", vec[2], "-", vec[3], ".jpg"), dim[1], dim[2])
+    jpeg(filename = paste0(dossier, "/base-", vec[1], "-", vec[2], "-", vec[3], ".jpg"), dim[1], dim[2])
     par(bg = moycoul(agen)$html)
     try(silent = T, plot(1, xlab = "", ylab = "", type = "n", bty = "n", axes = FALSE))
     dev.off()
-} 
+}

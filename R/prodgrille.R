@@ -2,13 +2,17 @@ prodgrille <- function(liste, lig, col, verbose = TRUE, affich = TRUE) {
     if (verbose) {
         message(paste("    lecture "))
     }
-    test <- lapply(mapply(seq, seq(1, lig * col, by = lig), seq(col, lig * col, by = col), SIMPLIFY = FALSE), funccolle2, 
+    test <- lapply(mapply(seq, seq(1, lig * col, by = lig), seq(col, lig * col, by = col), SIMPLIFY = FALSE), funccolle2,
         liste = liste)
-    
-    
+
+
     if (verbose) {
         message(paste("    collage "))
     }
+
+     # trouver un moyen de gerer ca en ram quand on est au max.
+    # passage sur disque ?
+
     test <- abind::abind(test, along = 1)
     if (affich) {
         if (verbose) {
@@ -26,4 +30,4 @@ prodgrille <- function(liste, lig, col, verbose = TRUE, affich = TRUE) {
 # abind::abind(test, along = 1) 4.135301 4.161878 4.184652 4.188135 4.212134 4.217619 8
 funccolle2 <- function(rang, liste) {
     abind::abind(liste[rang], along = 2)
-} 
+}

@@ -20,9 +20,10 @@ genre_base(chemin = "base", redim = NULL, verbose = FALSE,
 li le contenu du dossier de tuiles et genere un objet base
 }
 \examples{
-les_tuiles <- genre_base("base",redim=c(25,25))
-genre_base("base3")
-genre_base("base3",redim=c(25,25))
-genre_base("base3",redim=c(25,25),preload = FALSE)
+base <- file.path(find.package('tipixel'),'base')
+les_tuiles <- genre_base(base,redim=c(25,25))
+genre_base(base)
+genre_base(base,redim=c(25,25))
+genre_base(base,redim=c(25,25),preload = FALSE)
 }
 
