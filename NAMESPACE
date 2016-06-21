@@ -2,7 +2,9 @@
 
 S3method(print,unebase)
 export(decoupsynth)
+export(genere_base)
 export(genere_tuiles)
-export(genre_base)
 export(moycoul)
 export(pixel)
+export(pixel_enhanced)
+export(plotraster)

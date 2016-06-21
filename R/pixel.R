@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
+#' @encoding UTF-8
 #' @title pixel
-#' @description fonction a lancer
-#' @param file fichier jpg d origine a decouper
-#' @param lig nombre de ligne
-#' @param col nombre de colonne
-#' @param base la base de tuile a utiliser
-#' @param target fichier de sortie
+#' @description fonction générale du package. Permet de transformer une image en mosaique d'autres images
+#' @param file fichier jpg d'origine à découper
+#' @param lig nombre de lignes
+#' @param col nombre de colonnes
+#' @param base la base de tuile à utiliser
+#' @param target fichier de sortie en jpg
 #' @param paralell si oui le calcul en paralell sera utilisé
-#' @param threat nombre de coeur a utilisé si paralell =TRUE
-#' @param doublon si FAUX on supprime les doublon avant de calculer les distances
-#' @param open si VRAI le fichier target est ouvert en fin de creation
+#' @param threat nombre de coeur à utiliser si paralell =TRUE
+#' @param doublon si FAUX on supprime les doublons avant de calculer les distances
+#' @param open si VRAI le fichier target est ouvert en fin de création
 #' @param verbose si VRAI rend la fonction bavarde
-#' @param redim utile si la base ne contient pas les images perchargée, precise les dimension des tuiles
+#' @param redim utile si la base ne contient pas les images perchargées, précise les dimensions des tuiles
 #' @param affich booleen si vrai le resultat est affiché en tant que graphique dans R
-#' @param random tire au hasard la vignette parmi les meilleur tuiles disponible, random precise ce nombre
+#' @param random tire au hasard la vignette parmi les meilleurs tuiles disponibles, random precise ce nombre
 #' @examples
 #' ## Not run:
 #' library(tipixel)
@@ -21,8 +22,9 @@
 #' genere_tuiles(lescomb,dossier='my_pict')
 #' base <- file.path(find.package('tipixel'),'base')
 #' img <- sample(list.files(base,full.names = TRUE),1)
-#' les_tuiles <- genre_base(base,redim=c(25,25))
-#' les_tuiles2 <- genre_base('my_pict',redim=c(25,25))
+#' plotraster(aperm(jpeg::readJPEG(img),c(2,1,3)))
+#' les_tuiles <- genere_base(base,redim=c(25,25))
+#' les_tuiles2 <- genere_base('my_pict')
 #' pixel(file=img,lig=5,col=5,base=les_tuiles,target='dessin.jpg',open=TRUE,affich = TRUE)
 #' pixel(file=img,lig=50,col=50,base=les_tuiles,target='dessin2.jpg',open=TRUE)
 #' pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin3.jpg',open=TRUE)
@@ -33,7 +35,6 @@
 
 #' @export
 
-# file='646_220.jpg';lig=200;col=200;base=les_tuiles;target='dessin3a.jpg'
 pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, threat = 2, open = FALSE, verbose = TRUE, affich = FALSE,
     doublon = FALSE, redim = NULL,random=1) {
     if (verbose) {
@@ -44,7 +45,6 @@ pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, threat 
         message(paste("découpage de l'image en ", lig, " x ", col))
     }
     test <- decoupsynth(img = img, lig = lig, col = col)$tab
-    # TODO GERER DOUBLON, puis jointure
 
     test$nom <- as.character(test$nom)
 
@@ -101,8 +101,8 @@ pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, threat 
         message(paste("preparation plot"))
     }
     # print(dim(corresp))
-
-    if (!is.na(base$read)) {
+suppressWarnings(flag <-!is.na(base$read))
+    if (flag[1]) {
         if (verbose) {
             message(paste("   lecture depuis base"))
         }

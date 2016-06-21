@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
+#' @encoding UTF-8
 #' @title resize
-#' @description redim d'une image en array
-#' @param arr array
+#' @description redimensionne une image au format array
+#' @param arr array à redimensionner
 #' @param x nouvelle dimension en x
 #' @param y nouvelle dimension en y
 #'
@@ -24,4 +26,4 @@ bim <- function(lay, ss) {
     return(rr)
 }
 
- 
+

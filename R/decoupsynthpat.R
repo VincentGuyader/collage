@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+#' @encoding UTF-8
 #' @title decoupsynthpath
-#' @description decoupe et synthétise une image depuis son chemin
+#' @description découpe et synthétise une image depuis son chemin
 #' @param path chemin de l'image
 #' @param redim dimension finale de l'image
 #' @param verbose booleen rend la fonction bavarde
-#' @param preload booleen si VRAI les images sont préchargée
+#' @param preload booleen si VRAI les images sont préchargées (prend de la RAM mais accelère le traitement)
 #'
 decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE) {
     lim <- NULL
@@ -56,17 +57,20 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
 #' @export
 #'
 
-decoupsynth <- function(img, lig = 10, col = 10, redim = NULL) {
+decoupsynth <- function(img, lig = 10, col = 10, redim = NULL,enhanced=FALSE) {
 
     a <- lapply(1:(lig), FUN = prout, base = round(seq.int(1, dim(img)[1], length.out = lig + 1)))
     b <- lapply(1:(col), FUN = prout, base = round(seq.int(1, dim(img)[2], length.out = col + 1)))
     tt <- expand.grid(x = a, y = b)
-    ok <- apply(tt, MARGIN = 1, FUN = extr, img = img)
+    ok <- apply(tt, MARGIN = 1, FUN = extr, img = img,enhanced=FALSE)
 
-    # ce qui est au dessus ne semble pas bloquant, mais peut etre optimisable ?
-
-
+    # ce qui est au dessus ne semble pas bloquant, mais peut etre moycoul_enhancedencore optimisable ?
     # sapply(ok,FUN=function(x)x$html)
+
+    # ICI CA MERDE A LA SORTIE DE OK EN MODE ENHANCED
+
+    # do.call(cbind,ok[[1]]$rgb)
+
     out <- cbind(1:dim(tt)[1], tt, t(sapply(ok, FUN = function(x) x$rgb)), html = sapply(ok, FUN = function(x) x$html))
     names(out) <- c("nom", "lig", "col", "R", "G", "B", "html")
 
@@ -82,8 +86,20 @@ decoupsynth <- function(img, lig = 10, col = 10, redim = NULL) {
 
 
 
-extr <- function(vec, img) {
-    moycoul(img[seq(vec$x[1], vec$x[2]), seq(vec$y[1], vec$y[2]), ])
+extr <- function(vec, img,enhanced) {
+  if (!enhanced){
+   return(moycoul(
+      img[seq(vec$x[1], vec$x[2]), seq(vec$y[1], vec$y[2]), ]
+   ))}else{
+     # save(img,file="aef.RData")
+     # print(img)
+     out <- moycoul_enhanced(
+
+       img[seq(vec$x[1], vec$x[2]), seq(vec$y[1], vec$y[2]), ]
+     )
+     return(out)
+
+      }
 
 }
 

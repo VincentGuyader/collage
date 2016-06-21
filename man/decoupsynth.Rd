@@ -4,7 +4,7 @@
 \alias{decoupsynth}
 \title{decoupsynth}
 \usage{
-decoupsynth(img, lig = 10, col = 10, redim = NULL)
+decoupsynth(img, lig = 10, col = 10, redim = NULL, enhanced = FALSE)
 }
 \arguments{
 \item{img}{array de l 'image}

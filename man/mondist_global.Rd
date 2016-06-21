@@ -7,16 +7,16 @@
 mondist_global(lesX, B, paralell = FALSE, threat = 2)
 }
 \arguments{
-\item{lesX}{les point dont on cherche la distance par rappoirt à la base}
+\item{lesX}{les points dont on cherche la distance par rappoirt à la base}
 
 \item{B}{coordonnée des points de la base}
 
 \item{paralell}{booleen si VRAI alors le multiprocessing est utilisé}
 
-\item{threat}{nombre de coeurs a utiliser}
+\item{threat}{nombre de coeurs à utiliser}
 }
 \description{
-fonction qui calcule la distance d 'un ensemble de points par raport a un autre ensemble de point.
+fonction qui calcule la distance d'un ensemble de points par raport à un autre ensemble de points.
 }
 \examples{
 lesX<-do.call(rbind,(rep(list(t(X)),15)))

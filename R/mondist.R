@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
+#' @encoding UTF-8
 #' @title mondist
-#' @description  fonction qui calcule la distance d 'un point par raport a un autre ensemble de point.
+#' @description  fonction qui calcule la distance d'un point par raport à un autre ensemble de points.
 #' @param X coordonnée du point
 #' @param B coordonnée des points de la base
 #' @examples
+#' ## Not run:
 #' X<-matrix(c(0.5,0.5,0.5))
 #' B<-t(matrix(round(runif(9),2),3))
 #' mondist(X,B)
+#' ## End(Not run)
 
 mondist <- function(X, B) {
     sqrt(colSums(matrix((as.vector(X) - as.vector(B))^2, 3)))
 }
 
 #' @title mondist_global
-#' @description  fonction qui calcule la distance d 'un ensemble de points par raport a un autre ensemble de point.
-#' @param lesX les point dont on cherche la distance par rappoirt à la base
+#' @description  fonction qui calcule la distance d'un ensemble de points par raport à un autre ensemble de points.
+#' @param lesX les points dont on cherche la distance par rappoirt à la base
 #' @param B coordonnée des points de la base
 #' @param paralell booleen si VRAI alors le multiprocessing est utilisé
-#' @param threat nombre de coeurs a utiliser
+#' @param threat nombre de coeurs à utiliser
 #' @examples
 #' lesX<-do.call(rbind,(rep(list(t(X)),15)))
 #' B<-t(matrix(round(runif(12),2),3))
@@ -29,16 +32,16 @@ mondist_global <- function(lesX, B, paralell = FALSE, threat = 2) {
     if (threat == 1) {
         paralell <- FALSE
     }
-    
+
     if (!paralell) {
         out <- foreach(i = 1:nrow(lesX)) %do% {
-            
+
             # sqrt(colSums(matrix((as.vector(lesX[i, ]) - as.vector(t(B)))^2,3)))
             sqrt(colSums(matrix((as.vector(lesX[i, ]) - as.vector(B))^2, 3)))
-            
+
         }
     } else if (paralell) {
-        
+
         # if (getDoParWorkers() != threat) {
         cl <- snow::makeCluster(threat, type = "SOCK")
         doSNOW::registerDoSNOW(cl)
@@ -50,5 +53,5 @@ mondist_global <- function(lesX, B, paralell = FALSE, threat = 2) {
         snow::stopCluster(cl)
     }
     do.call(rbind, out)
-    
-} 
+
+}

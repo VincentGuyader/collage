@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 #' @encoding UTF-8
 #'
 #' @title tipixel
@@ -8,4 +7,4 @@
 #' @examples
 #' help(pixel)
 
-NULL 
+NULL
