@@ -1,18 +1,37 @@
 prodgrille <- function(liste, lig, col, verbose = TRUE, affich = TRUE) {
+
+  save(liste,lig,col,verbose,affich,file="prodgrille.RData")
+  load("prodgrille.RData")
     if (verbose) {
         message(paste("    lecture "))
     }
-    test <- lapply(mapply(seq, seq(1, lig * col, by = lig), seq(col, lig * col, by = col), SIMPLIFY = FALSE), funccolle2,
+  # lapply(liste,dim)
+  # le mapply est faux je suppose
+
+# out<-  apply(
+#   matrix(seq_len(length(liste)),ncol=col,byrow = TRUE)
+#   ,MARGIN=1,FUN=funccolle2,liste=liste)
+# #
+# # dim(out)
+# # [1] 145800      3
+#
+#
+# matrix(seq_len(length(liste)),ncol=col,byrow = TRUE)
+
+    test <- lapply(
+      split(matrix(seq_len(length(liste)),ncol=lig,byrow = TRUE),seq_len(col))
+       # mapply(seq, seq(1, lig * col, by = lig), seq(col, lig * col, by = col), SIMPLIFY = FALSE)
+      , funccolle2,
         liste = liste)
-
-
+length(liste)
+length(unique(liste))
     if (verbose) {
         message(paste("    collage "))
     }
 
      # trouver un moyen de gerer ca en ram quand on est au max.
     # passage sur disque ?
-
+lapply(test,dim)
     test <- abind::abind(test, along = 1)
     if (affich) {
         if (verbose) {

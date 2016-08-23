@@ -6,20 +6,22 @@
 #' @param redim permet de redimensionner les tuiles
 #' @param verbose rend la fonction bavarde
 #' @param preload pre charge les images et rend la base indépendante des fichiers.. mais prend de la place en ram
+#' @param recursive si VRAI va parcourir les sous dossiers
+#' @param progress affiche la progression dans la console
 #' @examples
-#' ## Not run
+#' \dontrun{
 #' base <- file.path(find.package('tipixel'),'base')
 #' les_tuiles <- genere_base(base,redim=c(25,25))
 #' genere_base(base)
 #' genere_base(base,redim=c(25,25))
 #' genere_base(base,redim=c(25,25),preload = FALSE)
-#' ## End(Not run)
+#' }
 #' @export
 
 
-genere_base <- function(chemin = "base", redim = NULL, verbose = FALSE, preload = TRUE) {
-    nom <- list.files(chemin, full.names = TRUE,pattern = "*.(jpg|jpeg)$")
-    tout <- plyr::llply(nom, .fun = decoupsynthpath, redim = redim, verbose = verbose, .progress = "text", preload = preload)
+genere_base <- function(chemin = "base", redim = NULL, verbose = FALSE, preload = TRUE,recursive = TRUE,progress="text") {
+    nom <- list.files(chemin, full.names = TRUE,pattern = "*.(jpg|jpeg)$",recursive = TRUE)
+    tout <- plyr::llply(nom, .fun = decoupsynthpath, redim = redim, verbose = verbose, .progress = progress, preload = preload)
     # options(warn = -1)
     suppressWarnings(
      LABASE <- cbind(nom, dplyr::bind_rows(lapply(tout, FUN = function(x) {
@@ -50,6 +52,7 @@ genere_base <- function(chemin = "base", redim = NULL, verbose = FALSE, preload 
 print.unebase <- function(x, ...) {
 
     cat("base de ", nrow(x$base), " tuiles \n")
+  cat("exemple de chemin :",x$base[1,]$nom, "\n")
     if (!is.null(dim(x$read[[1]]))) {
         cat("base avec images préchargées \n ")
         if (!is.na(x$redim[[1]])) {

@@ -4,7 +4,6 @@
 #' @title tipixel
 #' @docType package
 #' @name tipixel
-#' @examples
-#' help(pixel)
+
 
 NULL

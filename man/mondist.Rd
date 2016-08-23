@@ -16,10 +16,10 @@ mondist(X, B)
 fonction qui calcule la distance d'un point par raport à un autre ensemble de points.
 }
 \examples{
-## Not run:
+\dontrun{
 X<-matrix(c(0.5,0.5,0.5))
 B<-t(matrix(round(runif(9),2),3))
 mondist(X,B)
-## End(Not run)
+}
 }
 

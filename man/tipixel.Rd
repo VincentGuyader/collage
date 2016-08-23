@@ -6,7 +6,4 @@
 \alias{tipixel}
 \alias{tipixel-package}
 \title{tipixel}
-\examples{
-help(pixel)
-}
 

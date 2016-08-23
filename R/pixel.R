@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+#' @importFrom grDevices dev.off
+#' @importFrom graphics par plot rasterImage
+#' @importFrom stats na.omit setNames
+#' @importFrom utils browseURL packageDescription
 #' @encoding UTF-8
 #' @title pixel
 #' @description fonction générale du package. Permet de transformer une image en mosaique d'autres images
@@ -8,7 +12,7 @@
 #' @param base la base de tuile à utiliser
 #' @param target fichier de sortie en jpg
 #' @param paralell si oui le calcul en paralell sera utilisé
-#' @param threat nombre de coeur à utiliser si paralell =TRUE
+#' @param thread nombre de coeur à utiliser si paralell =TRUE
 #' @param doublon si FAUX on supprime les doublons avant de calculer les distances
 #' @param open si VRAI le fichier target est ouvert en fin de création
 #' @param verbose si VRAI rend la fonction bavarde
@@ -16,7 +20,7 @@
 #' @param affich booleen si vrai le resultat est affiché en tant que graphique dans R
 #' @param random tire au hasard la vignette parmi les meilleurs tuiles disponibles, random precise ce nombre
 #' @examples
-#' ## Not run:
+#' \dontrun{
 #' library(tipixel)
 #' lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
 #' genere_tuiles(lescomb,dossier='my_pict')
@@ -30,17 +34,56 @@
 #' pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin3.jpg',open=TRUE)
 #' pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
 #' pixel(file=img,lig=200,col=200,base=les_tuiles,target='dessin4.jpg'
-#' ,open=TRUE,paralell = TRUE,threat = 2)
-#' ## End(Not run)
+#' ,open=TRUE,paralell = TRUE,thread = 2)
+#' }
 
 #' @export
 
-pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, threat = 2, open = FALSE, verbose = TRUE, affich = FALSE,
+pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, thread = 2, open = FALSE, verbose = TRUE, affich = FALSE,
     doublon = FALSE, redim = NULL,random=1) {
     if (verbose) {
         message("chargement de l'image")
     }
     img <- jpeg::readJPEG(file)
+
+    # on va cacluler les lig et col optimale si on ne nous passe pas le truc en entier
+    # il faut que les dimensions des tuiles soient la memes
+    # nrow(img)/ncol(img)
+    # nrow(img)/lig
+    #
+    # dim(img)
+    if (missing(lig) & missing(col)){
+      stop("nedd lig and/or col")
+    }
+
+
+    if (missing(redim)){
+      dim_tuile <- base$redim
+
+    }else{
+      dim_tuile <- redim
+    }
+
+# ca ca marche bien si tuiles carrées
+    if (missing(lig) & !missing(col)){
+        lig<- round(col*nrow(img)/ncol(img))
+        lig <- round(lig * (dim_tuile[1]/dim_tuile[2]))
+    }
+
+    if (!missing(lig) & missing(col)){
+      col<- round(lig*ncol(img)/nrow(img))
+      col <- round(col * (dim_tuile[2]/dim_tuile[1]))
+    }
+
+
+#
+
+
+    # si tuile 2 fois moins large, il en faut 2 fois plus
+
+
+
+
     if (verbose) {
         message(paste("découpage de l'image en ", lig, " x ", col))
     }
@@ -62,7 +105,7 @@ pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, threat 
 
 
 
-    BONdist <- mondist_global(test[, c("R", "G", "B")], t(base$base[, c("R", "G", "B")]), paralell = paralell, threat = threat)
+    BONdist <- mondist_global(test[, c("R", "G", "B")], t(base$base[, c("R", "G", "B")]), paralell = paralell, thread = thread)
     colnames(BONdist) <- base$base$nom
     rownames(BONdist) <- test$nom
 
@@ -106,15 +149,35 @@ suppressWarnings(flag <-!is.na(base$read))
         if (verbose) {
             message(paste("   lecture depuis base"))
         }
+# browser()
 
-        liste <- base$read[as.character(corresp$pict)]
+# names(base$read)
+
+
+if ( !setequal(dim_tuile,base$redim)){
+
+  if (verbose) {
+    message(paste("   redimensionnement des tuiles de la base"))
+  }
+
+base_redim <- base$read[unique(as.character(corresp$pict))]
+base_redim<-plyr::llply(base_redim,resize,25,25,.progress = "text")
+liste <- base_redim[as.character(corresp$pict)]
+}else{
+  liste <- base$read[as.character(corresp$pict)]
+
+}
+        # redimensioner a la volé ce truc
+
+
 
     } else {
         if (verbose) {
             message(paste("   lecture depuis fichiers"))
         }
 
-        tout <- plyr::llply(as.character(levels(corresp$pict)), .fun = decoupsynthpath, redim = redim, verbose = verbose,
+        tout <- plyr::llply(as.character(levels(corresp$pict)), .fun = decoupsynthpath,
+                            redim = redim, verbose = verbose,
             .progress = "text", preload = TRUE)
         names(tout) <- as.character(levels(corresp$pict))
         lesREAD <- lapply(tout, FUN = function(x) {
@@ -127,6 +190,7 @@ suppressWarnings(flag <-!is.na(base$read))
     if (verbose) {
         message(paste("reconstruction image "))
     }
+# browser()
     out <- aperm(prodgrille(liste, lig, col, verbose = verbose, affich = affich), c(2, 1, 3))
 
     if (length(target) != 0) {

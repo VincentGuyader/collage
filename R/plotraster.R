@@ -3,6 +3,7 @@
 #' @title plotraster
 #' @description affiche une image raster dans la fenêtre graphique
 #' @param img l 'image (en array)
+#' @param verbose booleen qui rend la fonction bavarde
 #' @export
 
 

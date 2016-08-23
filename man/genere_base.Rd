@@ -6,7 +6,7 @@
 \title{genere_base}
 \usage{
 genere_base(chemin = "base", redim = NULL, verbose = FALSE,
-  preload = TRUE)
+  preload = TRUE, recursive = TRUE, progress = "text")
 }
 \arguments{
 \item{chemin}{le chemin du dossier de tuiles}
@@ -16,17 +16,21 @@ genere_base(chemin = "base", redim = NULL, verbose = FALSE,
 \item{verbose}{rend la fonction bavarde}
 
 \item{preload}{pre charge les images et rend la base indépendante des fichiers.. mais prend de la place en ram}
+
+\item{recursive}{si VRAI va parcourir les sous dossiers}
+
+\item{progress}{affiche la progression dans la console}
 }
 \description{
 importe le contenu du dossier de tuiles et génère un objet base
 }
 \examples{
-## Not run
+\dontrun{
 base <- file.path(find.package('tipixel'),'base')
 les_tuiles <- genere_base(base,redim=c(25,25))
 genere_base(base)
 genere_base(base,redim=c(25,25))
 genere_base(base,redim=c(25,25),preload = FALSE)
-## End(Not run)
+}
 }
 

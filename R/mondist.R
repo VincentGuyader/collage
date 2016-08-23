@@ -5,11 +5,11 @@
 #' @param X coordonnée du point
 #' @param B coordonnée des points de la base
 #' @examples
-#' ## Not run:
+#' \dontrun{
 #' X<-matrix(c(0.5,0.5,0.5))
 #' B<-t(matrix(round(runif(9),2),3))
 #' mondist(X,B)
-#' ## End(Not run)
+#' }
 
 mondist <- function(X, B) {
     sqrt(colSums(matrix((as.vector(X) - as.vector(B))^2, 3)))
@@ -20,16 +20,19 @@ mondist <- function(X, B) {
 #' @param lesX les points dont on cherche la distance par rappoirt à la base
 #' @param B coordonnée des points de la base
 #' @param paralell booleen si VRAI alors le multiprocessing est utilisé
-#' @param threat nombre de coeurs à utiliser
+#' @param thread nombre de coeurs à utiliser
 #' @examples
+#' \dontrun{
+#' X<-matrix(c(0.5,0.5,0.5))
 #' lesX<-do.call(rbind,(rep(list(t(X)),15)))
 #' B<-t(matrix(round(runif(12),2),3))
 #' system.time(mondist_global(lesX,B))
-#' system.time(mondist_global(lesX,B,paralell=TRUE,threat=2))
+#' system.time(mondist_global(lesX,B,paralell=TRUE,thread=2))
+#' }
 
-mondist_global <- function(lesX, B, paralell = FALSE, threat = 2) {
+mondist_global <- function(lesX, B, paralell = FALSE, thread = 2) {
     lesX <- as.matrix(lesX)
-    if (threat == 1) {
+    if (thread == 1) {
         paralell <- FALSE
     }
 
@@ -42,11 +45,11 @@ mondist_global <- function(lesX, B, paralell = FALSE, threat = 2) {
         }
     } else if (paralell) {
 
-        # if (getDoParWorkers() != threat) {
-        cl <- snow::makeCluster(threat, type = "SOCK")
+        # if (getDoParWorkers() != thread) {
+        cl <- snow::makeCluster(thread, type = "SOCK")
         doSNOW::registerDoSNOW(cl)
         # }
-        suppressWarnings(range <- split(1:nrow(lesX), rep(1:threat, each = round(nrow(lesX)/threat))))
+        suppressWarnings(range <- split(1:nrow(lesX), rep(1:thread, each = round(nrow(lesX)/thread))))
         out <- foreach::foreach(i = range, .export = "mondist_global", .packages = "foreach") %dopar% {
             mondist_global(lesX[i, ], B, paralell = FALSE)
         }

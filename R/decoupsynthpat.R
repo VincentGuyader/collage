@@ -6,7 +6,7 @@
 #' @param redim dimension finale de l'image
 #' @param verbose booleen rend la fonction bavarde
 #' @param preload booleen si VRAI les images sont préchargées (prend de la RAM mais accelère le traitement)
-#'
+#' @export
 decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE) {
     lim <- NULL
     if (verbose) {

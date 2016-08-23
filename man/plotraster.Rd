@@ -9,6 +9,8 @@ plotraster(img, verbose = TRUE)
 }
 \arguments{
 \item{img}{l 'image (en array)}
+
+\item{verbose}{booleen qui rend la fonction bavarde}
 }
 \description{
 affiche une image raster dans la fenêtre graphique
