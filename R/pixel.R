@@ -22,19 +22,23 @@
 #' @examples
 #' \dontrun{
 #' library(tipixel)
-#' lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-#' genere_tuiles(lescomb,dossier='my_pict')
-#' base <- file.path(find.package('tipixel'),'base')
-#' img <- sample(list.files(base,full.names = TRUE),1)
-#' plotraster(aperm(jpeg::readJPEG(img),c(2,1,3)))
-#' les_tuiles <- genere_base(base,redim=c(25,25))
-#' les_tuiles2 <- genere_base('my_pict')
+#'
+#' base <- file.path(find.package('tipixel'),'base') # un dossier contenant des images d'exemple
+#' img <- sample(list.files(base,full.names = TRUE),1) # on selectionne une image au hasard
+#' plotraster(aperm(jpeg::readJPEG(img),c(2,1,3))) # on affiche cette image
+#' les_tuiles <- genere_base(base,redim=c(25,25)) # on fabrique une base à partir du dossier
+#'
 #' pixel(file=img,lig=5,col=5,base=les_tuiles,target='dessin.jpg',open=TRUE,affich = TRUE)
 #' pixel(file=img,lig=50,col=50,base=les_tuiles,target='dessin2.jpg',open=TRUE)
 #' pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin3.jpg',open=TRUE)
-#' pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
 #' pixel(file=img,lig=200,col=200,base=les_tuiles,target='dessin4.jpg'
-#' ,open=TRUE,paralell = TRUE,thread = 2)
+#' ,open=TRUE,paralell = TRUE,thread = 2) #on utilise 2 coeur sur la machine pour accelerer le processus
+#'
+#' lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
+#' genere_tuiles(lescomb,dossier='my_pict') # on genere des tuiles d'une seule couleur
+#' les_tuiles2 <- genere_base('my_pict')
+#' pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
+#'
 #' }
 
 #' @export
