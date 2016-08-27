@@ -104,7 +104,14 @@ les_tuiles_non_charge</code></pre></div>
 </div>
 <div id="la-fonction-pixel" class="section level2">
 <h2>La fonction pixel</h2>
-<p>La fonction <code>pixel</code> est la principale fonction du package. Pour l’utiliser un certain nombre de paramètres sont obligatoires : * <code>file</code> pointe vers l’image à pixeliser * <code>lig</code> et <code>col</code> définissent un quadrillage de l’image d’origine grâce à un nombre de lignes et de colonnes respectivement. Plus le maillage est fin, plus la résolution sera fine et le résultat satisfaisant, mais plus l’image <code>target</code> sera volumineuse (en dimension et en taille) * <code>base</code> pointe vers la base * <code>target</code> reçoit une chaîne de caractères qui spécifie le nom du fichier de sortie qui sera généré. * <code>affich</code> affiche l’image pixelisée dans la fenêtre de plot (plus long)</p>
+<p>La fonction <code>pixel</code> est la principale fonction du package. Pour l’utiliser un certain nombre de paramètres sont obligatoires :</p>
+<ul>
+<li><p><code>file</code> pointe vers l’image à pixeliser.</p></li>
+<li><p><code>lig</code> et <code>col</code> définissent un quadrillage de l’image d’origine grâce à un nombre de lignes et de colonnes respectivement. Plus le maillage est fin, plus la résolution sera fine et le résultat satisfaisant, mais plus l’image <code>target</code> sera volumineuse (en dimension et en taille)</p></li>
+<li><p><code>base</code> pointe vers la base</p></li>
+<li><p><code>target</code> reçoit une chaîne de caractères qui spécifie le nom du fichier de sortie qui sera généré.</p></li>
+<li><p><code>affich</code> affiche l’image pixelisée dans la fenêtre de plot (plus long)</p></li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pixel</span>(<span class="dt">file=</span>img,<span class="dt">lig=</span><span class="dv">5</span>,<span class="dt">col=</span><span class="dv">5</span>,<span class="dt">base=</span>les_tuiles,<span class="dt">target=</span><span class="st">'dessin.jpg'</span>,<span class="dt">affich =</span> <span class="ot">TRUE</span>)
 <span class="kw">pixel</span>(<span class="dt">file=</span>img,<span class="dt">lig=</span><span class="dv">50</span>,<span class="dt">col=</span><span class="dv">50</span>,<span class="dt">base=</span>les_tuiles,<span class="dt">target=</span><span class="st">'dessin2.jpg'</span>,<span class="dt">affich=</span><span class="ot">TRUE</span>)</code></pre></div>
 <!-- ```{r fig.width=8, fig.height=8,echo=FALSE,eval=FALSE} -->
