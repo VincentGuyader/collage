@@ -4,7 +4,7 @@ author: "Vincent Guyader"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{pixel}
+  %\VignetteIndexEntry{tipixel}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -71,10 +71,15 @@ plotraster(aperm(jpeg::readJPEG(img),c(2,1,3)))# permet d'afficher l'image en ta
 ## La fonction pixel
 
 La fonction `pixel` est la principale fonction du package. Pour l'utiliser un certain nombre de paramètres sont obligatoires : 
-* `file` pointe vers l'image à pixeliser
+
+* `file` pointe vers l'image à pixeliser.
+
 * `lig` et `col` définissent un quadrillage de l'image d'origine grâce à un nombre de lignes et de colonnes respectivement. Plus le maillage est fin, plus la résolution sera fine et le résultat satisfaisant, mais plus l'image `target` sera volumineuse (en dimension et en taille)
+
 * `base` pointe vers la base
+
 * `target` reçoit une chaîne de caractères qui spécifie le nom du fichier de sortie qui sera généré.
+
 * `affich` affiche l'image pixelisée dans la fenêtre de plot (plus long)
 
 
