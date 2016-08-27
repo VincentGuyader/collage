@@ -1,0 +1,24 @@
+Package: tipixel
+Type: Package
+Title: Fabrique une image en mosaique à partir d'autres images
+Version: 0.1.3
+Author: vincent Guyader [aut, cre]
+Maintainer: vincent guyader <vincent@thinkr.fr>
+Description: Fabrique une image en mosaique à partir d'autres images
+License: GPL-3
+LazyData: TRUE
+Imports:
+    grDevices,
+    jpeg,
+    raster,
+    abind,
+    plyr,
+    doSNOW,
+    dplyr
+RoxygenNote: 5.0.1
+Depends: foreach
+URL: https://github.com/ThinkRstat/tipixel
+Encoding: UTF-8
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
