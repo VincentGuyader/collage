@@ -1,7 +1,7 @@
 prodgrille <- function(liste, lig, col, verbose = TRUE, affich = TRUE) {
 
-  save(liste,lig,col,verbose,affich,file="prodgrille.RData")
-  load("prodgrille.RData")
+  # save(liste,lig,col,verbose,affich,file="prodgrille.RData")
+  # load("prodgrille.RData")
     if (verbose) {
         message(paste("    lecture "))
     }
