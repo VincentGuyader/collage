@@ -8,6 +8,7 @@
 #' @param preload pre charge les images et rend la base indépendante des fichiers.. mais prend de la place en ram
 #' @param recursive si VRAI va parcourir les sous dossiers
 #' @param progress affiche la progression dans la console
+#' @param nombre nombre de tuiles à inclure (aléatoire)
 #' @examples
 #' \dontrun{
 #' base <- file.path(find.package('tipixel'),'base')
@@ -19,8 +20,16 @@
 #' @export
 
 
-genere_base <- function(chemin = "base", redim = NULL, verbose = FALSE, preload = TRUE,recursive = TRUE,progress="text") {
+genere_base <- function(chemin = "base", redim = c(25,25), verbose = FALSE, preload = TRUE,recursive = TRUE,progress="text",nombre=NULL) {
     nom <- list.files(chemin, full.names = TRUE,pattern = "*.(jpg|jpeg)$",recursive = TRUE)
+
+    if (!missing(nombre)){
+    if (nombre<length(nom)){
+
+      nom <-     nom[sample(seq_along(nom),nombre)]
+    }
+    }
+
     tout <- plyr::llply(nom, .fun = decoupsynthpath, redim = redim, verbose = verbose, .progress = progress, preload = preload)
     # options(warn = -1)
     suppressWarnings(
@@ -55,9 +64,10 @@ print.unebase <- function(x, ...) {
   cat("exemple de chemin :",x$base[1,]$nom, "\n")
     if (!is.null(dim(x$read[[1]]))) {
         cat("base avec images préchargées \n ")
+      if (!is.null(x$redim)){
         if (!is.na(x$redim[[1]])) {
             cat("taille :", x$redim)
         }
-    }
+    }}
 
 }
