@@ -20,7 +20,7 @@
 #' @export
 
 
-genere_base <- function(chemin = "base", redim = c(25,25), verbose = FALSE, preload = TRUE,recursive = TRUE,progress="text",nombre=NULL) {
+genere_base <- function(chemin = "base", redim = c(25,25), verbose = FALSE, preload = TRUE,recursive = TRUE,progress="tk",nombre=NULL) {
     nom <- list.files(chemin, full.names = TRUE,pattern = "*.(jpg|jpeg)$",recursive = TRUE)
 
     if (!missing(nombre)){

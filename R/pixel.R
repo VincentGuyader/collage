@@ -160,7 +160,7 @@ pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, thread 
       }
 
       base_redim <- base$read[unique(as.character(corresp$pict))]
-      base_redim<-plyr::llply(base_redim,resize,25,25,.progress = "text")
+      base_redim<-plyr::llply(base_redim,resize,25,25,.progress = "tk")
       liste <- base_redim[as.character(corresp$pict)]
     }else{
       liste <- base$read[as.character(corresp$pict)]
@@ -177,7 +177,7 @@ pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, thread 
 
     tout <- plyr::llply(as.character(levels(corresp$pict)), .fun = decoupsynthpath,
                         redim = redim, verbose = verbose,
-                        .progress = "text", preload = TRUE)
+                        .progress = "tk", preload = TRUE)
     names(tout) <- as.character(levels(corresp$pict))
     lesREAD <- lapply(tout, FUN = function(x) {
       x$read

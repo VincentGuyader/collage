@@ -5,8 +5,8 @@
 \alias{genere_base}
 \title{genere_base}
 \usage{
-genere_base(chemin = "base", redim = NULL, verbose = FALSE,
-  preload = TRUE, recursive = TRUE, progress = "text")
+genere_base(chemin = "base", redim = c(25, 25), verbose = FALSE,
+  preload = TRUE, recursive = TRUE, progress = "tk", nombre = NULL)
 }
 \arguments{
 \item{chemin}{le chemin du dossier de tuiles}
@@ -20,6 +20,8 @@ genere_base(chemin = "base", redim = NULL, verbose = FALSE,
 \item{recursive}{si VRAI va parcourir les sous dossiers}
 
 \item{progress}{affiche la progression dans la console}
+
+\item{nombre}{nombre de tuiles à inclure (aléatoire)}
 }
 \description{
 importe le contenu du dossier de tuiles et génère un objet base
