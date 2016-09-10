@@ -20,5 +20,5 @@ Depends: foreach
 URL: https://github.com/ThinkRstat/tipixel
 Encoding: UTF-8
 Suggests: knitr,
-    rmarkdown
+    rmarkdown,shiny,shinyFiles
 VignetteBuilder: knitr
