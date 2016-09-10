@@ -4,9 +4,9 @@
 liste_unebase <- function(){
 
   memoire<-ls(envir=.GlobalEnv)
-
-  memoire[sapply(memoire,function(k){inherits((eval(parse(text=k))),"unebase")})]
-
+if(length(memoire)!=0){
+  return(memoire[sapply(memoire,function(k){inherits((eval(parse(text=k))),"unebase")})])
+}else{return(NULL)}
 }
 
 #' @export

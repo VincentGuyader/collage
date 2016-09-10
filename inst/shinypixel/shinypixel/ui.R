@@ -35,9 +35,9 @@ shinyUI(pageWithSidebar(
       tabPanel("Gestion des bases",
 
                tags$h3("Construire une base"),
+               textInput("nom_creation_base", "Nom de la base crée:", make.names(paste("NEW_base",Sys.time(),sep="_"))),
 
                shinyDirButton('base', 'creer une nouvelle base', 'Please select a folder'),
-               textInput("nom_creation_base", "Nom de la base crée:", make.names(paste("NEW_base",Sys.time(),sep="_"))),
                numericInput("redim1",
                             label = h3("hauteur des tuiles en px"),
                             value = 25,min=1)   ,
