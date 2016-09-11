@@ -44,13 +44,24 @@ shinyServer(function(input, output,session) {
 
 
     print("VOILA LA ON LANCE LE TRUC")
-    print(liste_unebase())
+
+
+  YOP = reactive({
+
+
+        print("actioncar changment col")
+
+liste_unebase()
+  })
+
+
+
 
     output$selectUI_a <- renderUI({
-      selectInput("nom_base_a", "Selectionner la base", liste_unebase())
+      selectInput("nom_base_a", "Selectionner la base", YOP())
     })
     output$selectUI_b <- renderUI({
-      selectInput("nom_base", "Selectionner la base", liste_unebase())
+      selectInput("nom_base", "Selectionner la base", YOP())
     })
     cur_val <- ""
 
@@ -90,18 +101,18 @@ shinyServer(function(input, output,session) {
       print("mise a jour nombre tuiles")
 
       print(str(input$nom_base_a))
-
+      print(str(input$nom_base))
       # des fois "" des fois null
       if (is.null(input$nom_base_a)){
-        paste("Nombre de pixel",input$n_col*input$n_row)
+        paste("Nombre de pixel :",input$n_col*input$n_row)
       }else if (is.null(input$file) | input$nom_base_a==""){
-      paste("Nombre de pixel",input$n_col*input$n_row)
+      paste("Nombre de pixel :",input$n_col*input$n_row)
       }else{
         cat("input$nom_base",input$nom_base,"\n")
 
         cat("input$nom_base_a",input$nom_base_a,"\n")
 
-        paste("Nombre de pixel",calc_dim(col=input$n_col,
+        paste("Nombre de pixel :",calc_dim(col=input$n_col,
                                          lig=input$n_row,
                                          redim=eval(parse(text=paste0(input$nom_base_a,"$redim"))),
                                          dim= dim(jpeg::readJPEG(normalizePath(as.character(parseFilePaths(volumes, input$file)$datapath))))
@@ -133,20 +144,30 @@ shinyServer(function(input, output,session) {
       updateSelectInput(session, "nom_base",choices = ll)
       updateSelectInput(session, "nom_base_a",choices = ll)
 
+      # obigé de bouriner le update du dessus n 'est pas stage et selectUI_a oit etre modifie en dur
+      output$selectUI_a <- renderUI({
+        selectInput("nom_base_a", "Selectionner la base",ll)
+      })
+      output$selectUI_b <- renderUI({
+        selectInput("nom_base", "Selectionner la base", ll)
+      })
     })
 
 
     observeEvent(input$export_base, {
       print("on exporte la base FUCK YEAH")
-      print(input$nom_base)
+      print(str(input$nom_base))
 print(as.character(parseSavePath(volumes, input$export_base)$datapath))
 
-print(
-todo<-paste0("saveRDS(",input$nom_base,",file='"
-      ,as.character(parseSavePath(volumes, input$export_base)$datapath),"')")
-)
-do(todo)
 
+if(exists(input$nom_base)){
+
+  print(
+    todo<-paste0("saveRDS(",input$nom_base,",file='"
+                 ,as.character(parseSavePath(volumes, input$export_base)$datapath),"')")
+  )
+do(todo)
+}
 
 
 })
@@ -166,13 +187,20 @@ do(todo)
       ll<-liste_unebase()
       updateSelectInput(session, "nom_base",choices = ll)
       updateSelectInput(session, "nom_base_a",choices = ll)
+      # obigé de bouriner le update du dessus n 'est pas stage et selectUI_a oit etre modifie en dur
+      output$selectUI_a <- renderUI({
+        selectInput("nom_base_a", "Selectionner la base",ll)
+      })
+      output$selectUI_b <- renderUI({
+        selectInput("nom_base", "Selectionner la base", ll)
+      })
 
     })
 
 
 
     observeEvent(input$go, {
-      #
+      print("GOOOOO")
       print(input$nom_base)
       print(input$nom_base_a)
       LABASE <-input$nom_base
@@ -214,7 +242,9 @@ do(todo)
         affich = is.element("open",input$options),
         doublon = is.element("doublon",input$options),
         verbose = is.element("verbose",input$options),
-        target=target)
+        target=target,
+        paralell = is.element("paralell",input$options),
+        thread=as.numeric(input$thread))
           for (i in 1:3) {
             progress$set(value = i)
             Sys.sleep(0.1)
@@ -226,5 +256,35 @@ do(todo)
 
 
       })
+
+
+
+    observeEvent(input$demo, {
+      print("on charge la demo")
+print(liste_unebase())
+      # base <- file.path(find.package('tipixel'),'base')
+      # img <- sample(list.files(base,full.names = TRUE),1)
+      # plotraster(aperm(jpeg::readJPEG(img),c(2,1,3)))
+      # les_tuiles <<- genere_base(base,redim=c(25,25))
+      #
+      #
+      # ll<-liste_unebase()
+      # print(ll)
+      # updateSelectInput(session, "nom_base",choices = ll,selected = "les_tuiles")
+      # updateSelectInput(session, "nom_base_a",choices = ll,selected = "les_tuiles")
+      # shiny::updateNumericInput(session,"n_col",value = 50)
+      # shiny::updateNumericInput(session,"n_row",value = 50)
+
+
+base <- paste0(file.path(find.package('tipixel'),'base'),"/basechaton.RDS")
+chatons <<- readRDS(base)
+
+ll<-liste_unebase()
+print(ll)
+updateSelectInput(session, "nom_base",choices = ll,selected = "chatons")
+updateSelectInput(session, "nom_base_a",choices = ll,selected = "chatons")
+
+    })
+
 
   })

@@ -22,7 +22,7 @@
 #' @examples
 #' \dontrun{
 #' library(tipixel)
-#' 
+#'
 
 #' base <- file.path(find.package('tipixel'),'base')
 #' img <- sample(list.files(base,full.names = TRUE),1)
@@ -33,11 +33,11 @@
 #' pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin3.jpg',open=TRUE)
 #' pixel(file=img,lig=200,col=200,base=les_tuiles,target='dessin4.jpg'
 #' ,open=TRUE,paralell = TRUE,thread = 2)
-#' 
+#'
 #' lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-#' genere_tuiles(lescomb,dossier='my_pict')#' 
+#' genere_tuiles(lescomb,dossier='my_pict')#'
 #' les_tuiles2 <- genere_base('my_pict')
-#' 
+#'
 #' pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
 
 #' }
@@ -104,7 +104,7 @@ pixel <- function(file, lig, col, base, target = NULL, paralell = FALSE, thread 
 
 
 
-  BONdist <- mondist_global(test[, c("R", "G", "B")], t(base$base[, c("R", "G", "B")]), paralell = paralell, thread = thread)
+  BONdist <- mondist_global(test[, c("R", "G", "B")], t(base$base[, c("R", "G", "B")]), paralell = paralell, thread = thread,verbose=verbose)
   colnames(BONdist) <- base$base$nom
   rownames(BONdist) <- test$nom
 
