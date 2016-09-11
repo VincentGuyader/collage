@@ -1,5 +1,8 @@
 require(shiny)
-require(shinyFiles)
+if( !require(shinyFiles, quietly = TRUE) ){
+  install.packages( "shinyFiles")
+  require(shinyFiles)
+}
 require(tipixel)
 # source("tools.R")
 shinyServer(function(input, output,session) {
