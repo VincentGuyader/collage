@@ -6,6 +6,7 @@ shinyServer(function(input, output,session) {
   volumes <- c('home'="/mnt/docs/big/Vincent/")
   volumes <- c('wd'='.')
   volumes <- c('wd'='/mnt/docs/big/chaton/')
+  volumes <- c('wd'='/')
   shinyFileChoose(input, 'file', roots=volumes)
   output$filepaths <- renderPrint({parseFilePaths(volumes, input$file)})
 

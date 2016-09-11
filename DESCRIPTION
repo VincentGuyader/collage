@@ -1,7 +1,7 @@
 Package: tipixel
 Type: Package
 Title: Fabrique une image en mosaique à partir d'autres images
-Version: 0.1.3
+Version: 0.1.4
 Author: vincent Guyader [aut, cre]
 Maintainer: vincent guyader <vincent@thinkr.fr>
 Description: Fabrique une image en mosaique à partir d'autres images
