@@ -1,5 +1,8 @@
 require(shiny)
-require(shinyFiles)
+if( !require(shinyFiles, quietly = TRUE) ){
+  install.packages( "shinyFiles")
+  require(shinyFiles)
+}
 
 shinyUI(pageWithSidebar(
   headerPanel(
