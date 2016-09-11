@@ -3,6 +3,9 @@
 #' @importFrom graphics par plot rasterImage
 #' @importFrom stats na.omit setNames
 #' @importFrom utils browseURL packageDescription
+#' @importFrom jpeg readJPEG
+#' @importFrom jpeg writeJPEG
+#' @importFrom plyr llply
 #' @encoding UTF-8
 #' @title pixel
 #' @description fonction générale du package. Permet de transformer une image en mosaique d'autres images
@@ -19,9 +22,6 @@
 #' @param redim utile si la base ne contient pas les images perchargées, précise les dimensions des tuiles
 #' @param affich booleen si vrai le resultat est affiché en tant que graphique dans R
 #' @param random tire au hasard la vignette parmi les meilleurs tuiles disponibles, random precise ce nombre
-#' @importFrom jpeg readJPEG
-#' @importFrom jpeg writeJPEG
-#' @importFrom plyr llply
 #'
 #' @examples
 #' \dontrun{
@@ -54,16 +54,16 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
     message("chargement de l'image")
   }
   img <- readJPEG(file)
+  if (missing(lig)){lig <-NA}
+  if (missing(col)){ col <-NA}
 
-  if (missing(lig) ){lig <-NA}
-  if (missing(col)){col <-NA}
+
   if (!is.na(lig)){  if (lig==0){lig <-NA}}
   if (!is.na(col)){  if (col==0){col <-NA}}
   if (is.na(lig) & is.na(col)){
     message("nedd lig and/or col")
     return(NULL)
   }
-
   if (missing(redim)){
     dim_tuile <- base$redim
 
@@ -79,7 +79,6 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
     col<- round(lig*ncol(img)/nrow(img))
     col <- round(col * (dim_tuile[2]/dim_tuile[1]))
   }
-
 
 
   # si tuile 2 fois moins large, il en faut 2 fois plus

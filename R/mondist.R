@@ -61,6 +61,6 @@ if (verbose) { message(thread," threads utilisés")}
         }
         stopCluster(cl)
     }
-    bind_rows(out)
-
+    # bind_rows(out) #Erreur : cannot convert object to a data frame
+do.call(rbind,out)
 }
