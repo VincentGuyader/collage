@@ -78,6 +78,17 @@ print.dqh<-function(base){
 run_2048<-function(nrow,ncol,p=0.9){
 
 
+
+  help <- function(){
+cat("   *** KEY BINDING ***  \n\n")
+    cat("press ECHAP to quit\n\n")
+    cat("choose moove E (up) ; D (down) ; S (left); F (right) \n")
+    cat("choose moove 8 (up) ; 2 (down) ; 4 (left); 6 (right) \n")
+    cat("choose moove I (up) ; K (down) ; J (left); L (right) \n\n\n")
+
+  }
+
+
   if (missing(nrow) & missing(ncol)){
     nrow <- ncol <- 4
   }
@@ -90,17 +101,26 @@ run_2048<-function(nrow,ncol,p=0.9){
 
   base<-matrix(0,nrow=nrow,ncol=ncol)
 
-  while(length(which(base==2048))==0 & length(which(base==0))!=0){
+  while(length(which(base==2048))==0 ){
     base<-add2or4(base,p=p)
     # print(base)
 
     class(base)<-"dqh"
     print(base)
+    flag <-sum((base==rbind(base[-1,],0))+(base==rbind(0,base[-nrow(base),]))+(base==cbind(base[,-1],0))+(base==cbind(0,base[,-nrow(base)])))
+    if (flag==0){
+      # print(base)
+      break}
 
-    cat("\n","choose moove E (up) ; D (down) ; s (left); f (right)","\n") # prompt
+    y<-character(0)
+    while(length(y)==0){
+    cat("\n","choose moove E (up) ; D (down) ; s (left); f (right) OR H for help","\n") # prompt
     y<-scan(n=1,what = "character")
+    }
 
-    base <- switch(y,
+
+baseSAVE <-base
+    base <- switch(EXPR = y,
                    E = H_(base),
                    D = B_(base),
                    S = G_(base),
@@ -112,11 +132,27 @@ run_2048<-function(nrow,ncol,p=0.9){
                    '8' = H_(base),
                    '2' = B_(base),
                    '4' = G_(base),
-                   '6' = D_(base)
-    )
+                   '6' = D_(base),
+                   H= help(),
+                   h= help(),
+                   'i' = H_(base),
+                   'k' = B_(base),
+                   'j' = G_(base),
+                   'l' = D_(base),
+                   'I' = H_(base),
+                   'K' = B_(base),
+                   'J' = G_(base),
+                   'L' = D_(base)
 
-  }
+
+    )
+  if (is.null(base)){
+    cat(" wrong KEY \n")
+    base<-baseSAVE}
+
   # TODO CHECK DES MOUVEMENTs RESTANTs POSSIBLEs
 
-  if( sum(base==2048)>1){cat("YOU WIN ! \n")}else{cat("YOU LOOSE \n")}
+}
+
+  if( sum(base>=2048)>1){cat("YOU WIN ! \n")}else{cat("YOU LOOSE \n")}
 }
