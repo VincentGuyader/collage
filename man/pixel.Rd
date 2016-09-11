@@ -45,7 +45,7 @@ library(tipixel)
 
 base <- file.path(find.package('tipixel'),'base')
 img <- sample(list.files(base,full.names = TRUE),1)
-plotraster(aperm(jpeg::readJPEG(img),c(2,1,3)))
+plotraster(aperm(readJPEG(img),c(2,1,3)))
 les_tuiles <- genere_base(base,redim=c(25,25))
 pixel(file=img,lig=5,col=5,base=les_tuiles,target='dessin.jpg',open=TRUE,affich = TRUE)
 pixel(file=img,lig=50,col=50,base=les_tuiles,target='dessin2.jpg',open=TRUE)
@@ -58,6 +58,13 @@ genere_tuiles(lescomb,dossier='my_pict')#'
 les_tuiles2 <- genere_base('my_pict')
 
 pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
+
+
+#you like kittens ?
+kittenize(img)
+
+# you want a GUI ?
+shinypixel()
 }
 }
 

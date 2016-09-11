@@ -6,13 +6,14 @@
 #' @param redim dimension finale de l'image
 #' @param verbose booleen rend la fonction bavarde
 #' @param preload booleen si VRAI les images sont préchargées (prend de la RAM mais accelère le traitement)
+#' @importFrom jpeg readJPEG
 #' @export
 decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE) {
     lim <- NULL
     if (verbose) {
         message(path)
     }
-    try(lim <- aperm(jpeg::readJPEG(path), c(2, 1, 3)))
+    try(lim <- aperm(readJPEG(path), c(2, 1, 3)))
     # microbenchmark(aperm(lim,c(2,1,3)),t_array(lim))
 
     if (length(lim) == 0) {

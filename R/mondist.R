@@ -22,10 +22,16 @@ mondist <- function(X, B) {
 #' @param parallel booleen si VRAI alors le multiprocessing est utilisé
 #' @param thread nombre de coeurs à utiliser
 #' @param verbose booleen qui rend la fonction bavarde
+#' @importFrom dplyr bind_rows
+#' @importFrom snow makeCluster
+#' @importFrom snow stopCluster
+#' @importFrom foreach foreach
+#' @importFrom doSNOW registerDoSNOW
+#'
 #' @examples
 #' \dontrun{
 #' X<-matrix(c(0.5,0.5,0.5))
-#' lesX<-dplyr::bind_rows(rep(list(t(X)),15))
+#' lesX<-bind_rows(rep(list(t(X)),15))
 #' B<-t(matrix(round(runif(12),2),3))
 #' system.time(mondist_global(lesX,B))
 #' system.time(mondist_global(lesX,B,parallel=TRUE,thread=2))
@@ -40,22 +46,21 @@ mondist_global <- function(lesX, B, parallel = FALSE, thread = 2,verbose=TRUE) {
     if (!parallel) {
         out <- foreach(i = 1:nrow(lesX)) %do% {
 
-            # sqrt(colSums(matrix((as.vector(lesX[i, ]) - as.vector(t(B)))^2,3)))
             sqrt(colSums(matrix((as.vector(lesX[i, ]) - as.vector(B))^2, 3)))
 
         }
     } else if (parallel) {
 if (verbose) { message(thread," threads utilisés")}
         # if (getDoParWorkers() != thread) {
-        cl <- snow::makeCluster(thread, type = "SOCK")
-        doSNOW::registerDoSNOW(cl)
+        cl <- makeCluster(thread, type = "SOCK")
+        registerDoSNOW(cl)
         # }
         suppressWarnings(range <- split(1:nrow(lesX), rep(1:thread, each = round(nrow(lesX)/thread))))
-        out <- foreach::foreach(i = range, .export = "mondist_global", .packages = "foreach") %dopar% {
+        out <- foreach(i = range, .export = "mondist_global", .packages = "foreach") %dopar% {
             mondist_global(lesX[i, ], B, parallel = FALSE,verbose=FALSE)
         }
-        snow::stopCluster(cl)
+        stopCluster(cl)
     }
-    dplyr::bind_rows(out)
-
+    # bind_rows(out) #Erreur : cannot convert object to a data frame
+do.call(rbind,out)
 }

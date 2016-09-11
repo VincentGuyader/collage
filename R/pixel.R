@@ -3,6 +3,9 @@
 #' @importFrom graphics par plot rasterImage
 #' @importFrom stats na.omit setNames
 #' @importFrom utils browseURL packageDescription
+#' @importFrom jpeg readJPEG
+#' @importFrom jpeg writeJPEG
+#' @importFrom plyr llply
 #' @encoding UTF-8
 #' @title pixel
 #' @description fonction générale du package. Permet de transformer une image en mosaique d'autres images
@@ -19,6 +22,7 @@
 #' @param redim utile si la base ne contient pas les images perchargées, précise les dimensions des tuiles
 #' @param affich booleen si vrai le resultat est affiché en tant que graphique dans R
 #' @param random tire au hasard la vignette parmi les meilleurs tuiles disponibles, random precise ce nombre
+#'
 #' @examples
 #' \dontrun{
 #' library(tipixel)
@@ -26,7 +30,7 @@
 
 #' base <- file.path(find.package('tipixel'),'base')
 #' img <- sample(list.files(base,full.names = TRUE),1)
-#' plotraster(aperm(jpeg::readJPEG(img),c(2,1,3)))
+#' plotraster(aperm(readJPEG(img),c(2,1,3)))
 #' les_tuiles <- genere_base(base,redim=c(25,25))
 #' pixel(file=img,lig=5,col=5,base=les_tuiles,target='dessin.jpg',open=TRUE,affich = TRUE)
 #' pixel(file=img,lig=50,col=50,base=les_tuiles,target='dessin2.jpg',open=TRUE)
@@ -39,7 +43,13 @@
 #' les_tuiles2 <- genere_base('my_pict')
 #'
 #' pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
-
+#'
+#'
+#' #you like kittens ?
+#' kittenize(img)
+#'
+#' # you want a GUI ?
+#' shinypixel()
 #' }
 
 #' @export
@@ -49,17 +59,17 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
   if (verbose) {
     message("chargement de l'image")
   }
-  img <- jpeg::readJPEG(file)
+  img <- readJPEG(file)
+  if (missing(lig)){lig <-NA}
+  if (missing(col)){ col <-NA}
 
-  if (missing(lig) ){lig <-NA}
-  if (missing(col)){col <-NA}
+
   if (!is.na(lig)){  if (lig==0){lig <-NA}}
   if (!is.na(col)){  if (col==0){col <-NA}}
   if (is.na(lig) & is.na(col)){
     message("nedd lig and/or col")
     return(NULL)
   }
-
   if (missing(redim)){
     dim_tuile <- base$redim
 
@@ -75,7 +85,6 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
     col<- round(lig*ncol(img)/nrow(img))
     col <- round(col * (dim_tuile[2]/dim_tuile[1]))
   }
-
 
 
   # si tuile 2 fois moins large, il en faut 2 fois plus
@@ -160,7 +169,7 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
       }
 
       base_redim <- base$read[unique(as.character(corresp$pict))]
-      base_redim<-plyr::llply(base_redim,resize,25,25,.progress = "tk")
+      base_redim<-llply(base_redim,resize,25,25,.progress = "tk")
       liste <- base_redim[as.character(corresp$pict)]
     }else{
       liste <- base$read[as.character(corresp$pict)]
@@ -175,7 +184,7 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
       message(paste("   lecture depuis fichiers"))
     }
 
-    tout <- plyr::llply(as.character(levels(corresp$pict)), .fun = decoupsynthpath,
+    tout <- llply(as.character(levels(corresp$pict)), .fun = decoupsynthpath,
                         redim = redim, verbose = verbose,
                         .progress = "tk", preload = TRUE)
     names(tout) <- as.character(levels(corresp$pict))
@@ -196,7 +205,7 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
     if (verbose) {
       message(paste("export dans ", target))
     }
-    jpeg::writeJPEG(out, target = target, quality = 1)
+    writeJPEG(out, target = target, quality = 1)
     if (open) {
       if (verbose) {
         message(paste("ouverture de", target))

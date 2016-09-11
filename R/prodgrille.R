@@ -1,3 +1,4 @@
+#' @importFrom abind abind
 prodgrille <- function(liste, lig, col, verbose = TRUE, affich = TRUE) {
 
   # save(liste,lig,col,verbose,affich,file="prodgrille.RData")
@@ -32,7 +33,7 @@ length(unique(liste))
      # trouver un moyen de gerer ca en ram quand on est au max.
     # passage sur disque ?
 lapply(test,dim)
-    test <- abind::abind(test, along = 1)
+    test <- abind(test, along = 1)
     if (affich) {
         if (verbose) {
             message(paste("    affichage "))
@@ -48,5 +49,5 @@ lapply(test,dim)
 # microbenchmark::microbenchmark(abind::abind(test,along=1),times=8) expr min lq mean median uq max neval
 # abind::abind(test, along = 1) 4.135301 4.161878 4.184652 4.188135 4.212134 4.217619 8
 funccolle2 <- function(rang, liste) {
-    abind::abind(liste[rang], along = 2)
+    abind(liste[rang], along = 2)
 }
