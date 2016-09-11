@@ -9,17 +9,19 @@ shinyUI(pageWithSidebar(
     tabsetPanel(
       tabPanel("Choisir les images",
                tags$br(),
+
                shinyFiles::shinyFilesButton('file', 'Choix de l\'image en entrée', 'Please select a file', FALSE),
                shinyFiles::shinySaveButton('save', 'Choix de l\'image en sortie', 'Save file as...', filetype=list(picture=c('jpeg', 'jpg'))),
+
                htmlOutput("selectUI_a"),
 
 
                numericInput("n_col",
                             label = h3("nombre de colonnes"),
-                            value = 4,min=0)   ,
+                            value = 42,min=0)   ,
                numericInput("n_row",
                             label = h3("nombre de lignes"),
-                            value = 4,min=0),
+                            value = 42,min=0),
 
                # ici on met le nombre total d tuiles
 
@@ -27,18 +29,28 @@ shinyUI(pageWithSidebar(
                checkboxGroupInput("options",
                                   label = h3("options"),
                                   choices = list("ouvre le fichier de sortie" = "open",
-                                                 "autoriser les doublons" = "doublon", "verbose" = "verbose"),
-                                  selected = c("open","doublon","verbose"))
+                                                 "autoriser les doublons" = "doublon",
+                                                 "verbose" = "verbose",
+                                                 "paralell"  = "paralell"
+
+
+                                                 ),
+                                  selected = c("open","doublon","verbose")),
+               numericInput("thread",
+                            label = h3("nombre de thread"),
+                            value = 2,min=1)
+
 
 
                ),
       tabPanel("Gestion des bases",
 
                tags$h3("Construire une base"),
+               textInput("nom_creation_base", "Nom de la base crée:", make.names(paste("NEW_base",Sys.time(),sep="_"))),
 
                shinyDirButton('base', 'creer une nouvelle base', 'Please select a folder'),
-               textInput("nom_creation_base", "Nom de la base crée:", make.names(paste("NEW_base",Sys.time(),sep="_"))),
-               numericInput("redim1",
+               actionButton("demo","JE VEUX DES CHATONS"),
+                              numericInput("redim1",
                             label = h3("hauteur des tuiles en px"),
                             value = 25,min=1)   ,
                numericInput("redim2",
@@ -54,9 +66,10 @@ shinyUI(pageWithSidebar(
 
                tags$p(),
                htmlOutput("selectUI_b"),
+               shinySaveButton('export_base', 'exporter la base', 'Save file as...', filetype=list(RDS=c('RDS'))),
+
                shinyFilesButton('import_base', 'Importer une base', 'Please select a file', FALSE),
-               textInput("nom_import_base", "Nom de la base importée:", make.names(paste("base",Sys.time(),sep="_"))),
-               shinySaveButton('export_base', 'exporter la base', 'Save file as...', filetype=list(RDS=c('RDS')))
+               textInput("nom_import_base", "Nom de la base importée:", make.names(paste("base",Sys.time(),sep="_")))
 
 
 

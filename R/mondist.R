@@ -21,6 +21,7 @@ mondist <- function(X, B) {
 #' @param B coordonnée des points de la base
 #' @param paralell booleen si VRAI alors le multiprocessing est utilisé
 #' @param thread nombre de coeurs à utiliser
+#' @param verbose booleen qui rend la fonction bavarde
 #' @examples
 #' \dontrun{
 #' X<-matrix(c(0.5,0.5,0.5))
@@ -30,7 +31,7 @@ mondist <- function(X, B) {
 #' system.time(mondist_global(lesX,B,paralell=TRUE,thread=2))
 #' }
 
-mondist_global <- function(lesX, B, paralell = FALSE, thread = 2) {
+mondist_global <- function(lesX, B, paralell = FALSE, thread = 2,verbose=TRUE) {
     lesX <- as.matrix(lesX)
     if (thread == 1) {
         paralell <- FALSE
@@ -44,14 +45,14 @@ mondist_global <- function(lesX, B, paralell = FALSE, thread = 2) {
 
         }
     } else if (paralell) {
-
+if (verbose) { message(thread," threads utilisés")}
         # if (getDoParWorkers() != thread) {
         cl <- snow::makeCluster(thread, type = "SOCK")
         doSNOW::registerDoSNOW(cl)
         # }
         suppressWarnings(range <- split(1:nrow(lesX), rep(1:thread, each = round(nrow(lesX)/thread))))
         out <- foreach::foreach(i = range, .export = "mondist_global", .packages = "foreach") %dopar% {
-            mondist_global(lesX[i, ], B, paralell = FALSE)
+            mondist_global(lesX[i, ], B, paralell = FALSE,verbose=FALSE)
         }
         snow::stopCluster(cl)
     }
