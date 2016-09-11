@@ -11,10 +11,6 @@ export(liste_unebase)
 export(moycoul)
 export(pixel)
 export(plotraster)
-<<<<<<< HEAD
-export(run_2048)
-=======
->>>>>>> 945fe4b37544e3fdb47454e4b948f09fe36d77ee
 export(shinypixel)
 importFrom(grDevices,dev.off)
 importFrom(graphics,par)

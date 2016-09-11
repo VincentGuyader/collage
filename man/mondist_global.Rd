@@ -23,7 +23,7 @@ fonction qui calcule la distance d'un ensemble de points par raport à un autre 
 \examples{
 \dontrun{
 X<-matrix(c(0.5,0.5,0.5))
-lesX<-do.call(rbind,(rep(list(t(X)),15)))
+lesX<-dplyr::bind_rows(rep(list(t(X)),15))
 B<-t(matrix(round(runif(12),2),3))
 system.time(mondist_global(lesX,B))
 system.time(mondist_global(lesX,B,parallel=TRUE,thread=2))
