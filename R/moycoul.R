@@ -18,18 +18,18 @@ moycoul <- function(img) {
     list(rgb = val, html = rgb(val[1], val[2], val[3]))
 }
 
-
+#' @importFrom grDevices rgb
 moycoul_enhanced <- function(img) {
 
   # on coupe img en 4
-# browser()
+  # browser()
 
-coupe_x <- round(dim(img)[1]/2)
-coupe_y <- round(dim(img)[2]/2)
+  coupe_x <- round(dim(img)[1]/2)
+  coupe_y <- round(dim(img)[2]/2)
 
-yop <- lapply(list(A=img[1:coupe_x,1:coupe_y,],B=img[1:coupe_x,coupe_y:dim(img)[2],],C=img[coupe_x:dim(img)[1],1:coupe_y,], D=img[coupe_x:dim(img)[1],coupe_y:dim(img)[2],]),FUN=colMeans, dims = 2)
+  yop <- lapply(list(A=img[1:coupe_x,1:coupe_y,],B=img[1:coupe_x,coupe_y:dim(img)[2],],C=img[coupe_x:dim(img)[1],1:coupe_y,], D=img[coupe_x:dim(img)[1],coupe_y:dim(img)[2],]),FUN=colMeans, dims = 2)
 
-html<-sapply(yop,function(val){grDevices::rgb(val[1], val[2], val[3])})
+  html<-sapply(yop,function(val){rgb(val[1], val[2], val[3])})
 
   # if (is.null(dim(img))) {
   #   val <- img
