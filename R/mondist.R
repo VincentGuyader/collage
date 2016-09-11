@@ -19,7 +19,7 @@ mondist <- function(X, B) {
 #' @description  fonction qui calcule la distance d'un ensemble de points par raport à un autre ensemble de points.
 #' @param lesX les points dont on cherche la distance par rappoirt à la base
 #' @param B coordonnée des points de la base
-#' @param paralell booleen si VRAI alors le multiprocessing est utilisé
+#' @param parallel booleen si VRAI alors le multiprocessing est utilisé
 #' @param thread nombre de coeurs à utiliser
 #' @param verbose booleen qui rend la fonction bavarde
 #' @examples
@@ -28,23 +28,23 @@ mondist <- function(X, B) {
 #' lesX<-do.call(rbind,(rep(list(t(X)),15)))
 #' B<-t(matrix(round(runif(12),2),3))
 #' system.time(mondist_global(lesX,B))
-#' system.time(mondist_global(lesX,B,paralell=TRUE,thread=2))
+#' system.time(mondist_global(lesX,B,parallel=TRUE,thread=2))
 #' }
 
-mondist_global <- function(lesX, B, paralell = FALSE, thread = 2,verbose=TRUE) {
+mondist_global <- function(lesX, B, parallel = FALSE, thread = 2,verbose=TRUE) {
     lesX <- as.matrix(lesX)
     if (thread == 1) {
-        paralell <- FALSE
+        parallel <- FALSE
     }
 
-    if (!paralell) {
+    if (!parallel) {
         out <- foreach(i = 1:nrow(lesX)) %do% {
 
             # sqrt(colSums(matrix((as.vector(lesX[i, ]) - as.vector(t(B)))^2,3)))
             sqrt(colSums(matrix((as.vector(lesX[i, ]) - as.vector(B))^2, 3)))
 
         }
-    } else if (paralell) {
+    } else if (parallel) {
 if (verbose) { message(thread," threads utilisés")}
         # if (getDoParWorkers() != thread) {
         cl <- snow::makeCluster(thread, type = "SOCK")
@@ -52,7 +52,7 @@ if (verbose) { message(thread," threads utilisés")}
         # }
         suppressWarnings(range <- split(1:nrow(lesX), rep(1:thread, each = round(nrow(lesX)/thread))))
         out <- foreach::foreach(i = range, .export = "mondist_global", .packages = "foreach") %dopar% {
-            mondist_global(lesX[i, ], B, paralell = FALSE,verbose=FALSE)
+            mondist_global(lesX[i, ], B, parallel = FALSE,verbose=FALSE)
         }
         snow::stopCluster(cl)
     }

@@ -101,7 +101,7 @@ pixel(file=img,lig=50,col=50,base=les_tuiles,target='dessin2.jpg',affich=TRUE)
 Pour gagner en vitesse il faut utiliser au maximum les coeurs de votre machine, `thread` est l'argument qui correspond au nombre de thread sur lesquels paralleliser les calculs : c'est un paramètre à adapter aux capacités de la machine. _Si vous n'avez que 2 coeurs, inutile de lancer 8 thread..._ 
 ```{r,eval=FALSE}
 
-pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin4.jpg' ,open=TRUE,paralell = TRUE,thread = 2)
+pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin4.jpg' ,open=TRUE,parallel = TRUE,thread = 2)
 
 ```
 
@@ -109,7 +109,7 @@ Si vous utilisez une base de tuiles non préchargées, alors il faut préciser l
 
 ```{r,eval=FALSE}
 
-pixel(file=img,lig=50,col=50,base=les_tuiles_non_charge,target='dessin5.jpg' ,open=TRUE,paralell = TRUE,thread = 2,redim = c(20,20))
+pixel(file=img,lig=50,col=50,base=les_tuiles_non_charge,target='dessin5.jpg' ,open=TRUE,parallel = TRUE,thread = 2,redim = c(20,20))
 
 ```
 
@@ -118,7 +118,7 @@ Le parametre `random` permet de modifier la methode de choix des tuiles. random 
 
 ```{r eval=FALSE}
 
-pixel(file=img,lig=100,col=100,base=les_tuiles_non_charge,target='dessin6.jpg' ,open=TRUE,paralell = TRUE,thread = 2,doublon=TRUE,random=2)
+pixel(file=img,lig=100,col=100,base=les_tuiles_non_charge,target='dessin6.jpg' ,open=TRUE,parallel = TRUE,thread = 2,doublon=TRUE,random=2)
 
 ```
 

@@ -4,14 +4,14 @@
 \alias{mondist_global}
 \title{mondist_global}
 \usage{
-mondist_global(lesX, B, paralell = FALSE, thread = 2)
+mondist_global(lesX, B, parallel = FALSE, thread = 2)
 }
 \arguments{
 \item{lesX}{les points dont on cherche la distance par rappoirt à la base}
 
 \item{B}{coordonnée des points de la base}
 
-\item{paralell}{booleen si VRAI alors le multiprocessing est utilisé}
+\item{parallel}{booleen si VRAI alors le multiprocessing est utilisé}
 
 \item{thread}{nombre de coeurs à utiliser}
 }
@@ -24,7 +24,7 @@ X<-matrix(c(0.5,0.5,0.5))
 lesX<-do.call(rbind,(rep(list(t(X)),15)))
 B<-t(matrix(round(runif(12),2),3))
 system.time(mondist_global(lesX,B))
-system.time(mondist_global(lesX,B,paralell=TRUE,thread=2))
+system.time(mondist_global(lesX,B,parallel=TRUE,thread=2))
 }
 }
 

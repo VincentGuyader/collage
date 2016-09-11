@@ -7,8 +7,8 @@
 #' @param col nombre de colonne
 #' @param base la base de tuile a utiliser
 #' @param target fichier de sortie
-#' @param paralell si oui le calcul en paralell sera utilisé
-#' @param threat nombre de coeur a utilisé si paralell =TRUE
+#' @param parallel si oui le calcul en parallel sera utilisé
+#' @param threat nombre de coeur a utilisé si parallel =TRUE
 #' @param doublon si FAUX on supprime les doublon avant de calculer les distances
 #' @param open si VRAI le fichier target est ouvert en fin de creation
 #' @param verbose si VRAI rend la fonction bavarde
@@ -29,15 +29,15 @@
 #' pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin3.jpg',open=TRUE)
 #' pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
 #' pixel(file=img,lig=200,col=200,base=les_tuiles,target='dessin4.jpg'
-#' ,open=TRUE,paralell = TRUE,threat = 2)
+#' ,open=TRUE,parallel = TRUE,threat = 2)
 #' ## End(Not run)
 
 #' @export
 # pixel_enhanced(file=img,lig=50,col=50,base=les_tuiles,target='dessin2.jpg',open=TRUE)
 # file=img;lig=200;col=200;base=les_tuiles;target='dessin4.jpg'
-# open=TRUE;paralell = TRUE;threat = 2
+# open=TRUE;parallel = TRUE;threat = 2
 
-pixel_enhanced <- function(file, lig, col, base, target = NULL, paralell = FALSE, threat = 2, open = FALSE, verbose = TRUE, affich = FALSE,
+pixel_enhanced <- function(file, lig, col, base, target = NULL, parallel = FALSE, threat = 2, open = FALSE, verbose = TRUE, affich = FALSE,
                   doublon = FALSE, redim = NULL,random=1) {
   if (verbose) {
     message("chargement de l'image")
@@ -64,7 +64,7 @@ pixel_enhanced <- function(file, lig, col, base, target = NULL, paralell = FALSE
 
 
 
-  BONdist <- mondist_global(test[, c("R", "G", "B")], t(base$base[, c("R", "G", "B")]), paralell = paralell, threat = threat)
+  BONdist <- mondist_global(test[, c("R", "G", "B")], t(base$base[, c("R", "G", "B")]), parallel = parallel, threat = threat)
   colnames(BONdist) <- base$base$nom
   rownames(BONdist) <- test$nom
 

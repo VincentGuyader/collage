@@ -244,7 +244,7 @@ do(todo)
         doublon = is.element("doublon",input$options),
         verbose = is.element("verbose",input$options),
         target=target,
-        paralell = is.element("paralell",input$options),
+        parallel = is.element("parallel",input$options),
         thread=as.numeric(input$thread))
           for (i in 1:3) {
             progress$set(value = i)

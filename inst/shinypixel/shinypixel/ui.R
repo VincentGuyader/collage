@@ -31,7 +31,7 @@ shinyUI(pageWithSidebar(
                                   choices = list("ouvre le fichier de sortie" = "open",
                                                  "autoriser les doublons" = "doublon",
                                                  "verbose" = "verbose",
-                                                 "paralell"  = "paralell"
+                                                 "parallel"  = "parallel"
 
 
                                                  ),

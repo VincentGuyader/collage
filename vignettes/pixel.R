@@ -27,16 +27,16 @@
 
 ## ----eval=FALSE----------------------------------------------------------
 #  
-#  pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin4.jpg' ,open=TRUE,paralell = TRUE,thread = 2)
+#  pixel(file=img,lig=100,col=100,base=les_tuiles,target='dessin4.jpg' ,open=TRUE,parallel = TRUE,thread = 2)
 #  
 
 ## ----eval=FALSE----------------------------------------------------------
 #  
-#  pixel(file=img,lig=50,col=50,base=les_tuiles_non_charge,target='dessin5.jpg' ,open=TRUE,paralell = TRUE,thread = 2,redim = c(20,20))
+#  pixel(file=img,lig=50,col=50,base=les_tuiles_non_charge,target='dessin5.jpg' ,open=TRUE,parallel = TRUE,thread = 2,redim = c(20,20))
 #  
 
 ## ----eval=FALSE----------------------------------------------------------
 #  
-#  pixel(file=img,lig=100,col=100,base=les_tuiles_non_charge,target='dessin6.jpg' ,open=TRUE,paralell = TRUE,thread = 2,doublon=TRUE,random=2)
+#  pixel(file=img,lig=100,col=100,base=les_tuiles_non_charge,target='dessin6.jpg' ,open=TRUE,parallel = TRUE,thread = 2,doublon=TRUE,random=2)
 #  
 
