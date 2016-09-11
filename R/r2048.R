@@ -118,7 +118,6 @@ cat("   *** KEY BINDING ***  \n\n")
     y<-scan(n=1,what = "character")
     }
 
-
 baseSAVE <-base
     base <- switch(EXPR = y,
                    E = H_(base),
@@ -149,7 +148,6 @@ baseSAVE <-base
   if (is.null(base)){
     cat(" wrong KEY \n")
     base<-baseSAVE}
-
 
 
 }
