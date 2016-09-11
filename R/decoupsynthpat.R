@@ -84,30 +84,14 @@ decoupsynth <- function(img, lig = 10, col = 10, redim = NULL,enhanced=FALSE) {
     return(out)
 }
 
-
-
-
-extr <- function(vec, img,enhanced) {
-  if (!enhanced){
-   return(moycoul(
-      img[seq(vec$x[1], vec$x[2]), seq(vec$y[1], vec$y[2]), ]
-   ))}else{
-     # save(img,file="aef.RData")
-     # print(img)
-     out <- moycoul_enhanced(
-
-       img[seq(vec$x[1], vec$x[2]), seq(vec$y[1], vec$y[2]), ]
-     )
-     return(out)
-
-      }
-
+extr <- function(vec, img, enhanced = FALSE) {
+  moy <- if(enhanced) moycoul_enhanced else moycoul
+  moycoul( img[seq(vec$x[1], vec$x[2]), seq(vec$y[1], vec$y[2]), ] )
 }
 
 prout <- function(t, base) {
     return(base[t:(t + 1)])
 }
-
 
 print.tuile <- function(x, ...) {
 
