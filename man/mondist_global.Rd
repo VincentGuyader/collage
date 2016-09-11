@@ -4,7 +4,7 @@
 \alias{mondist_global}
 \title{mondist_global}
 \usage{
-mondist_global(lesX, B, parallel = FALSE, thread = 2)
+mondist_global(lesX, B, parallel = FALSE, thread = 2, verbose = TRUE)
 }
 \arguments{
 \item{lesX}{les points dont on cherche la distance par rappoirt à la base}
@@ -14,6 +14,8 @@ mondist_global(lesX, B, parallel = FALSE, thread = 2)
 \item{parallel}{booleen si VRAI alors le multiprocessing est utilisé}
 
 \item{thread}{nombre de coeurs à utiliser}
+
+\item{verbose}{booleen qui rend la fonction bavarde}
 }
 \description{
 fonction qui calcule la distance d'un ensemble de points par raport à un autre ensemble de points.

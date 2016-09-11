@@ -56,6 +56,6 @@ if (verbose) { message(thread," threads utilisés")}
         }
         snow::stopCluster(cl)
     }
-    do.call(rbind, out)
+    dplyr::bind_rows(out)
 
 }
