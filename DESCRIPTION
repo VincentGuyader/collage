@@ -1,0 +1,11 @@
+Package: r2048
+Type: Package
+Title: The 2048 game
+Version: 0.1
+Date: 2016-09-11
+Author: Vincent Guyader
+Maintainer: vincent guyader <vincent@thinkr.fr>
+Description: The 2048 game (from http://gabrielecirulli.github.io/2048/)
+License: GNU
+LazyData: TRUE
+RoxygenNote: 5.0.1
