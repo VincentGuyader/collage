@@ -9,6 +9,8 @@
 #' @param recursive si VRAI va parcourir les sous dossiers
 #' @param progress affiche la progression dans la console
 #' @param nombre nombre de tuiles à inclure (aléatoire)
+#' @importFrom plyr llply
+#' @importFrom dplyr bind_rows
 #' @examples
 #' \dontrun{
 #' base <- file.path(find.package('tipixel'),'base')
@@ -30,10 +32,10 @@ genere_base <- function(chemin = "base", redim = c(25,25), verbose = FALSE, prel
     }
     }
 
-    tout <- plyr::llply(nom, .fun = decoupsynthpath, redim = redim, verbose = verbose, .progress = progress, preload = preload)
+    tout <- llply(nom, .fun = decoupsynthpath, redim = redim, verbose = verbose, .progress = progress, preload = preload)
     # options(warn = -1)
     suppressWarnings(
-     LABASE <- cbind(nom, dplyr::bind_rows(lapply(tout, FUN = function(x) {
+     LABASE <- cbind(nom, bind_rows(lapply(tout, FUN = function(x) {
         x$tab
     }))[, -1]))
      # options(warn = 0)

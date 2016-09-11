@@ -1,3 +1,4 @@
+#' @importFrom shiny runApp
 #' @export
 shinypixel <- function() {
   appDir <- system.file("shinypixel", "shinypixel", package = "tipixel")
@@ -5,5 +6,5 @@ shinypixel <- function() {
     stop("Could not find example directory. Try re-installing `tipixel`.", call. = FALSE)
   }
 
-  shiny::runApp(appDir, display.mode = "normal")
+  runApp(appDir, display.mode = "normal")
 }

@@ -5,6 +5,7 @@
 #' @param combinaisons data.frame avec 1 ligne = une combinaison R V B
 #' @param dossier chemin du dossier de création des tuiles
 #' @param dim, vecteur de taille 2, dimension en pixel des tuiles
+#' @importFrom grDevices jpeg
 #' @examples
 #' ## Not run
 #' lescomb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
@@ -24,7 +25,7 @@ gendess <- function(vec, dossier = "base", dim = c(100, 100)) {
     agen[, , 1] <- vec[1]
     agen[, , 2] <- vec[2]
     agen[, , 3] <- vec[3]
-    grDevices::jpeg(filename = paste0(dossier, "/base-", vec[1], "-", vec[2], "-", vec[3], ".jpg"), dim[1], dim[2])
+    jpeg(filename = paste0(dossier, "/base-", vec[1], "-", vec[2], "-", vec[3], ".jpg"), dim[1], dim[2])
     par(bg = moycoul(agen)$html)
     try(silent = T, plot(1, xlab = "", ylab = "", type = "n", bty = "n", axes = FALSE))
     dev.off()

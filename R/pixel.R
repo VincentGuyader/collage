@@ -19,6 +19,10 @@
 #' @param redim utile si la base ne contient pas les images perchargées, précise les dimensions des tuiles
 #' @param affich booleen si vrai le resultat est affiché en tant que graphique dans R
 #' @param random tire au hasard la vignette parmi les meilleurs tuiles disponibles, random precise ce nombre
+#' @importFrom jpeg readJPEG
+#' @importFrom jpeg writeJPEG
+#' @importFrom plyr llply
+#'
 #' @examples
 #' \dontrun{
 #' library(tipixel)
@@ -26,7 +30,7 @@
 
 #' base <- file.path(find.package('tipixel'),'base')
 #' img <- sample(list.files(base,full.names = TRUE),1)
-#' plotraster(aperm(jpeg::readJPEG(img),c(2,1,3)))
+#' plotraster(aperm(readJPEG(img),c(2,1,3)))
 #' les_tuiles <- genere_base(base,redim=c(25,25))
 #' pixel(file=img,lig=5,col=5,base=les_tuiles,target='dessin.jpg',open=TRUE,affich = TRUE)
 #' pixel(file=img,lig=50,col=50,base=les_tuiles,target='dessin2.jpg',open=TRUE)
@@ -49,7 +53,7 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
   if (verbose) {
     message("chargement de l'image")
   }
-  img <- jpeg::readJPEG(file)
+  img <- readJPEG(file)
 
   if (missing(lig) ){lig <-NA}
   if (missing(col)){col <-NA}
@@ -160,7 +164,7 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
       }
 
       base_redim <- base$read[unique(as.character(corresp$pict))]
-      base_redim<-plyr::llply(base_redim,resize,25,25,.progress = "tk")
+      base_redim<-llply(base_redim,resize,25,25,.progress = "tk")
       liste <- base_redim[as.character(corresp$pict)]
     }else{
       liste <- base$read[as.character(corresp$pict)]
@@ -175,7 +179,7 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
       message(paste("   lecture depuis fichiers"))
     }
 
-    tout <- plyr::llply(as.character(levels(corresp$pict)), .fun = decoupsynthpath,
+    tout <- llply(as.character(levels(corresp$pict)), .fun = decoupsynthpath,
                         redim = redim, verbose = verbose,
                         .progress = "tk", preload = TRUE)
     names(tout) <- as.character(levels(corresp$pict))
@@ -196,7 +200,7 @@ pixel <- function(file, lig, col, base, target = NULL, parallel = FALSE, thread 
     if (verbose) {
       message(paste("export dans ", target))
     }
-    jpeg::writeJPEG(out, target = target, quality = 1)
+    writeJPEG(out, target = target, quality = 1)
     if (open) {
       if (verbose) {
         message(paste("ouverture de", target))
