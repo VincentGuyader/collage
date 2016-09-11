@@ -1,4 +1,4 @@
-# r2048
+# tipixel
 
 ## Installation
 
@@ -6,9 +6,8 @@
 
 ```R
 install.packages("devtools")
-devtools::install_github("ThinkRstat/r2048")
-library(r2048)
-run_2048()
+devtools::install_github("ThinkRstat/tipixel")
+library(tipixel)
+browseVignettes("tipixel")
+help("pixel")
 ```
-
-original game : <http://gabrielecirulli.github.io/2048/>

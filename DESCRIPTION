@@ -1,11 +1,24 @@
-Package: r2048
+Package: tipixel
 Type: Package
-Title: The 2048 game
-Version: 0.1
-Date: 2016-09-11
-Author: Vincent Guyader
+Title: Fabrique une image en mosaique à partir d'autres images
+Version: 0.1.4
+Author: vincent Guyader [aut, cre]
 Maintainer: vincent guyader <vincent@thinkr.fr>
-Description: The 2048 game (from http://gabrielecirulli.github.io/2048/)
-License: GNU
+Description: Fabrique une image en mosaique à partir d'autres images
+License: GPL-3
 LazyData: TRUE
+Imports:
+    grDevices,
+    jpeg,
+    raster,
+    abind,
+    plyr,
+    doSNOW,
+    dplyr
 RoxygenNote: 5.0.1
+Depends: foreach
+URL: https://github.com/ThinkRstat/tipixel
+Encoding: UTF-8
+Suggests: knitr,
+    rmarkdown,shiny,shinyFiles
+VignetteBuilder: knitr
