@@ -43,7 +43,13 @@
 #' les_tuiles2 <- genere_base('my_pict')
 #'
 #' pixel(file=img,lig=100,col=100,base=les_tuiles2,target='dessin4.jpg',open=TRUE)
-
+#'
+#'
+#' #you like kittens ?
+#' kittenize(img)
+#'
+#' # you want a GUI ?
+#' shinypixel()
 #' }
 
 #' @export
