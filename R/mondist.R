@@ -22,21 +22,18 @@ mondist <- function(X, B) {
 #' @param parallel booleen si VRAI alors le multiprocessing est utilisé
 #' @param thread nombre de coeurs à utiliser
 #' @param verbose booleen qui rend la fonction bavarde
-#' @importFrom dplyr bind_rows
-#' @importFrom snow makeCluster
-#' @importFrom snow stopCluster
+#' @importFrom snow makeCluster stopCluster
 #' @importFrom foreach foreach
 #' @importFrom doSNOW registerDoSNOW
 #'
 #' @examples
 #' \dontrun{
-#' X<-matrix(c(0.5,0.5,0.5))
-#' lesX<-bind_rows(rep(list(t(X)),15))
-#' B<-t(matrix(round(runif(12),2),3))
-#' system.time(mondist_global(lesX,B))
-#' system.time(mondist_global(lesX,B,parallel=TRUE,thread=2))
+#' n <- 200*200
+#' lesX <- data.frame( R = runif(n),  G = runif(n),  B = runif(n) )
+#' B    <- cbind( runif(50), runif(50), runif(50) )
+#' system.time(mondist_global(lesX,t(B)))
+#' system.time(mondist_global(lesX,t(B),parallel=TRUE,thread=2))
 #' }
-
 mondist_global <- function(lesX, B, parallel = FALSE, thread = 2,verbose=TRUE) {
     lesX <- as.matrix(lesX)
     if (thread == 1) {
@@ -45,12 +42,10 @@ mondist_global <- function(lesX, B, parallel = FALSE, thread = 2,verbose=TRUE) {
 
     if (!parallel) {
         out <- foreach(i = 1:nrow(lesX)) %do% {
-
-            sqrt(colSums(matrix((as.vector(lesX[i, ]) - as.vector(B))^2, 3)))
-
+          sqrt(colSums(matrix((as.vector(lesX[i, ]) - as.vector(B))^2, 3)))
         }
     } else if (parallel) {
-if (verbose) { message(thread," threads utilisés")}
+        if (verbose) { message(thread," threads utilisés")}
         # if (getDoParWorkers() != thread) {
         cl <- makeCluster(thread, type = "SOCK")
         registerDoSNOW(cl)
@@ -61,6 +56,5 @@ if (verbose) { message(thread," threads utilisés")}
         }
         stopCluster(cl)
     }
-    # bind_rows(out) #Erreur : cannot convert object to a data frame
-do.call(rbind,out)
+    do.call(rbind,out)
 }
