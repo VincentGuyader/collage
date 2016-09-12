@@ -14,8 +14,12 @@ Imports:
     abind,
     plyr,
     doSNOW,
-    dplyr
+    dplyr,
+    tibble,
+    Rcpp
+LinkingTo: Rcpp, RcppParallel
 RoxygenNote: 5.0.1
+SystemRequirements: C++11
 Depends: foreach
 URL: https://github.com/ThinkRstat/tipixel
 Encoding: UTF-8

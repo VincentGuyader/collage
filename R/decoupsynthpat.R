@@ -57,7 +57,6 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
 #' @param redim dimension finale de l'image
 #' @export
 #'
-
 decoupsynth <- function(img, lig = 10, col = 10, redim = NULL,enhanced=FALSE) {
 
     a <- lapply(1:(lig), FUN = prout, base = round(seq.int(1, dim(img)[1], length.out = lig + 1)))
