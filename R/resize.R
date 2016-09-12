@@ -5,10 +5,7 @@
 #' @param arr array à redimensionner
 #' @param x nouvelle dimension en x
 #' @param y nouvelle dimension en y
-#' @importFrom raster raster
-#' @importFrom raster extent
-#' @importFrom raster as.matrix
-#' @importFrom raster resample
+#' @importFrom raster raster extent extent<- as.matrix resample
 
 resize <- function(arr, x, y) {
     ss <- raster(ncol = x, nrow = y)
