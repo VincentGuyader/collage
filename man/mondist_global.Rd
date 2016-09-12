@@ -22,11 +22,11 @@ fonction qui calcule la distance d'un ensemble de points par raport à un autre 
 }
 \examples{
 \dontrun{
-X<-matrix(c(0.5,0.5,0.5))
-lesX<-bind_rows(rep(list(t(X)),15))
-B<-t(matrix(round(runif(12),2),3))
-system.time(mondist_global(lesX,B))
-system.time(mondist_global(lesX,B,parallel=TRUE,thread=2))
+n <- 200*200
+lesX <- data.frame( R = runif(n),  G = runif(n),  B = runif(n) )
+B    <- cbind( runif(50), runif(50), runif(50) )
+system.time(mondist_global(lesX,t(B)))
+system.time(mondist_global(lesX,t(B),parallel=TRUE,thread=2))
 }
 }
 

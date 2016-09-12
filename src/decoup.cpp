@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include <RcppParallel.h>
+#include <tbb/parallel_invoke.h>
 
 using namespace Rcpp ;
 #include <math.h>
@@ -33,8 +34,9 @@ double meanview( const NumericVector& img, int nrow, int ncol, int row_from, int
   return res / (rows*cols) ;
 }
 
+//' @importFrom RcppParallel RcppParallelLibs
 // [[Rcpp::export]]
-List decoupsynth_cpp( NumericVector img, int lig, int col ){
+DataFrame decoupsynth_cpp( NumericVector img, int lig, int col ){
   IntegerVector dim = img.attr("dim") ;
   int nrow = dim[0], ncol = dim[1] ;
 
@@ -57,14 +59,7 @@ List decoupsynth_cpp( NumericVector img, int lig, int col ){
       [&]{ mean_channel(green, 1) ; },
       [&]{ mean_channel(blue, 2) ; }
     ) ;
-  Function rgb("rgb") ;
-  CharacterVector html = rgb( red, green, blue) ;
-  DataFrame tab = DataFrame::create( _["R"] = red, _["G"] = green, _["B"] = blue, _["html"] = html, _["stringsAsFactors"] = false ) ;
+  DataFrame tab = DataFrame::create( _["R"] = red, _["G"] = green, _["B"] = blue, _["stringsAsFactors"] = false ) ;
   tab.attr("class") = CharacterVector::create( "tbl_df", "tbl", "data.frame") ;
-  List out = List::create(
-    _["tab"] = tab,
-    _["read"] = img
-  ) ;
-  out.attr("class") = "tuile" ;
-  return out ;
+  return tab ;
 }
