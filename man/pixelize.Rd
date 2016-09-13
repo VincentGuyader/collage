@@ -11,8 +11,8 @@ pixelize
 }
 \examples{
 base <- system.file( "base", package = "tipixel")
-img <- sample(list.files(base,full.names = TRUE),1)
 les_tuiles <- genere_base(base,redim=c(25,25), progress = "text" )
+img <- sample_image()
 pixelize( img, les_tuiles, width = 10)
 }
 

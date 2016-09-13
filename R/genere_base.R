@@ -21,13 +21,12 @@
 #' }
 #' @export
 genere_base <- function(chemin = "base", redim = c(25,25), verbose = FALSE, preload = TRUE,recursive = TRUE,progress="tk",nombre=NULL) {
-    nom <- list.files(chemin, full.names = TRUE,pattern = "*.(jpg|jpeg)$",recursive = TRUE)
+    nom <- list.files(chemin, full.names = TRUE, pattern = "*.(jpg|jpeg)$", recursive = TRUE)
 
     if (!missing(nombre)){
-    if (nombre<length(nom)){
-
-      nom <-     nom[sample(seq_along(nom),nombre)]
-    }
+      if (nombre<length(nom)){
+        nom <-     nom[sample(seq_along(nom),nombre)]
+      }
     }
 
     tout <- llply(nom, .fun = decoupsynthpath, redim = redim, verbose = verbose, .progress = progress, preload = preload)

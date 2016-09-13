@@ -14,7 +14,6 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
         message(path)
     }
     try(lim <- aperm(readJPEG(path), c(2, 1, 3)))
-    # microbenchmark(aperm(lim,c(2,1,3)),t_array(lim))
 
     if (length(lim) == 0) {
         out <- list(tab = data.frame(nom = NA, lig = NA, col = NA, R = NA, G = NA, B = NA, html = NA), read = NA)
