@@ -32,7 +32,7 @@ collage <- function(tiles, width, height, best_tiles, tile_dim) {
 }
 
 #' @importFrom RcppParallel RcppParallelLibs
-scale_img <- function(img, width, height) {
-    .Call('tipixel_scale_img', PACKAGE = 'tipixel', img, width, height)
+find_best_tiles <- function(img, width, height, base) {
+    .Call('tipixel_find_best_tiles', PACKAGE = 'tipixel', img, width, height, base)
 }
 
