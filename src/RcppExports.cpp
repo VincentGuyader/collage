@@ -30,15 +30,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // scale_img
-DataFrame scale_img(NumericVector img, int lig, int col);
-RcppExport SEXP tipixel_scale_img(SEXP imgSEXP, SEXP ligSEXP, SEXP colSEXP) {
+DataFrame scale_img(NumericVector img, int width, int height);
+RcppExport SEXP tipixel_scale_img(SEXP imgSEXP, SEXP widthSEXP, SEXP heightSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type img(imgSEXP);
-    Rcpp::traits::input_parameter< int >::type lig(ligSEXP);
-    Rcpp::traits::input_parameter< int >::type col(colSEXP);
-    rcpp_result_gen = Rcpp::wrap(scale_img(img, lig, col));
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    rcpp_result_gen = Rcpp::wrap(scale_img(img, width, height));
     return rcpp_result_gen;
 END_RCPP
 }

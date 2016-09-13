@@ -36,18 +36,18 @@ double meanview( const NumericVector& img, int nrow, int ncol, int row_from, int
 
 //' @importFrom RcppParallel RcppParallelLibs
 // [[Rcpp::export]]
-DataFrame scale_img( NumericVector img, int lig, int col ){
+DataFrame scale_img( NumericVector img, int width, int height ){
   IntegerVector dim = img.attr("dim") ;
   int nrow = dim[0], ncol = dim[1] ;
 
-  IntegerVector a_steps = steps(nrow, lig) ;
-  IntegerVector b_steps = steps(ncol, col) ;
-  int n = lig*col ;
+  IntegerVector a_steps = steps(nrow, width) ;
+  IntegerVector b_steps = steps(ncol, height) ;
+  int n = width*height ;
 
   auto mean_channel = [&]( NumericVector& out, int channel ){
     double* p = out.begin() ;
-    for(int j=0, k=0; j<col; j++){
-      for(int i=0; i<lig; i++, k++ ){
+    for(int j=0, k=0; j<height; j++){
+      for(int i=0; i<width; i++, k++ ){
         p[k]   = meanview(img, nrow, ncol, a_steps[i], a_steps[i+1], b_steps[j], b_steps[j+1], channel ) ;
       }
     }
