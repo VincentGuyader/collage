@@ -4,16 +4,13 @@
 \alias{pixelize}
 \title{pixelize}
 \usage{
-pixelize(file, base, width = NA, height = NA)
+pixelize(file, base = base_samples, width = NA, height = NA)
 }
 \description{
 pixelize
 }
 \examples{
-path  <- system.file( "base", package = "tipixel")
-tiles <- generate_base(path,size=25)
-
 img <- sample_image()
-pixelize( img, tiles, width = 10)
+pixelize( img, width = 10)
 }
 

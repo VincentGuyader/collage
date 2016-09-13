@@ -4,6 +4,13 @@
 #'   kittens
 "kittens"
 
+#' A base of sample images
+#'
+#' @examples
+#'   base_samples
+"base_samples"
+
+
 # -*- coding: utf-8 -*-
 #' @encoding UTF-8
 #' @title kittenize

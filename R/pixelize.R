@@ -21,13 +21,10 @@ auto_dim <- function( img, width = NA, height = NA ){
 #' pixelize
 #'
 #' @examples
-#' path  <- system.file( "base", package = "tipixel")
-#' tiles <- generate_base(path,size=25)
-#'
 #' img <- sample_image()
-#' pixelize( img, tiles, width = 10)
+#' pixelize( img, width = 10)
 #' @importFrom jpeg readJPEG
-pixelize <- function(file, base, width=NA, height=NA ) {
+pixelize <- function(file, base = base_samples, width=NA, height=NA ) {
   img  <- readJPEG(file)
   dims <- auto_dim(img, width, height)
   width <- dims[1]
