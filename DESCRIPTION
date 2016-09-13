@@ -13,7 +13,6 @@ Imports:
     raster,
     abind,
     plyr,
-    doSNOW,
     dplyr,
     tibble,
     Rcpp

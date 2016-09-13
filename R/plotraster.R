@@ -4,9 +4,8 @@
 #' @description affiche une image raster dans la fenêtre graphique
 #' @param img l 'image (en array)
 #' @param verbose booleen qui rend la fonction bavarde
+#' @importFrom graphics rasterImage
 #' @export
-
-
 plotraster <- function(img, verbose = TRUE) {
     # print('on plot')
   img <- aperm(img, c(2, 1, 3))
