@@ -44,7 +44,7 @@ IntegerVector closest_rgb( DataFrame X, DataFrame B ){
         distance = distance_j ;
       }
     }
-    out[i] = best + 1; // R is 1-based
+    out[i] = best ;
 
   }) ;
 
