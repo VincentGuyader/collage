@@ -32,7 +32,7 @@ pixelize <- function(file, base, width=NA, height=NA ) {
   width <- dims[1]
   height <- dims[2]
 
-  best_tiles  <- find_best_tile(img, width, height, base$base )
+  best_tiles  <- find_best_tiles(img, width, height, base$base )
   tiles <- base$read
   tile_dim <- nrow(tiles[[1]])
   out <- collage( base$read, width, height, best_tiles, tile_dim )
