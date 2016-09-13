@@ -25,7 +25,7 @@ auto_dim <- function( img, width = NA, height = NA ){
 #' tiles <- generate_base(path,size=25)
 #'
 #' img <- sample_image()
-#' pixelize( img, les_tuiles, width = 10)
+#' pixelize( img, tiles, width = 10)
 #' @importFrom jpeg readJPEG
 pixelize <- function(file, base, width=NA, height=NA ) {
   img  <- readJPEG(file)

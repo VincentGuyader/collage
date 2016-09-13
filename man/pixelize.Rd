@@ -14,6 +14,6 @@ path  <- system.file( "base", package = "tipixel")
 tiles <- generate_base(path,size=25)
 
 img <- sample_image()
-pixelize( img, les_tuiles, width = 10)
+pixelize( img, tiles, width = 10)
 }
 
