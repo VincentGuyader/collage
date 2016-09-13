@@ -13,7 +13,7 @@
 #'   dir <- tempfile()
 #'   generate_mono_tiles(lescomb,dir)
 #' }
-#' @importFrom grDevices jpeg
+#' @importFrom grDevices jpeg rgb
 #' @export
 generate_mono_tiles <- function(comb, dir, size = 25) {
     try(dir.create(dir))
