@@ -80,7 +80,6 @@ IntegerVector find_best_tiles( NumericVector img, int width, int height, DataFra
         }
       }
       tiles[k] = best ;
-
     }
   }
 
