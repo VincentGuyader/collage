@@ -10,17 +10,19 @@ LazyData: TRUE
 Imports:
     grDevices,
     jpeg,
-    raster,
-    abind,
-    plyr,
-    dplyr,
     tibble,
-    Rcpp
-LinkingTo: Rcpp, RcppParallel
+    Rcpp,
+    RcppParallel
+LinkingTo:
+    Rcpp,
+    RcppParallel
 RoxygenNote: 5.0.1
 SystemRequirements: C++11
 URL: https://github.com/ThinkRstat/tipixel
 Encoding: UTF-8
-Suggests: knitr,
-    rmarkdown,shiny,shinyFiles
+Suggests:
+    knitr,
+    rmarkdown,
+    shiny,
+    shinyFiles
 VignetteBuilder: knitr
