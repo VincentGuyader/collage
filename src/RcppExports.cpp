@@ -20,6 +20,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// make_tile
+List make_tile(NumericVector img, int size);
+RcppExport SEXP tipixel_make_tile(SEXP imgSEXP, SEXP sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type img(imgSEXP);
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(make_tile(img, size));
+    return rcpp_result_gen;
+END_RCPP
+}
 // find_best_tiles
 IntegerVector find_best_tiles(NumericVector img, int width, int height, DataFrame base);
 RcppExport SEXP tipixel_find_best_tiles(SEXP imgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP baseSEXP) {

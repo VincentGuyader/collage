@@ -5,6 +5,10 @@ collage <- function(tiles, width, height, best_tiles, tile_dim) {
     .Call('tipixel_collage', PACKAGE = 'tipixel', tiles, width, height, best_tiles, tile_dim)
 }
 
+make_tile <- function(img, size) {
+    .Call('tipixel_make_tile', PACKAGE = 'tipixel', img, size)
+}
+
 #' @importFrom RcppParallel RcppParallelLibs
 find_best_tiles <- function(img, width, height, base) {
     .Call('tipixel_find_best_tiles', PACKAGE = 'tipixel', img, width, height, base)
