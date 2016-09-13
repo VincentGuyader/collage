@@ -54,6 +54,7 @@ IntegerVector find_best_tiles( NumericVector img, int width, int height, DataFra
   IntegerVector b_steps = steps(ncol, width) ;
   int n = width*height ;
   IntegerVector tiles = no_init(n) ;
+  NumericVector distances = no_init(n) ;
 
   auto get_distance = [&](int i, double r, double g, double b){
     return sqrt( square(r-R[i]) + square(g-G[i]) + square(b-B[i]) ) ;
@@ -80,8 +81,9 @@ IntegerVector find_best_tiles( NumericVector img, int width, int height, DataFra
         }
       }
       tiles[k] = best ;
+      distances[k] = distance ;
     }
   }
-
+  tiles.attr("distances") = distances ;
   return tiles ;
 }
