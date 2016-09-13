@@ -41,46 +41,6 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
         class(out) <- "tuile"
         return(out)
     }
-
-
-
-}
-
-# microbenchmark(decoupsynth_one(lim,redim=redim), decoupsynth(lim,1,1,redim),times=30 )
-
-
-#' @title decoupsynth
-#' @description decoupe et synthétise une image
-#' @param img array de l 'image
-#' @param lig nombre de ligne
-#' @param col nombre de colonne
-#' @param redim dimension finale de l'image
-#' @export
-#'
-decoupsynth <- function(img, lig = 10, col = 10, redim = NULL,enhanced=FALSE) {
-
-    a <- lapply(1:(lig), FUN = prout, base = round(seq.int(1, dim(img)[1], length.out = lig + 1)))
-    b <- lapply(1:(col), FUN = prout, base = round(seq.int(1, dim(img)[2], length.out = col + 1)))
-    tt <- expand.grid(x = a, y = b)
-    ok <- apply(tt, MARGIN = 1, FUN = extr, img = img,enhanced=FALSE)
-
-    # ce qui est au dessus ne semble pas bloquant, mais peut etre moycoul_enhancedencore optimisable ?
-    # sapply(ok,FUN=function(x)x$html)
-
-    # ICI CA MERDE A LA SORTIE DE OK EN MODE ENHANCED
-
-    # do.call(cbind,ok[[1]]$rgb)
-
-    out <- cbind(1:dim(tt)[1], tt, t(sapply(ok, FUN = function(x) x$rgb)), html = sapply(ok, FUN = function(x) x$html))
-    names(out) <- c("nom", "lig", "col", "R", "G", "B", "html")
-
-    if (length(redim) != 0) {
-
-        return(list(tab = out, read = resize(img, redim[1], redim[2])))
-    }
-    out <- list(tab = out, read = img)
-    class(out) <- "tuile"
-    return(out)
 }
 
 extr <- function(vec, img, enhanced = FALSE) {

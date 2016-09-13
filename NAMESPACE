@@ -2,7 +2,6 @@
 
 S3method(print,unebase)
 export(calc_dim)
-export(decoupsynth)
 export(decoupsynthpath)
 export(do)
 export(genere_base)
