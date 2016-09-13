@@ -1,8 +1,7 @@
 #' Get the path of a sample image
 #'
 sample_image <- function(){
-  path <- system.file( "base", package = "tipixel")
-  sample(jpegs(base))
+  sample(jpegs(system.file( "base", package = "tipixel")), 1)
 }
 
 #' get the list of jpegs from a directory

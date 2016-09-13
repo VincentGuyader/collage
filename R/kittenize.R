@@ -17,4 +17,4 @@
 #' }
 
 #' @export
-kittenize <- function(...) pixelize(base = kittens, ...)
+kittenize <- function(...) pixelize(..., base = kittens)

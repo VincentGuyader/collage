@@ -65,7 +65,7 @@ IntegerVector find_best_tiles( NumericVector img, int width, int height, DataFra
     for(int i=0; i<height; i++, k++ ){
       // get rgb that summarises the current subset of pixels
       int a_from = a_steps[i], a_to = a_steps[i+1] ;
-      int b_from = b_steps[i], b_to = b_steps[i+1] ;
+      int b_from = b_steps[j], b_to = b_steps[j+1] ;
       double red   = meanview(img, nrow, ncol, a_from, a_to, b_from, b_to, 0 ) ;
       double green = meanview(img, nrow, ncol, a_from, a_to, b_from, b_to, 1 ) ;
       double blue  = meanview(img, nrow, ncol, a_from, a_to, b_from, b_to, 2 ) ;

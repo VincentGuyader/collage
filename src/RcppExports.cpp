@@ -5,30 +5,6 @@
 
 using namespace Rcpp;
 
-// closest_rgb
-IntegerVector closest_rgb(DataFrame X, DataFrame B);
-RcppExport SEXP tipixel_closest_rgb(SEXP XSEXP, SEXP BSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DataFrame >::type X(XSEXP);
-    Rcpp::traits::input_parameter< DataFrame >::type B(BSEXP);
-    rcpp_result_gen = Rcpp::wrap(closest_rgb(X, B));
-    return rcpp_result_gen;
-END_RCPP
-}
-// dist_rgb
-NumericMatrix dist_rgb(DataFrame X, DataFrame B);
-RcppExport SEXP tipixel_dist_rgb(SEXP XSEXP, SEXP BSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DataFrame >::type X(XSEXP);
-    Rcpp::traits::input_parameter< DataFrame >::type B(BSEXP);
-    rcpp_result_gen = Rcpp::wrap(dist_rgb(X, B));
-    return rcpp_result_gen;
-END_RCPP
-}
 // collage
 NumericVector collage(List tiles, int width, int height, IntegerVector best_tiles, int tile_dim);
 RcppExport SEXP tipixel_collage(SEXP tilesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP best_tilesSEXP, SEXP tile_dimSEXP) {
