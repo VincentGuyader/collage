@@ -59,7 +59,5 @@ DataFrame decoupsynth_cpp( NumericVector img, int lig, int col ){
       [&]{ mean_channel(green, 1) ; },
       [&]{ mean_channel(blue, 2) ; }
     ) ;
-  DataFrame tab = DataFrame::create( _["R"] = red, _["G"] = green, _["B"] = blue, _["stringsAsFactors"] = false ) ;
-  tab.attr("class") = CharacterVector::create( "tbl_df", "tbl", "data.frame") ;
-  return tab ;
+  return DataFrame::create( _["R"] = red, _["G"] = green, _["B"] = blue ) ;
 }
