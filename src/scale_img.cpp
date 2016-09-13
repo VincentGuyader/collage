@@ -40,14 +40,14 @@ DataFrame scale_img( NumericVector img, int width, int height ){
   IntegerVector dim = img.attr("dim") ;
   int nrow = dim[0], ncol = dim[1] ;
 
-  IntegerVector a_steps = steps(nrow, width) ;
-  IntegerVector b_steps = steps(ncol, height) ;
+  IntegerVector a_steps = steps(nrow, height) ;
+  IntegerVector b_steps = steps(ncol, width) ;
   int n = width*height ;
 
   auto mean_channel = [&]( NumericVector& out, int channel ){
     double* p = out.begin() ;
-    for(int j=0, k=0; j<height; j++){
-      for(int i=0; i<width; i++, k++ ){
+    for(int j=0, k=0; j<width; j++){
+      for(int i=0; i<height; i++, k++ ){
         p[k]   = meanview(img, nrow, ncol, a_steps[i], a_steps[i+1], b_steps[j], b_steps[j+1], channel ) ;
       }
     }
