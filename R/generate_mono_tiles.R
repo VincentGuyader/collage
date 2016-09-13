@@ -4,8 +4,7 @@
 #' @description genère des images mono couleurs
 #' @param comb a matrix of data frame of RGB combinations
 #' @param dir path where to write the tiles
-#' @param width width of the generated tiles
-#' @param height height of the generated tiles
+#' @param size width and height of the generated tiles
 #' @importFrom grDevices jpeg
 #'
 #' @examples
@@ -16,13 +15,14 @@
 #' }
 #' @importFrom grDevices jpeg
 #' @export
-generate_mono_tiles <- function(comb, dir, width = 100, height = 100) {
+generate_mono_tiles <- function(comb, dir, size = 25) {
     try(dir.create(dir))
 
-    colors <- rgb( combinaisons[,1], combinaisons[,2], combinaisons[,3] )
+    colors <- rgb( comb[,1], comb[,2], comb[,3] )
     sapply( colors, function(color){
-      f <- file.path( dir, sprintf( "%s.jpg", color ) )
-      jpeg(f, width = width, height = height )
+      f <- file.path( dir, sprintf( "%s.jpg", substring(color,2) ) )
+      jpeg(f, width = size, height = size )
+      par( mar = c(0,0,0,0) , bg = color)
       plot(1, xlab = "", ylab = "", type = "n", bty = "n", axes = FALSE)
       dev.off()
     })

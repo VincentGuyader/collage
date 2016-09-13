@@ -5,16 +5,14 @@
 \alias{generate_mono_tiles}
 \title{genere_tuiles}
 \usage{
-generate_mono_tiles(comb, dir, width = 100, height = 100)
+generate_mono_tiles(comb, dir, size = 25)
 }
 \arguments{
 \item{comb}{a matrix of data frame of RGB combinations}
 
 \item{dir}{path where to write the tiles}
 
-\item{width}{width of the generated tiles}
-
-\item{height}{height of the generated tiles}
+\item{size}{width and height of the generated tiles}
 }
 \description{
 genère des images mono couleurs
