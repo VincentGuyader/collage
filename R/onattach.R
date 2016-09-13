@@ -12,7 +12,3 @@
         packageStartupMessage("")
     }
 }
-
-
-# enlève les faux positifs du check
-globalVariables(c("%do%", "%dopar%", "foreach", "i"))
