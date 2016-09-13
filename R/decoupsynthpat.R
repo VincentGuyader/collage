@@ -43,8 +43,8 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
 }
 
 print.tuile <- function(x, ...) {
-
     cat(" une tuile de ", dim(x$read), " \n")
     print(x$tab)
     cat("\n\n")
+    invisible(x)
 }
