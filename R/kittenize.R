@@ -1,3 +1,10 @@
+#' A base of kittens
+#'
+#' @examples
+#'   kittens
+"kittens"
+
+
 # -*- coding: utf-8 -*-
 #' @encoding UTF-8
 #' @title kittenize
@@ -19,9 +26,7 @@
 #' \dontrun{
 #' library(tipixel)
 #'
-#' img <- sample_image()
-#' base <- system.file("base", package = 'tipixel')
-#' kittenize(img)
+#' kittenize(sample_image())
 #' }
 
 #' @export
