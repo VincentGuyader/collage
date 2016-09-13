@@ -5,6 +5,10 @@
 using namespace Rcpp ;
 #include <math.h>
 
+inline double square(double x){
+  return x*x;
+}
+
 IntegerVector steps( int initial, int requested){
   double step = (initial - 1.0 ) / requested ;
 
@@ -36,28 +40,49 @@ double meanview( const NumericVector& img, int nrow, int ncol, int row_from, int
 
 //' @importFrom RcppParallel RcppParallelLibs
 // [[Rcpp::export]]
-DataFrame scale_img( NumericVector img, int width, int height ){
+IntegerVector find_best_tiles( NumericVector img, int width, int height, DataFrame base ){
   IntegerVector dim = img.attr("dim") ;
   int nrow = dim[0], ncol = dim[1] ;
+
+  // the rgb vectors for the base
+  NumericVector R = base["R"] ;
+  NumericVector G = base["G"] ;
+  NumericVector B = base["B"] ;
+  int nbase = R.size() ;
 
   IntegerVector a_steps = steps(nrow, height) ;
   IntegerVector b_steps = steps(ncol, width) ;
   int n = width*height ;
+  IntegerVector tiles = no_init(n) ;
 
-  auto mean_channel = [&]( NumericVector& out, int channel ){
-    double* p = out.begin() ;
-    for(int j=0, k=0; j<width; j++){
-      for(int i=0; i<height; i++, k++ ){
-        p[k]   = meanview(img, nrow, ncol, a_steps[i], a_steps[i+1], b_steps[j], b_steps[j+1], channel ) ;
-      }
-    }
+  auto get_distance = [&](int i, double r, double g, double b){
+    return sqrt( square(r-R[i]) + square(g-G[i]) + square(b-B[i]) ) ;
   } ;
-  NumericVector red = no_init(n), green = no_init(n), blue = no_init(n) ;
 
-  tbb::parallel_invoke(
-      [&]{ mean_channel(red, 0) ; },
-      [&]{ mean_channel(green, 1) ; },
-      [&]{ mean_channel(blue, 2) ; }
-    ) ;
-  return DataFrame::create( _["R"] = red, _["G"] = green, _["B"] = blue ) ;
+  for(int j=0; j<width; j++){
+
+    int k = j*height ;
+    for(int i=0; i<height; i++, k++ ){
+      // get rgb that summarises the current subset of pixels
+      int a_from = a_steps[i], a_to = a_steps[i+1] ;
+      int b_from = b_steps[i], b_to = b_steps[i+1] ;
+      double red   = meanview(img, nrow, ncol, a_from, a_to, b_from, b_to, 0 ) ;
+      double green = meanview(img, nrow, ncol, a_from, a_to, b_from, b_to, 1 ) ;
+      double blue  = meanview(img, nrow, ncol, a_from, a_to, b_from, b_to, 2 ) ;
+
+      double distance = get_distance(0, red, green, blue) ;
+      int best = 0 ;
+      for( int index=0; index<nbase; index++){
+        double current_distance = get_distance(index, red, green, blue) ;
+        if( current_distance < distance){
+          best = index ;
+          distance = current_distance ;
+        }
+      }
+      tiles[k] = best ;
+
+    }
+  }
+
+  return tiles ;
 }
