@@ -5,45 +5,19 @@
 \alias{kittenize}
 \title{kittenize}
 \usage{
-kittenize(file, lig = 100, col, target = "kitten.jpg", parallel = FALSE,
-  thread = 2, open = TRUE, verbose = TRUE, affich = FALSE,
-  doublon = FALSE, redim = NULL, random = 1)
+kittenize(...)
 }
 \arguments{
-\item{file}{fichier jpg d'origine à découper}
-
-\item{lig}{nombre de lignes}
-
-\item{col}{nombre de colonnes}
-
-\item{target}{fichier de sortie en jpg}
-
-\item{parallel}{si oui le calcul en parallel sera utilisé}
-
-\item{thread}{nombre de coeur à utiliser si parallel =TRUE}
-
-\item{open}{si VRAI le fichier target est ouvert en fin de création}
-
-\item{verbose}{si VRAI rend la fonction bavarde}
-
-\item{affich}{booleen si vrai le resultat est affiché en tant que graphique dans R}
-
-\item{doublon}{si FAUX on supprime les doublons avant de calculer les distances}
-
-\item{redim}{utile si la base ne contient pas les images perchargées, précise les dimensions des tuiles}
-
-\item{random}{tire au hasard la vignette parmi les meilleurs tuiles disponibles, random precise ce nombre}
+\item{\dots}{see \code{\link{pixelize}}}
 }
 \description{
-Pou ceux qui aiments les chatons
+Pour ceux qui aiments les chatons
 }
 \examples{
 \dontrun{
 library(tipixel)
 
-img <- sample_image()
-base <- system.file("base", package = 'tipixel')
-kittenize(img)
+kittenize(sample_image())
 }
 }
 
