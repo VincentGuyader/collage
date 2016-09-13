@@ -36,7 +36,7 @@ double meanview( const NumericVector& img, int nrow, int ncol, int row_from, int
 
 //' @importFrom RcppParallel RcppParallelLibs
 // [[Rcpp::export]]
-DataFrame decoupsynth_cpp( NumericVector img, int lig, int col ){
+DataFrame scale_img( NumericVector img, int lig, int col ){
   IntegerVector dim = img.attr("dim") ;
   int nrow = dim[0], ncol = dim[1] ;
 

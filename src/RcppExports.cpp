@@ -29,16 +29,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// decoupsynth_cpp
-DataFrame decoupsynth_cpp(NumericVector img, int lig, int col);
-RcppExport SEXP tipixel_decoupsynth_cpp(SEXP imgSEXP, SEXP ligSEXP, SEXP colSEXP) {
+// scale_img
+DataFrame scale_img(NumericVector img, int lig, int col);
+RcppExport SEXP tipixel_scale_img(SEXP imgSEXP, SEXP ligSEXP, SEXP colSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type img(imgSEXP);
     Rcpp::traits::input_parameter< int >::type lig(ligSEXP);
     Rcpp::traits::input_parameter< int >::type col(colSEXP);
-    rcpp_result_gen = Rcpp::wrap(decoupsynth_cpp(img, lig, col));
+    rcpp_result_gen = Rcpp::wrap(scale_img(img, lig, col));
     return rcpp_result_gen;
 END_RCPP
 }

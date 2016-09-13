@@ -28,7 +28,7 @@ dist_rgb <- function(X, B) {
 }
 
 #' @importFrom RcppParallel RcppParallelLibs
-decoupsynth_cpp <- function(img, lig, col) {
-    .Call('tipixel_decoupsynth_cpp', PACKAGE = 'tipixel', img, lig, col)
+scale_img <- function(img, lig, col) {
+    .Call('tipixel_scale_img', PACKAGE = 'tipixel', img, lig, col)
 }
 
