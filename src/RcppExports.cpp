@@ -5,6 +5,30 @@
 
 using namespace Rcpp;
 
+// closest_rgb
+IntegerVector closest_rgb(DataFrame X, DataFrame B);
+RcppExport SEXP tipixel_closest_rgb(SEXP XSEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< DataFrame >::type X(XSEXP);
+    Rcpp::traits::input_parameter< DataFrame >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(closest_rgb(X, B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dist_rgb
+NumericMatrix dist_rgb(DataFrame X, DataFrame B);
+RcppExport SEXP tipixel_dist_rgb(SEXP XSEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< DataFrame >::type X(XSEXP);
+    Rcpp::traits::input_parameter< DataFrame >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(dist_rgb(X, B));
+    return rcpp_result_gen;
+END_RCPP
+}
 // decoupsynth_cpp
 DataFrame decoupsynth_cpp(NumericVector img, int lig, int col);
 RcppExport SEXP tipixel_decoupsynth_cpp(SEXP imgSEXP, SEXP ligSEXP, SEXP colSEXP) {
@@ -15,18 +39,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type lig(ligSEXP);
     Rcpp::traits::input_parameter< int >::type col(colSEXP);
     rcpp_result_gen = Rcpp::wrap(decoupsynth_cpp(img, lig, col));
-    return rcpp_result_gen;
-END_RCPP
-}
-// closest_rgb
-IntegerVector closest_rgb(DataFrame X, DataFrame B);
-RcppExport SEXP tipixel_closest_rgb(SEXP XSEXP, SEXP BSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DataFrame >::type X(XSEXP);
-    Rcpp::traits::input_parameter< DataFrame >::type B(BSEXP);
-    rcpp_result_gen = Rcpp::wrap(closest_rgb(X, B));
     return rcpp_result_gen;
 END_RCPP
 }
