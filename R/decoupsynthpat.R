@@ -43,15 +43,6 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
     }
 }
 
-extr <- function(vec, img, enhanced = FALSE) {
-  moy <- if(enhanced) moycoul_enhanced else moycoul
-  moycoul( img[seq(vec$x[1], vec$x[2]), seq(vec$y[1], vec$y[2]), ] )
-}
-
-prout <- function(t, base) {
-    return(base[t:(t + 1)])
-}
-
 print.tuile <- function(x, ...) {
 
     cat(" une tuile de ", dim(x$read), " \n")
