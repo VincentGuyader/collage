@@ -21,7 +21,7 @@ decoupsynthpath <- function(path, redim = NULL, verbose = FALSE, preload = TRUE)
         class(out) <- "tuile"
         return(out)
     }
-    # decoupsynth_one(lim,redim=redim)
+
     mc <- moycoul(lim)
     out <- setNames(cbind(1, 1, 1, data.frame(matrix(mc$rgb, nrow = 1)), mc$html), c("nom", "lig", "col", "R", "G",
         "B", "html"))

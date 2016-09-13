@@ -13,15 +13,13 @@
 #' @importFrom dplyr bind_rows
 #' @examples
 #' \dontrun{
-#' base <- file.path(find.package('tipixel'),'base')
+#' base <- system.file("base", package = "tipixel" )
 #' les_tuiles <- genere_base(base,redim=c(25,25))
 #' genere_base(base)
 #' genere_base(base,redim=c(25,25))
 #' genere_base(base,redim=c(25,25),preload = FALSE)
 #' }
 #' @export
-
-
 genere_base <- function(chemin = "base", redim = c(25,25), verbose = FALSE, preload = TRUE,recursive = TRUE,progress="tk",nombre=NULL) {
     nom <- list.files(chemin, full.names = TRUE,pattern = "*.(jpg|jpeg)$",recursive = TRUE)
 
@@ -62,7 +60,7 @@ genere_base <- function(chemin = "base", redim = c(25,25), verbose = FALSE, prel
 #' @export
 print.unebase <- function(x, ...) {
 
-    cat("base de ", nrow(x$base), " tuiles \n")
+  cat("base de ", nrow(x$base), " tuiles \n")
   cat("exemple de chemin :",x$base[1,]$nom, "\n")
     if (!is.null(dim(x$read[[1]]))) {
         cat("base avec images préchargées \n ")

@@ -19,8 +19,8 @@
 #' \dontrun{
 #' library(tipixel)
 #'
-#' base <- file.path(find.package('tipixel'),'base')
-#' img <- sample(list.files(base,full.names = TRUE),1)
+#' img <- sample_image()
+#' base <- system.file("base", package = 'tipixel')
 #' kittenize(img)
 #' }
 
@@ -31,7 +31,7 @@ kittenize <- function(file, lig=100,col, target = "kitten.jpg", parallel = FALSE
 
   base <- paste0(file.path(find.package('tipixel'),'base'),"/basechaton.RDS")
   chatons <<- readRDS(base)
-print(chatons)
+  print(chatons)
 
 
  pixel(file, lig=lig, col=col, base=chatons, target = target, parallel = parallel,

@@ -28,7 +28,7 @@ importe le contenu du dossier de tuiles et génère un objet base
 }
 \examples{
 \dontrun{
-base <- file.path(find.package('tipixel'),'base')
+base <- system.file("base", package = "tipixel" )
 les_tuiles <- genere_base(base,redim=c(25,25))
 genere_base(base)
 genere_base(base,redim=c(25,25))

@@ -41,8 +41,8 @@ Pou ceux qui aiments les chatons
 \dontrun{
 library(tipixel)
 
-base <- file.path(find.package('tipixel'),'base')
-img <- sample(list.files(base,full.names = TRUE),1)
+img <- sample_image()
+base <- system.file("base", package = 'tipixel')
 kittenize(img)
 }
 }
