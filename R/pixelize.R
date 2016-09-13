@@ -1,9 +1,7 @@
-
-# assumptions: tiles are square of all the same sizes. this can be the job of genere_base
-
-auto_dim <- function( img, width = NA, height = NA ){
-  nr <- nrow(img)
-  nc <- ncol(img)
+#' @export
+auto_dim <- function( original_dim, width = NA, height = NA ){
+  nr <- original_dim[1]
+  nc <- original_dim[2]
   ratio <- nc / nr
 
   if( is.na(width) && is.na(height) ){
@@ -26,7 +24,7 @@ auto_dim <- function( img, width = NA, height = NA ){
 #' @importFrom jpeg readJPEG
 pixelize <- function(file, base = base_samples, width=NA, height=NA ) {
   img  <- readJPEG(file)
-  dims <- auto_dim(img, width, height)
+  dims <- auto_dim(dim(img), width, height)
   width <- dims[1]
   height <- dims[2]
 
