@@ -25,7 +25,7 @@ IntegerVector closest_rgb( DataFrame X, DataFrame B ){
 
   IntegerVector out(nx) ;
 
-  tbb::parallel_for(0, nx, 1, [&](int i){
+  tbb::parallel_for(0, nx, [&](int i){
     // grab rgb for the j'th base image
     double red=red_x[i], green=green_x[i], blue=blue_x[i] ;
 
@@ -70,7 +70,7 @@ NumericMatrix dist_rgb( DataFrame X, DataFrame B ){
   NumericMatrix out = no_init_matrix(nx, nb) ;
 
   // for( int j=0; j<nb; j++){
-  tbb::parallel_for(0, nb, 1, [&](int j){
+  tbb::parallel_for(0, nb, [&](int j){
     // grab rgb for the j'th base image
     double red=red_b[j], green=green_b[j], blue=blue_b[j] ;
 
