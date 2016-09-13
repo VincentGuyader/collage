@@ -21,8 +21,9 @@ auto_dim <- function( img, width = NA, height = NA ){
 #' pixelize
 #'
 #' @examples
-#' base <- system.file( "base", package = "tipixel")
-#' les_tuiles <- genere_base(base,redim=c(25,25), progress = "text" )
+#' path  <- system.file( "base", package = "tipixel")
+#' tiles <- generate_base(path,size=25)
+#'
 #' img <- sample_image()
 #' pixelize( img, les_tuiles, width = 10)
 #' @importFrom jpeg readJPEG
