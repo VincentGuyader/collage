@@ -29,6 +29,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// collage
+NumericVector collage(List tiles, int width, int height, IntegerVector best_tiles, int tile_dim);
+RcppExport SEXP tipixel_collage(SEXP tilesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP best_tilesSEXP, SEXP tile_dimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type tiles(tilesSEXP);
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type best_tiles(best_tilesSEXP);
+    Rcpp::traits::input_parameter< int >::type tile_dim(tile_dimSEXP);
+    rcpp_result_gen = Rcpp::wrap(collage(tiles, width, height, best_tiles, tile_dim));
+    return rcpp_result_gen;
+END_RCPP
+}
 // scale_img
 DataFrame scale_img(NumericVector img, int width, int height);
 RcppExport SEXP tipixel_scale_img(SEXP imgSEXP, SEXP widthSEXP, SEXP heightSEXP) {

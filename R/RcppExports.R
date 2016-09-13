@@ -27,6 +27,10 @@ dist_rgb <- function(X, B) {
     .Call('tipixel_dist_rgb', PACKAGE = 'tipixel', X, B)
 }
 
+collage <- function(tiles, width, height, best_tiles, tile_dim) {
+    .Call('tipixel_collage', PACKAGE = 'tipixel', tiles, width, height, best_tiles, tile_dim)
+}
+
 #' @importFrom RcppParallel RcppParallelLibs
 scale_img <- function(img, width, height) {
     .Call('tipixel_scale_img', PACKAGE = 'tipixel', img, width, height)
