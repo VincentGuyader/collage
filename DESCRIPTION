@@ -12,7 +12,9 @@ Imports:
     jpeg,
     tibble,
     Rcpp,
-    RcppParallel
+    RcppParallel,
+    shiny,
+    shinyFiles
 LinkingTo:
     Rcpp,
     RcppParallel
@@ -22,7 +24,5 @@ URL: https://github.com/ThinkRstat/tipixel
 Encoding: UTF-8
 Suggests:
     knitr,
-    rmarkdown,
-    shiny,
-    shinyFiles
+    rmarkdown
 VignetteBuilder: knitr
