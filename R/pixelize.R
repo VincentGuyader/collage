@@ -43,3 +43,20 @@ pixelize <- function(img = readJPEG(file), base = base_samples, width=NA, height
   attr( out, "quality") <- get_quality(summary)
   out
 }
+
+show_base_quality <- function( img = readJPEG(file), base = base_samples, max_distance = .1, width = NA, height = NA, file){
+  if( missing(file) ){
+    assert_that(is_image(img))
+  }
+  dims <- auto_dim(dim(img), width, height)
+  width <- dims[1]
+  height <- dims[2]
+
+  best_tiles  <- find_best_tiles(img, width, height, base$base )
+
+  distances <- pmin( attr(best_tiles, "distances") / sqrt(3), max_distance ) / max_distance
+
+  data <- array( rep(distances, 3), dim = c(height, width, 3) )
+  data
+}
+
