@@ -7,7 +7,7 @@
 #' @importFrom assertthat assert_that
 #' @importFrom grDevices col2rgb
 #' @export
-gridize <- function( img = readJPEG(file), width = NA, height = NA, size = 1, col = "white", file ){
+gridize <- function( img = readJPEG(file), width = NA, height = NA, size = 1, col = "white", average = FALSE, file ){
   if( missing(file) ) assert_that(is_image(img))
   rgb <- as.vector( col2rgb(col) ) / 256
 
@@ -15,5 +15,5 @@ gridize <- function( img = readJPEG(file), width = NA, height = NA, size = 1, co
   width <- dims[1]
   height <- dims[2]
 
-  gridize_cpp( img, width, height, size, rgb )
+  gridize_cpp( img, width, height, size, rgb, average )
 }

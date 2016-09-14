@@ -1,7 +1,7 @@
 #include <tipixel.h>
 
 // [[Rcpp::export]]
-NumericVector gridize_cpp( NumericVector img, int width, int height, int size, NumericVector rgb){
+NumericVector gridize_cpp( NumericVector img, int width, int height, int size, NumericVector rgb, bool mean = false){
   IntegerVector dim = img.attr("dim") ;
   int nrow = dim[0] ;
   int ncol = dim[1] ;
@@ -47,11 +47,24 @@ NumericVector gridize_cpp( NumericVector img, int width, int height, int size, N
         int tile_height = a_to-a_from ;
         double* q = p + rowpos + (i+1) * size  ;
 
-        for( int jj=0; jj<tile_width; jj++){
-          std::copy( data_image, data_image + tile_height, q ) ;
-          data_image += nrow ;
+        if( mean ){
+          double m = 0.0 ;
+          for( int jj=0; jj<tile_width; jj++){
+            m = std::accumulate( data_image, data_image + tile_height, m) ;
+            data_image += nrow ;
+          }
+          m = m / (tile_height * tile_width) ;
+          for( int jj=0; jj<tile_width; jj++){
+            std::fill(q, q+tile_height, m) ;
+            q += out_height ;
+          }
+        } else {
+          for( int jj=0; jj<tile_width; jj++){
+            std::copy( data_image, data_image + tile_height, q ) ;
+            data_image += nrow ;
 
-          q += out_height ;
+            q += out_height ;
+          }
         }
 
         rowpos += tile_height ;

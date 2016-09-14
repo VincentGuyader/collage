@@ -5,7 +5,7 @@
 \title{adds a grid to show the parts of the image to be replaced by tiles}
 \usage{
 gridize(img = readJPEG(file), width = NA, height = NA, size = 1,
-  col = "white", file)
+  col = "white", average = FALSE, file)
 }
 \description{
 adds a grid to show the parts of the image to be replaced by tiles
