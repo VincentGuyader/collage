@@ -41,6 +41,7 @@ pixelize <- function(img = readJPEG(file), base = base_samples, width=NA, height
   tile_dim <- nrow(tiles[[1]])
   out <- collage( base$read, width, height, best_tiles, tile_dim )
   attr( out, "quality") <- get_quality(summary)
+  attr( out, "tiles_use" ) <- length( unique( best_tiles ) ) / nrow(base$base)
   out
 }
 
