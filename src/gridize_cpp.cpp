@@ -66,16 +66,11 @@ NumericVector gridize_cpp( NumericVector img, int width, int height, int size, N
 
   } ;
 
-  // tbb::parallel_invoke(
-  //    [&]{ fill_grid(0) ; },
-  //    [&]{ fill_grid(1) ; },
-  //    [&]{ fill_grid(2) ; }
-  // ) ;
-  //
-
-  fill_grid(0) ;
-  fill_grid(1) ;
-  fill_grid(2) ;
+  tbb::parallel_invoke(
+     [&]{ fill_grid(0) ; },
+     [&]{ fill_grid(1) ; },
+     [&]{ fill_grid(2) ; }
+  ) ;
 
   return out ;
 }
