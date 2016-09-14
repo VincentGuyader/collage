@@ -14,7 +14,8 @@ Imports:
     Rcpp,
     RcppParallel,
     shiny,
-    shinyFiles
+    shinyFiles,
+    assertthat
 LinkingTo:
     Rcpp,
     RcppParallel

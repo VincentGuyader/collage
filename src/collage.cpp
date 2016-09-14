@@ -1,7 +1,4 @@
-#include <Rcpp.h>
-#include <RcppParallel.h>
-
-using namespace Rcpp;
+#include <tipixel.h>
 
 // [[Rcpp::export]]
 NumericVector collage( List tiles, int width, int height, IntegerVector best_tiles, int tile_dim){

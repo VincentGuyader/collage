@@ -1,9 +1,4 @@
-#include <Rcpp.h>
-#include <RcppParallel.h>
-#include <tbb/parallel_invoke.h>
-
-using namespace Rcpp ;
-#include <math.h>
+#include <tipixel.h>
 
 inline double square(double x){
   return x*x;
@@ -17,6 +12,7 @@ IntegerVector steps( int initial, int requested){
   for( int i=0; i<requested+1; i++, value += step ){
     res[i] = nearbyint(value) - 1;
   }
+  res[requested] = initial + 1 ;
   return res ;
 }
 
@@ -28,8 +24,8 @@ double meanview( const NumericVector& img, int nrow, int ncol, int row_from, int
   int offset = nrow*ncol*channel + col_from*nrow + row_from;
   const double* start = img.begin() + offset ;
 
-  int rows = row_to - row_from + 1;
-  int cols = col_to - col_from + 1 ;
+  int rows = row_to - row_from ;
+  int cols = col_to - col_from ;
 
   double res = 0.0 ;
   for( int j=0; j<cols; j++, start += nrow ){
