@@ -17,7 +17,7 @@ Pour ceux qui aiments les chatons
 \dontrun{
 library(tipixel)
 
-kittenize(sample_image())
+kittenize(file = sample_image())
 }
 }
 

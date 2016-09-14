@@ -4,13 +4,14 @@
 \alias{pixelize}
 \title{pixelize}
 \usage{
-pixelize(file, base = base_samples, width = NA, height = NA)
+pixelize(img = readJPEG(file), base = base_samples, width = NA,
+  height = NA, file)
 }
 \description{
 pixelize
 }
 \examples{
 img <- sample_image()
-pixelize( img, width = 10)
+pixelize( file = img, width = 10)
 }
 

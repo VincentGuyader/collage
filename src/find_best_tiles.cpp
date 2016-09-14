@@ -12,7 +12,7 @@ IntegerVector steps( int initial, int requested){
   for( int i=0; i<requested+1; i++, value += step ){
     res[i] = nearbyint(value) - 1;
   }
-  res[requested] = initial + 1 ;
+  res[requested] = initial ;
   return res ;
 }
 

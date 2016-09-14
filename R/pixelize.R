@@ -20,10 +20,12 @@ auto_dim <- function( original_dim, width = NA, height = NA ){
 #'
 #' @examples
 #' img <- sample_image()
-#' pixelize( img, width = 10)
+#' pixelize( file = img, width = 10)
 #' @importFrom jpeg readJPEG
-pixelize <- function(file, base = base_samples, width=NA, height=NA ) {
-  img  <- readJPEG(file)
+pixelize <- function(img = readJPEG(file), base = base_samples, width=NA, height=NA, file ) {
+  if( missing(file) ){
+    assert_that(is_image(img))
+  }
   dims <- auto_dim(dim(img), width, height)
   width <- dims[1]
   height <- dims[2]

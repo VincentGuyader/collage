@@ -8,37 +8,18 @@ pixel_ui <- function(){
         tabPanel("Choisir les images",
                  tags$br(),
 
-                 shinyFiles::shinyFilesButton('file', 'Choix de l\'image en entrée', 'Please select a file', FALSE),
-                 shinyFiles::shinySaveButton('save', 'Choix de l\'image en sortie', 'Save file as...', filetype=list(picture=c('jpeg', 'jpg'))),
+                 shinyFilesButton('file', 'Choix de l\'image en entrée', 'Please select a file', FALSE),
+                 shinySaveButton('save', 'Choix de l\'image en sortie', 'Save file as...', filetype=list(picture=c('jpeg', 'jpg'))),
 
                  htmlOutput("selectUI_a"),
 
 
-                 numericInput("n_col",
-                              label = h3("nombre de colonnes"),
-                              value = 42,min=0)   ,
-                 numericInput("n_row",
-                              label = h3("nombre de lignes"),
-                              value = 42,min=0),
+                 numericInput("n_col", label = h3("nombre de colonnes"), value = 42,min=0)   ,
+                 numericInput("n_row", label = h3("nombre de lignes"), value = 42,min=0),
 
                  # ici on met le nombre total d tuiles
 
-                 h3(textOutput("nb_tuiles")),
-                 checkboxGroupInput("options",
-                                    label = h3("options"),
-                                    choices = list("ouvre le fichier de sortie" = "open",
-                                                   "autoriser les doublons" = "doublon",
-                                                   "verbose" = "verbose",
-                                                   "parallel"  = "parallel"
-
-
-                                    ),
-                                    selected = c("open","doublon","verbose")),
-                 numericInput("thread",
-                              label = h3("nombre de thread"),
-                              value = 2,min=1)
-
-
+                 h3(textOutput("nb_tuiles"))
 
         ),
         tabPanel("Gestion des bases",
@@ -86,11 +67,7 @@ pixel_ui <- function(){
       verbatimTextOutput('directorypath'),
       verbatimTextOutput('export_base'),
       verbatimTextOutput('import_base'),
-      # uiOutput('jpeg'),
-      # htmlOutput("picture"),
       imageOutput("myImage")
-      # ,
-      # imageOutput("myImage",height = 500)
     )
   ))
 }

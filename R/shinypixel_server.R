@@ -1,26 +1,26 @@
 
+#' @importFrom jpeg readJPEG
 pixel_server <- function(){
   shinyServer(function(input, output,session) {
-    # volumes <- c('home'="/mnt/docs/big/Vincent/")
-    # volumes <- c('wd'='.')
-    # volumes <- c('wd'='/mnt/docs/big/chaton/')
+
+    bases <- list( samples = base_samples, kittens = kittens )
+
+
     volumes <- c('wd'='~')
     shinyFileChoose(input, 'file', roots=volumes)
-    output$filepaths <- renderPrint({parseFilePaths(volumes, input$file)})
+    output$filepaths <- renderPrint( parseFilePaths(volumes, input$file) )
 
     shinyFileChoose(input, 'import_base', roots=volumes)
-    output$import_base <- renderPrint({parseFilePaths(volumes, input$import_base)})
+    output$import_base <- renderPrint( parseFilePaths(volumes, input$import_base) )
 
     shinyFileSave(input, 'save', roots=volumes)
-    output$savefile <- renderPrint({parseSavePath(volumes, input$save)})
-
+    output$savefile <- renderPrint( parseSavePath(volumes, input$save) )
 
     shinyFileSave(input, 'export_base', roots=volumes)
-    output$export_base <- renderPrint({parseSavePath(volumes, input$export_base)})
-
+    output$export_base <- renderPrint( parseSavePath(volumes, input$export_base) )
 
     shinyDirChoose(input, 'base', roots=volumes)
-    output$directorypath <- renderPrint({parseDirPath(volumes, input$base)})
+    output$directorypath <- renderPrint( parseDirPath(volumes, input$base) )
 
     output$myImage <- renderImage({
       # TODO tropompliqué pour ce que c est
@@ -30,7 +30,7 @@ pixel_server <- function(){
       normalizePath(as.character(parseFilePaths(volumes, input$file)$datapath))->chemin
       cat("chemin",chemin,"\n")
       if (length(chemin)!=0){
-        plotraster(aperm(jpeg::readJPEG(chemin),c(2,1,3))) # on affiche cette image
+        plotraster(aperm(readJPEG(chemin),c(2,1,3))) # on affiche cette image
       }
       dev.off()
       # Return a list containing the filename
@@ -237,13 +237,9 @@ pixel_server <- function(){
           lig=as.numeric(input$n_row),
           col=as.numeric(input$n_col),
           base=eval(parse(text=LABASE)),
-          open = is.element("open",input$options),
-          affich = is.element("open",input$options),
-          doublon = is.element("doublon",input$options),
-          verbose = is.element("verbose",input$options),
           target=target,
-          parallel = is.element("parallel",input$options),
-          thread=as.numeric(input$thread))
+        )
+
         for (i in 1:3) {
           progress$set(value = i)
           Sys.sleep(0.1)
