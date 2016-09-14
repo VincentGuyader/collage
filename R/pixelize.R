@@ -31,8 +31,13 @@ pixelize <- function(img = readJPEG(file), base = base_samples, width=NA, height
   height <- dims[2]
 
   best_tiles  <- find_best_tiles(img, width, height, base$base )
+
+  distances <- attr(best_tiles, "distances")
+  quality <- 1 - mean(distances) / sqrt(3)
+
   tiles <- base$read
   tile_dim <- nrow(tiles[[1]])
   out <- collage( base$read, width, height, best_tiles, tile_dim )
+  attr( out, "quality") <- quality
   out
 }
