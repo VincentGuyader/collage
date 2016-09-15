@@ -13,13 +13,13 @@
 #' @importFrom tibble data_frame
 #' @importFrom jpeg readJPEG
 #' @export
-generate_base <- function(path, size = 25, ...){
+generate_base <- function(path, size = 25, ... ){
   files  <- jpegs( path, ... )
-  images <- sapply( files, readJPEG)
+  images <- sapply( files, readJPEG )
   data   <- lapply( images, make_tile, size=size)
 
   mean   <- t(sapply( data, "[[", "mean" ))
-  base   <- data_frame( nom = rownames(mean), R = mean[,1], G = mean[,2], B = mean[,3] )
+  base   <- data_frame( nom = files, R = mean[,1], G = mean[,2], B = mean[,3] )
   row.names(base) <- NULL
 
   read   <- lapply( data, "[[", "img")
