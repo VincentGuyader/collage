@@ -13,6 +13,6 @@ adds a grid to show the parts of the image to be replaced by tiles
 \examples{
   img <- sample_image()
   g <- gridize( file = img, width = 10, height = 10, col = "white", size = 2)
-  plotraster(g)
+  plot( as.raster(g) )
 }
 

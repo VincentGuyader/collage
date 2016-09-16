@@ -3,7 +3,7 @@
 #' @examples
 #'   img <- sample_image()
 #'   g <- gridize( file = img, width = 10, height = 10, col = "white", size = 2)
-#'   plotraster(g)
+#'   plot( as.raster(g) )
 #' @importFrom assertthat assert_that
 #' @importFrom grDevices col2rgb
 #' @export

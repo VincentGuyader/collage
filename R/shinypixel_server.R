@@ -30,7 +30,7 @@ pixel_server <- function(){
       normalizePath(as.character(parseFilePaths(volumes, input$file)$datapath))->chemin
       cat("chemin",chemin,"\n")
       if (length(chemin)!=0){
-        plotraster(aperm(readJPEG(chemin),c(2,1,3))) # on affiche cette image
+        plot( as.raster(aperm(readJPEG(chemin),c(2,1,3))) ) # on affiche cette image
       }
       dev.off()
       # Return a list containing the filename
@@ -259,7 +259,7 @@ pixel_server <- function(){
       print(liste_unebase())
       # base <- file.path(find.package('tipixel'),'base')
       # img <- sample(list.files(base,full.names = TRUE),1)
-      # plotraster(aperm(jpeg::readJPEG(img),c(2,1,3)))
+      # plot( as.raster( jpeg::readJPEG(img),c(2,1,3)) )
       # les_tuiles <<- genere_base(base,redim=c(25,25))
       #
       #
