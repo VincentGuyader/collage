@@ -3,7 +3,7 @@ Type: Package
 Title: Fabrique une image en mosaique à partir d'autres images
 Version: 0.1.4
 Authors@R: c(
-    person("Vincent", "Guyader", , "hadley@rstudio.com", c("aut", "cre")),
+    person("Vincent", "Guyader", , "vincent@thinkr.fr", c("aut", "cre")),
     person("Romain", "Francois", , "romain@r-enthusiasts.com", role = "aut")
     )
 Description: Fabrique une image en mosaique à partir d'autres images
