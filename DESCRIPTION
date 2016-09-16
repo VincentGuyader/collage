@@ -2,8 +2,10 @@ Package: tipixel
 Type: Package
 Title: Fabrique une image en mosaique à partir d'autres images
 Version: 0.1.4
-Author: vincent Guyader [aut, cre]
-Maintainer: vincent guyader <vincent@thinkr.fr>
+Authors@R: c(
+    person("Vincent", "Guyader", , "hadley@rstudio.com", c("aut", "cre")),
+    person("Romain", "Francois", , "romain@r-enthusiasts.com", role = "aut")
+    )
 Description: Fabrique une image en mosaique à partir d'autres images
 License: GPL-3
 LazyData: TRUE
