@@ -22,6 +22,7 @@ auto_dim <- function( original_dim, width = NA, height = NA ){
 #' img <- sample_image()
 #' pixelize( file = img, width = 10)
 #' @importFrom jpeg readJPEG
+#' @export
 pixelize <- function(img = readJPEG(file), base = base_samples, width=NA, height=NA, file ) {
   if( missing(file) ){
     assert_that(is_image(img))
