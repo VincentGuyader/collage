@@ -48,6 +48,7 @@ pixelize <- function(img = readJPEG(file), base = base_samples, width=NA, height
   out
 }
 
+#' @export
 show_base_quality <- function( img = readJPEG(file), base = base_samples, max_distance = .1, width = NA, height = NA, file){
   if( missing(file) ){
     assert_that(is_image(img))
