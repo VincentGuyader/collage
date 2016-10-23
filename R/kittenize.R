@@ -1,27 +1,24 @@
-#' A base of kittens
+#' Bases of sample images
 #'
+#' @rdname bases
 #' @examples
 #'   kittens
 "kittens"
 
-#' A base of sample images
-#'
+#' @rdname bases
 #' @examples
 #'   base_samples
 "base_samples"
 
 
-# -*- coding: utf-8 -*-
-#' @encoding UTF-8
-#' @title kittenize
-#' @description Pour ceux qui aiments les chatons
+#' kittenize
+#'
+#' version of \code{\link{pixelize}} using kittens
+#'
 #' @param \dots see \code{\link{pixelize}}
 #' @examples
 #' \dontrun{
-#' library(tipixel)
-#'
-#' kittenize(file = sample_image())
+#'   kittenize(file = sample_image())
 #' }
-
 #' @export
 kittenize <- function(...) pixelize(..., base = kittens)

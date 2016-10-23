@@ -11,7 +11,7 @@ generate_base(path, size = 25, ...)
 
 \item{size}{size (width and height) of the generated tiles}
 
-\item{\dots}{used by \code{\link{jpegs}}}
+\item{\dots}{used by \code{\link[jpeg]{readJPEG}}}
 }
 \description{
 importe le contenu du dossier de tuiles et génère un objet base

@@ -2,17 +2,21 @@
 % Please edit documentation in R/kittenize.R
 \docType{data}
 \name{kittens}
+\alias{base_samples}
 \alias{kittens}
-\title{A base of kittens}
+\title{Bases of sample images}
 \format{An object of class \code{unebase} of length 3.}
 \usage{
 kittens
+
+base_samples
 }
 \description{
-A base of kittens
+Bases of sample images
 }
 \examples{
   kittens
+  base_samples
 }
 \keyword{datasets}
 

@@ -3,7 +3,7 @@
 #' importe le contenu du dossier de tuiles et génère un objet base
 #' @param path directory where to find the images
 #' @param size size (width and height) of the generated tiles
-#' @param \dots used by \code{\link{jpegs}}
+#' @param \dots used by \code{\link[jpeg]{readJPEG}}
 #'
 #' @examples
 #' \dontrun{
