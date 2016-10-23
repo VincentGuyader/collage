@@ -15,8 +15,6 @@ Imports:
     tibble,
     Rcpp,
     RcppParallel,
-    shiny,
-    shinyFiles,
     assertthat, 
     magick
 LinkingTo:
