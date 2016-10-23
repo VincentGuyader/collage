@@ -1,5 +1,6 @@
 #' Get the path of a sample image
 #'
+#' @export
 sample_image <- function(){
   sample(jpegs(system.file( "base", package = "tipixel")), 1)
 }
@@ -8,6 +9,7 @@ sample_image <- function(){
 #'
 #' @param path the directory
 #' @param \dots passed to \code{\link{list.files}}, mostly used for the \code{recursive} argument
+#' @export
 jpegs <- function(path, ... ){
   list.files( path, pattern = "[.](jpg|jpeg)$", full.names = TRUE, ... )
 }
