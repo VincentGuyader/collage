@@ -17,7 +17,8 @@ Imports:
     RcppParallel,
     shiny,
     shinyFiles,
-    assertthat
+    assertthat, 
+    magick
 LinkingTo:
     Rcpp,
     RcppParallel

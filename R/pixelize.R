@@ -1,4 +1,3 @@
-#' @export
 auto_dim <- function( original_dim, width = NA, height = NA ){
   nr <- original_dim[1]
   nc <- original_dim[2]
