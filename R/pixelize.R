@@ -1,20 +1,3 @@
-auto_dim <- function( original_dim, width = NA, height = NA ){
-  nr <- original_dim[1]
-  nc <- original_dim[2]
-  ratio <- nc / nr
-
-  if( is.na(width) && is.na(height) ){
-    height <- 100
-    width  <- round(height * ratio)
-  } else if(is.na(width) ){
-    width <- round( height * ratio )
-  } else if(is.na(height)){
-    height <- round( width / ratio)
-  }
-  c( width, height )
-
-}
-
 #' pixelize
 #'
 #' @examples
@@ -46,6 +29,18 @@ pixelize <- function(img = readJPEG(file), base = base_samples, width=NA, height
   attr( out, "tiles_use" ) <- list( percent = used_tiles/nrow(base$base), n = used_tiles )
   out
 }
+
+#' kittenize
+#'
+#' version of \code{\link{pixelize}} using kittens
+#'
+#' @param \dots see \code{\link{pixelize}}
+#' @examples
+#' \dontrun{
+#'   kittenize(file = sample_image())
+#' }
+#' @export
+kittenize <- function(...) pixelize(..., base = kittens)
 
 #' @export
 show_base_quality <- function( img = readJPEG(file), base = base_samples, max_distance = .1, width = NA, height = NA, file){
