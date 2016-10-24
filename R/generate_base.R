@@ -1,41 +1,36 @@
 #' makes tiles from jpegs in a directory
 #'
 #' importe le contenu du dossier de tuiles et génère un objet base
-#' @param path directory where to find the images
+#' @param files image files
 #' @param size size (width and height) of the generated tiles
-#' @param \dots used by \code{\link[jpeg]{readJPEG}}
 #'
 #' @examples
 #' \dontrun{
-#' path <- system.file("base", package = "tipixel" )
-#' generate_base(path, size = 25)
+#' images <- jpegs( system.file("base", package = "tipixel" ) )
+#' generate_base(images, size = 25)
 #' }
 #' @importFrom tibble data_frame
-#' @importFrom jpeg readJPEG
+#' @importFrom magick image_read image_scale
 #' @export
-generate_base <- function(path, size = 25, ... ){
-  files  <- jpegs( path, ... )
-  images <- sapply( files, readJPEG )
-  data   <- lapply( images, make_tile, size=size)
+generate_base <- function(files, size = 25){
+  images <- image_read(files)
+  scaled <- image_scale( images, "1x1!" )
 
-  mean   <- t(sapply( data, "[[", "mean" ))
-  base   <- data_frame( nom = files, R = mean[,1], G = mean[,2], B = mean[,3] )
-  row.names(base) <- NULL
+  grab <- function(channel){
+    sapply( scaled, function(.){
+      .[[1]][channel]
+    })
+  }
+  first <- function(.) .[[1]]
 
-  read   <- lapply( data, "[[", "img")
+  base     <- data_frame( R = grab(1), G = grab(2), B = grab(3))
+  geometry <- sprintf( "%dx%d!", size, size )
+  tiles    <- image_scale(images, geometry) %>% lapply(first)
 
-  structure( list( base=base, read=read, redim=c(size, size)), class ="unebase" )
+  structure( list( base=base, read=tiles, size = size), class ="unebase" )
 }
 
 #' @export
 print.unebase <- function(x, ...) {
-  cat("base de ", nrow(x$base), " tuiles \n")
-  cat("exemple de chemin :",x$base[1,]$nom, "\n")
-    if (!is.null(dim(x$read[[1]]))) {
-        cat("base avec images préchargées \n ")
-      if (!is.null(x$redim)){
-        if (!is.na(x$redim[[1]])) {
-            cat("taille :", x$redim)
-        }
-    }}
+  cat( sprintf("image base with %d tiles (%dx%d)\n", nrow(x$base), x$size, x$size ) )
 }

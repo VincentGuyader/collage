@@ -34,43 +34,6 @@ double meanview( const NumericVector& img, int nrow, int ncol, int row_from, int
   return res / (rows*cols) ;
 }
 
-// [[Rcpp::export]]
-List make_tile( NumericVector img, int size){
-  int n = size*size ;
-  NumericVector out = no_init(n*3) ;
-  out.attr("dim") = IntegerVector::create(size, size, 3) ;
-  NumericVector mean = no_init(3) ;
-
-  IntegerVector dim = img.attr("dim") ;
-  int nrow = dim[0], ncol = dim[1] ;
-
-  IntegerVector a_steps = steps(nrow, size) ;
-  IntegerVector b_steps = steps(ncol, size) ;
-
-  auto fill_channel = [&](int channel){
-    double* p = out.begin() + n*channel ;
-    double sum = 0.0 ;
-    for(int j=0, k=0; j<size; j++){
-      int b_from = b_steps[j], b_to = b_steps[j+1] ;
-      for(int i=0; i<size; i++, k++ ){
-        int a_from = a_steps[i], a_to = a_steps[i+1] ;
-        sum += p[k] = meanview(img, nrow, ncol, a_from, a_to, b_from, b_to, channel ) ;
-      }
-      mean[channel] = sum / n ;
-    }
-  } ;
-
-  tbb::parallel_invoke(
-    [&]{ fill_channel(0) ; },
-    [&]{ fill_channel(1) ; },
-    [&]{ fill_channel(2) ; }
-  ) ;
-
-  return List::create( _["img"] = out, _["mean"] = mean) ;
-
-}
-
-
 //' @importFrom RcppParallel RcppParallelLibs
 // [[Rcpp::export]]
 IntegerVector find_best_tiles( NumericVector img, int width, int height, DataFrame base ){

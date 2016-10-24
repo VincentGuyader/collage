@@ -4,14 +4,12 @@
 \alias{generate_base}
 \title{makes tiles from jpegs in a directory}
 \usage{
-generate_base(path, size = 25, ...)
+generate_base(files, size = 25)
 }
 \arguments{
-\item{path}{directory where to find the images}
+\item{files}{image files}
 
 \item{size}{size (width and height) of the generated tiles}
-
-\item{\dots}{used by \code{\link[jpeg]{readJPEG}}}
 }
 \description{
 importe le contenu du dossier de tuiles et génère un objet base
