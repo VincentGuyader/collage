@@ -1,8 +1,12 @@
 #' Get the path of a sample image
 #'
+#' @param i index of the sample image, if missing an image is selected at random
+#' @return the full path of a sample image
+#'
 #' @export
-sample_image <- function(){
-  sample(jpegs(system.file( "base", package = "tipixel")), 1)
+sample_image <- function(i){
+  images <- jpegs(system.file( "base", package = "tipixel"))
+  if( missing(i) ) sample(images, 1) else images[i]
 }
 
 #' get the list of jpegs from a directory

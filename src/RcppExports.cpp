@@ -22,16 +22,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // find_best_tiles
-IntegerVector find_best_tiles(NumericVector img, int width, int height, DataFrame base);
-RcppExport SEXP tipixel_find_best_tiles(SEXP imgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP baseSEXP) {
+IntegerVector find_best_tiles(RawVector img, int size, DataFrame base);
+RcppExport SEXP tipixel_find_best_tiles(SEXP imgSEXP, SEXP sizeSEXP, SEXP baseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type img(imgSEXP);
-    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
-    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    Rcpp::traits::input_parameter< RawVector >::type img(imgSEXP);
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< DataFrame >::type base(baseSEXP);
-    rcpp_result_gen = Rcpp::wrap(find_best_tiles(img, width, height, base));
+    rcpp_result_gen = Rcpp::wrap(find_best_tiles(img, size, base));
     return rcpp_result_gen;
 END_RCPP
 }

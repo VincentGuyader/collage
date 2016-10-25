@@ -5,9 +5,8 @@ collage <- function(tiles, width, height, best_tiles, tile_dim) {
     .Call('tipixel_collage', PACKAGE = 'tipixel', tiles, width, height, best_tiles, tile_dim)
 }
 
-#' @importFrom RcppParallel RcppParallelLibs
-find_best_tiles <- function(img, width, height, base) {
-    .Call('tipixel_find_best_tiles', PACKAGE = 'tipixel', img, width, height, base)
+find_best_tiles <- function(img, size, base) {
+    .Call('tipixel_find_best_tiles', PACKAGE = 'tipixel', img, size, base)
 }
 
 gridize_cpp <- function(img, width, height, size, rgb, mean = FALSE) {

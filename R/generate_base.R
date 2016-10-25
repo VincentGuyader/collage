@@ -6,8 +6,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' images <- jpegs( system.file("base", package = "tipixel" ) )
-#' generate_base(images, size = 25)
+#'   images <- jpegs( system.file("base", package = "tipixel" ) )
+#'   generate_base(images, size = 25)
 #' }
 #' @importFrom tibble data_frame
 #' @importFrom magick image_read image_scale

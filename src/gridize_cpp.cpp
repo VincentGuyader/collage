@@ -1,5 +1,17 @@
 #include <tipixel.h>
 
+IntegerVector steps( int initial, int requested){
+  double step = (initial - 1.0 ) / requested ;
+
+  IntegerVector res(requested + 1) ;
+  double value = 1.0 ;
+  for( int i=0; i<requested+1; i++, value += step ){
+    res[i] = nearbyint(value) - 1;
+  }
+  res[requested] = initial ;
+  return res ;
+}
+
 // [[Rcpp::export]]
 NumericVector gridize_cpp( NumericVector img, int width, int height, int size, NumericVector rgb, bool mean = false){
   IntegerVector dim = img.attr("dim") ;
