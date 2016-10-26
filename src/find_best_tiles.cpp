@@ -29,8 +29,6 @@ IntegerVector find_best_tiles( RawVector img, int size, DataFrame base ){
     return square(r-R[i]) + square(g-G[i]) + square(b-B[i]);
   } ;
 
-  int k = 0 ;
-
   IntegerVector row_steps = get_steps( nrow, size ) ;
   int nr = row_steps.size() - 1 ;
 
@@ -41,7 +39,8 @@ IntegerVector find_best_tiles( RawVector img, int size, DataFrame base ){
   IntegerVector tiles = no_init(n) ;
   NumericVector distances = no_init(n) ;
 
-  for( int i=0; i<nr; i++){
+  tbb::parallel_for(0, nr, [&](int i){
+    int k = i*nc ;
     for(int j=0; j<nc; j++, k++){
       int row_start = row_steps[i] ;
       int row_end = row_steps[i+1] ;
@@ -81,7 +80,7 @@ IntegerVector find_best_tiles( RawVector img, int size, DataFrame base ){
       tiles[k] = best ;
 
     }
-  }
+  }) ;
   tiles.attr("distances") = distances ;
   return tiles ;
 }
