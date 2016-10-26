@@ -5,10 +5,6 @@ collage <- function(tiles, width, height, best_tiles, size) {
     .Call('tipixel_collage', PACKAGE = 'tipixel', tiles, width, height, best_tiles, size)
 }
 
-collage_old <- function(tiles, width, height, best_tiles, tile_dim) {
-    .Call('tipixel_collage_old', PACKAGE = 'tipixel', tiles, width, height, best_tiles, tile_dim)
-}
-
 find_best_tiles <- function(img, size, base) {
     .Call('tipixel_find_best_tiles', PACKAGE = 'tipixel', img, size, base)
 }
