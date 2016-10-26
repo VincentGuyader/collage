@@ -22,12 +22,9 @@ as_bitmap <- function(img){
 #' @export
 pixelize <- function(img, base = base_samples, size = 10 ) {
   img <- as_bitmap(img)
-  best_tiles  <- find_best_tiles(img, size, base$base )
 
+  best_tiles  <- find_best_tiles(img, size, base$base )
   distances <- attr(best_tiles, "distances")
-  get_quality <- function(fun){
-    fun( 1 - distances / sqrt(3) )
-  }
 
   tiles <- base$read
   tile_dim <- nrow(tiles[[1]])
