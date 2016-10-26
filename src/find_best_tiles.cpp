@@ -82,5 +82,7 @@ IntegerVector find_best_tiles( RawVector img, int size, DataFrame base ){
     }
   }) ;
   tiles.attr("distances") = distances ;
+  tiles.attr("width")  = nc ;
+  tiles.attr("height") = nr ;
   return tiles ;
 }

@@ -26,10 +26,13 @@ pixelize <- function(img, base = base_samples, size = 10 ) {
   best_tiles  <- find_best_tiles(img, size, base$base )
   distances <- attr(best_tiles, "distances")
 
-  tiles <- base$read
-  tile_dim <- nrow(tiles[[1]])
-  out <- collage( base$read, width, height, best_tiles, tile_dim )
-  attr( out, "quality") <- get_quality(summary)
+  tiles     <- base$read
+  tile_size <- base$size
+  width     <- attr(best_tiles, "width")
+  height    <- attr(best_tiles, "height")
+
+  out <- collage( tiles, width, height, best_tiles, tile_size )
+  attr( out, "quality") <- summary(distances)
 
   used_tiles <- length( unique( best_tiles ) )
   attr( out, "tiles_use" ) <- list( percent = used_tiles/nrow(base$base), n = used_tiles )
