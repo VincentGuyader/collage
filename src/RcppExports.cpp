@@ -22,8 +22,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // base_mask
-RawVector base_mask(NumericVector distances, int width, int height, int size, double max_distance);
-RcppExport SEXP tipixel_base_mask(SEXP distancesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP sizeSEXP, SEXP max_distanceSEXP) {
+RawVector base_mask(NumericVector distances, int width, int height, int size, double min_distance, double max_distance);
+RcppExport SEXP tipixel_base_mask(SEXP distancesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP sizeSEXP, SEXP min_distanceSEXP, SEXP max_distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -31,8 +31,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type width(widthSEXP);
     Rcpp::traits::input_parameter< int >::type height(heightSEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< double >::type min_distance(min_distanceSEXP);
     Rcpp::traits::input_parameter< double >::type max_distance(max_distanceSEXP);
-    rcpp_result_gen = Rcpp::wrap(base_mask(distances, width, height, size, max_distance));
+    rcpp_result_gen = Rcpp::wrap(base_mask(distances, width, height, size, min_distance, max_distance));
     return rcpp_result_gen;
 END_RCPP
 }

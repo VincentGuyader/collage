@@ -55,15 +55,16 @@ kittenize <- function(...) pixelize(..., base = kittens)
 
 #' @importFrom magick image_read
 #' @export
-show_base_quality <- function( img, base = base_samples, size, max_distance = .1){
+show_base_quality <- function( img, base = base_samples, size, min_distance = 0, max_distance ){
   img <- as_bitmap(img)
   best_tiles  <- find_best_tiles(img, size, base$base )
   distances <- attr(best_tiles, "distances")
   width <- attr(best_tiles, "width")
   height <- attr(best_tiles, "height")
-
-  out <- base_mask( distances, width, height, size, max_distance )
-  image_read(out)
+  if( missing(max_distance) ){
+    max_distance <- max(distances)
+  }
+  image_read(base_mask( distances, width, height, size, min_distance, max(distances)))
 }
 
 #' adds a grid to show the parts of the image to be replaced by tiles
