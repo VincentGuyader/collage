@@ -53,6 +53,23 @@ pixelize <- function(img, base = base_samples, size = 10 ) {
 #' @export
 kittenize <- function(...) pixelize(..., base = kittens)
 
+#' visual representation of the quality of the base
+#'
+#' splits the image in pixels of \code{size} x \code{size}
+#'
+#' for each of these pixels find the best tile in the tile base and retrieve its distance
+#' to the average color of the pixel (distance is between 0 and 1),
+#'
+#' The rendered image is a gray scale of these distances.
+#'
+#' @param img image to pixelize
+#' @param base tile base to use
+#' @param size size (height and width) of each pixel
+#' @param min_distance anything below this value is represented in white
+#' @param max_distance anything above this value is represented in black
+#'
+#' @return an \code{\link[magick]{imagemagick}} object
+#'
 #' @importFrom magick image_read
 #' @export
 show_base_quality <- function( img, base = base_samples, size, min_distance = 0, max_distance ){
