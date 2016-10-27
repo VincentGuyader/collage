@@ -4,7 +4,13 @@
 \alias{sample_image}
 \title{Get the path of a sample image}
 \usage{
-sample_image()
+sample_image(i)
+}
+\arguments{
+\item{i}{index of the sample image, if missing an image is selected at random}
+}
+\value{
+the full path of a sample image
 }
 \description{
 Get the path of a sample image

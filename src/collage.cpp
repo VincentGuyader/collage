@@ -31,3 +31,33 @@ RawVector collage( List tiles, int width, int height, IntegerVector best_tiles, 
   return out ;
 
 }
+
+// [[Rcpp::export]]
+RawVector base_mask( NumericVector distances, int width, int height, int size, double max_distance){
+  int n = 4 * width * height * size * size ;
+  RawVector out = no_init( n) ;
+  const Rbyte opaque = 255 ;
+
+  for( int i=0; i<height; i++){
+    int k = i*width;
+    for( int j=0; j<width; j++, k++) {
+      double d = distances[k] ;
+      Rbyte value = d > max_distance ? 1 : (Rbyte)( 255*( d / max_distance ) );
+
+      for( int ii=0; ii<size; ii++){
+        int offset = (i * size + ii ) * (4 * width * size) + 4 * j * size;
+
+        Rbyte* q  = out.begin() + offset ;
+        for( int jj=0; jj<size; jj++, q += 4){
+          std::fill( q, q + 3, value) ;
+          q[3] = opaque ;
+        }
+      }
+    }
+  }
+
+
+  out.attr("dim") = IntegerVector::create( 4, width*size, height * size ) ;
+  return out ;
+
+}

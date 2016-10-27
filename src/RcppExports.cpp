@@ -21,6 +21,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// base_mask
+RawVector base_mask(NumericVector distances, int width, int height, int size, double max_distance);
+RcppExport SEXP tipixel_base_mask(SEXP distancesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP sizeSEXP, SEXP max_distanceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type distances(distancesSEXP);
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    Rcpp::traits::input_parameter< double >::type max_distance(max_distanceSEXP);
+    rcpp_result_gen = Rcpp::wrap(base_mask(distances, width, height, size, max_distance));
+    return rcpp_result_gen;
+END_RCPP
+}
 // find_best_tiles
 IntegerVector find_best_tiles(RawVector img, int size, DataFrame base);
 RcppExport SEXP tipixel_find_best_tiles(SEXP imgSEXP, SEXP sizeSEXP, SEXP baseSEXP) {

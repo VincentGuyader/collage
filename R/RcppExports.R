@@ -5,6 +5,10 @@ collage <- function(tiles, width, height, best_tiles, size) {
     .Call('tipixel_collage', PACKAGE = 'tipixel', tiles, width, height, best_tiles, size)
 }
 
+base_mask <- function(distances, width, height, size, max_distance) {
+    .Call('tipixel_base_mask', PACKAGE = 'tipixel', distances, width, height, size, max_distance)
+}
+
 find_best_tiles <- function(img, size, base) {
     .Call('tipixel_find_best_tiles', PACKAGE = 'tipixel', img, size, base)
 }

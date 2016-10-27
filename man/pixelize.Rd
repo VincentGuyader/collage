@@ -4,7 +4,15 @@
 \alias{pixelize}
 \title{pixelize}
 \usage{
-pixelize(img, base = base_samples, width = NA, height = NA)
+pixelize(img, base = base_samples, size = 10)
+}
+\arguments{
+\item{img}{image to process}
+
+\item{base}{tile base, e.g. \code{base_samples}}
+
+\item{size}{number of pixels, each square of \code{size} times \code{size} is replaced by the
+closest tile from \code{base}}
 }
 \description{
 pixelize
@@ -12,7 +20,7 @@ pixelize
 \examples{
 \dontrun{
   img <- sample_image()
-  pixelize( file = img, width = 10)
+  pixelize( file = img, size = 10)
 }
 }
 

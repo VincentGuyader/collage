@@ -19,6 +19,7 @@ as_bitmap <- function(img){
 #'   pixelize( file = img, size = 10)
 #' }
 #' @importFrom assertthat assert_that
+#' @importFrom magick image_read
 #' @export
 pixelize <- function(img, base = base_samples, size = 10 ) {
   img <- as_bitmap(img)
@@ -36,7 +37,8 @@ pixelize <- function(img, base = base_samples, size = 10 ) {
 
   used_tiles <- length( unique( best_tiles ) )
   attr( out, "tiles_use" ) <- list( percent = used_tiles/nrow(base$base), n = used_tiles )
-  out
+
+  image_read(out)
 }
 
 #' kittenize
@@ -51,21 +53,17 @@ pixelize <- function(img, base = base_samples, size = 10 ) {
 #' @export
 kittenize <- function(...) pixelize(..., base = kittens)
 
+#' @importFrom magick image_read
 #' @export
-show_base_quality <- function( img = readJPEG(file), base = base_samples, max_distance = .1, width = NA, height = NA, file){
-  if( missing(file) ){
-    assert_that(is_image(img))
-  }
-  dims <- auto_dim(dim(img), width, height)
-  width <- dims[1]
-  height <- dims[2]
+show_base_quality <- function( img, base = base_samples, size, max_distance = .1){
+  img <- as_bitmap(img)
+  best_tiles  <- find_best_tiles(img, size, base$base )
+  distances <- attr(best_tiles, "distances")
+  width <- attr(best_tiles, "width")
+  height <- attr(best_tiles, "height")
 
-  best_tiles  <- find_best_tiles(img, width, height, base$base )
-
-  distances <- pmin( attr(best_tiles, "distances") / sqrt(3), max_distance ) / max_distance
-
-  data <- array( rep(distances, 3), dim = c(height, width, 3) )
-  data
+  out <- base_mask( distances, width, height, size, max_distance )
+  image_read(out)
 }
 
 #' adds a grid to show the parts of the image to be replaced by tiles
