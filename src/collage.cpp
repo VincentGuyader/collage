@@ -9,7 +9,7 @@ RawVector collage( List tiles, int width, int height, IntegerVector best_tiles, 
   // they can be used in parallel
   std::vector<RawVector> tiles_vector( tiles.begin(), tiles.end() ) ;
 
-  for( int i=0; i<height; i++){            // rows
+  tbb::parallel_for( 0, height, [&](int i){
     int k = i*width ;
     for( int j=0; j<width; j++, k++){    // columns
       // fill the given position with the best tile
@@ -26,45 +26,50 @@ RawVector collage( List tiles, int width, int height, IntegerVector best_tiles, 
         q += 4 * width * size ;
       }
     }
-  }
+  }) ;
   out.attr("dim") = IntegerVector::create(4, width*size, height*size ) ;
   return out ;
 
+}
+
+const Rbyte WHITE  = 255 ;
+const Rbyte BLACK  = 0 ;
+const Rbyte OPAQUE = 255 ;
+
+inline Rbyte grayscale( double d, double min, double max ){
+  Rbyte value ;
+  if( d < min ){
+    value = WHITE ;
+  } else if( d > max ) {
+    value = BLACK ;
+  } else {
+    d = 1 - (d - min) / (max - min) ;
+    value = (Rbyte)(255*d) ;
+  }
+  return value ;
 }
 
 // [[Rcpp::export]]
 RawVector base_mask( NumericVector distances, int width, int height, int size, double min_distance, double max_distance){
   int n = 4 * width * height * size * size ;
   RawVector out = no_init( n) ;
-  const Rbyte opaque = 255 ;
-  const Rbyte white  = 255 ;
-  const Rbyte black  = 0 ;
 
-  for( int i=0; i<height; i++){
+  tbb::parallel_for(0, height, [&](int i){
     int k = i*width;
     for( int j=0; j<width; j++, k++) {
-      double d = distances[k] ;
-      Rbyte value ;
-      if( d < min_distance ){
-        value = white ;
-      } else if( d > max_distance ) {
-        value = black ;
-      } else {
-        d = 1 - (d - min_distance) / (max_distance - min_distance) ;
-        value = (Rbyte)(255*d) ;
-      }
+      Rbyte value = grayscale( distances[k], min_distance, max_distance) ;
+
       for( int ii=0; ii<size; ii++){
         int offset = (i * size + ii ) * (4 * width * size) + 4 * j * size;
 
         Rbyte* q  = out.begin() + offset ;
         for( int jj=0; jj<size; jj++, q += 4){
           std::fill( q, q + 3, value) ;
-          q[3] = opaque ;
+          q[3] = OPAQUE ;
         }
       }
     }
-  }
-
+  }) ;
 
   out.attr("dim") = IntegerVector::create( 4, width*size, height * size ) ;
   return out ;
