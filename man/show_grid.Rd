@@ -19,8 +19,7 @@ Adds a grid to show the parts of the image to be replaced by tiles
 \examples{
 \dontrun{
   img <- image_read( sample_image() )
-  g <- gridize( img, size = 10, grid_col = "white" )
-  plot( as.raster(g) )
+  show_grid( img, size = 10, grid_col = "white" )
 }
 }
 

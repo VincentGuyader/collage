@@ -93,8 +93,7 @@ show_base_quality <- function( img, base = base_samples, size, min_distance = 0,
 #' @examples
 #' \dontrun{
 #'   img <- image_read( sample_image() )
-#'   g <- gridize( img, size = 10, grid_col = "white" )
-#'   plot( as.raster(g) )
+#'   show_grid( img, size = 10, grid_col = "white" )
 #' }
 #' @importFrom assertthat assert_that
 #' @importFrom grDevices col2rgb
