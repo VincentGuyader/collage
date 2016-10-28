@@ -126,7 +126,7 @@ image_cut <- function(img, n = 10, direction = c("lines", "columns")){
 #'  holds the number of lost pixels at the bottom and the right
 #' @export
 lines_cut <- function(img, n = 10){
-  image_cut( img, n, direction = "horizontal")
+  image_cut( img, n, direction = "lines")
 }
 
 #' get the right size to split the image into a given number of columns
@@ -138,6 +138,6 @@ lines_cut <- function(img, n = 10){
 #'  holds the number of lost pixels at the bottom and the right
 #' @export
 columns_cut <- function(img, n = 10){
-  image_cut( img, n, direction = "vertical")
+  image_cut( img, n, direction = "columns")
 }
 
