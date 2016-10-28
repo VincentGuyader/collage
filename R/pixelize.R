@@ -105,3 +105,39 @@ show_grid <- function( img, size = 10, grid_col = "white" ){
   image_read( add_grid_cpp( img, size, rgb) )
 }
 
+image_cut <- function(img, n = 10, direction = c("lines", "columns")){
+  img <- as_bitmap(img)
+  height <- dim(img)[3]
+  width  <- dim(img)[2]
+  direction <- match.arg( direction )
+  x <- if(direction=="lines") height else width
+  out    <- floor( x / n )
+
+  attr(out, "lost") <- c( bottom = height %% out, right = width %% out)
+  out
+}
+
+#' get the right size to split the image into a given number of lines
+#'
+#' @param img an image
+#' @param n the number of lines
+#'
+#' @return a number of lines, in addition the \code{lost} attribute
+#'  holds the number of lost pixels at the bottom and the right
+#' @export
+lines_cut <- function(img, n = 10){
+  image_cut( img, n, direction = "horizontal")
+}
+
+#' get the right size to split the image into a given number of columns
+#'
+#' @param img an image
+#' @param n the number of columns
+#'
+#' @return a number of columns, in addition the \code{lost} attribute
+#'  holds the number of lost pixels at the bottom and the right
+#' @export
+columns_cut <- function(img, n = 10){
+  image_cut( img, n, direction = "vertical")
+}
+
