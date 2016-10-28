@@ -38,7 +38,7 @@ RawVector add_grid_cpp( RawVector img, int size, RawVector grid_color){
 
     for( int ii=row_start; ii<row_end; ii++){
       Rbyte* p = img.begin() + 4 * ii * ncol ;
-      q = out.begin() + (i+ii)*4*width ;
+      q = out.begin() + (1+i+ii)*4*width ;
 
       for( int j=0; j<nc; j++){
         int col_start = 4 * col_steps[j] ;
@@ -49,7 +49,7 @@ RawVector add_grid_cpp( RawVector img, int size, RawVector grid_color){
         q = add_grid_pixel(q) ;
 
         // copy data from source image
-        // std::copy( p, p + cols, q ) ;
+        std::copy( p, p + cols, q ) ;
         q += cols ;
         p += cols ;
       }
