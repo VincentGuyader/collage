@@ -2,18 +2,24 @@
 % Please edit documentation in R/pixelize.R
 \name{gridize}
 \alias{gridize}
-\title{adds a grid to show the parts of the image to be replaced by tiles}
+\title{Adds a grid to show the parts of the image to be replaced by tiles}
 \usage{
-gridize(img = readJPEG(file), width = NA, height = NA, size = 1,
-  col = "white", average = FALSE, file)
+gridize(img, size = 10, grid_col = "white")
+}
+\arguments{
+\item{img}{image}
+
+\item{size}{pixel size}
+
+\item{grid_col}{color to use for the grid}
 }
 \description{
-adds a grid to show the parts of the image to be replaced by tiles
+Adds a grid to show the parts of the image to be replaced by tiles
 }
 \examples{
 \dontrun{
-  img <- sample_image()
-  g <- gridize( file = img, width = 10, height = 10, col = "white", size = 2)
+  img <- image_read( sample_image() )
+  g <- gridize( img, size = 10, grid_col = "white" )
   plot( as.raster(g) )
 }
 }

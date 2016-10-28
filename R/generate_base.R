@@ -6,7 +6,8 @@
 #'
 #' @examples
 #' \dontrun{
-#'   images <- jpegs( system.file("base", package = "tipixel" ) )
+#'   path   <- system.file("base", package = "tipixel" )
+#'   images <- list.files( path, pattern= "jpg$", full.names = TRUE )
 #'   generate_base(images, size = 25)
 #' }
 #' @importFrom tibble data_frame
@@ -16,12 +17,12 @@ generate_base <- function(files, size = 25){
   images <- image_read(files)
   scaled <- image_scale( images, "1x1!" )
 
+  first <- function(.) .[[1]]
   grab <- function(channel){
     sapply( scaled, function(.){
-      .[[1]][channel]
+      first(.)[channel]
     })
   }
-  first <- function(.) .[[1]]
 
   base     <- data_frame( R = grab(1), G = grab(2), B = grab(3))
   geometry <- sprintf( "%dx%d!", size, size )

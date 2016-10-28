@@ -6,9 +6,9 @@
 #'
 #' @examples
 #' \dontrun{
-#'   comb<-expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
-#'   dir <- tempfile()
-#'   generate_mono_tiles(lescomb,dir)
+#'   comb <- expand.grid(a1=seq(0,1,0.15),a2=seq(0,1,0.15),a3=seq(0,1,0.15))
+#'   dir  <- tempfile()
+#'   generate_mono_tiles(comb, dir)
 #' }
 #' @importFrom grDevices jpeg rgb
 #' @export

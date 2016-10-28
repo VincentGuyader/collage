@@ -5,15 +5,7 @@
 #'
 #' @export
 sample_image <- function(i){
-  images <- jpegs(system.file( "base", package = "tipixel"))
+  path <- system.file( "base", package = "tipixel")
+  images <- list.files( path, pattern = "[.]jpe?g$", full.names = TRUE)
   if( missing(i) ) sample(images, 1) else images[i]
-}
-
-#' get the list of jpegs from a directory
-#'
-#' @param path the directory
-#' @param \dots passed to \code{\link{list.files}}, mostly used for the \code{recursive} argument
-#' @export
-jpegs <- function(path, ... ){
-  list.files( path, pattern = "[.](jpg|jpeg)$", full.names = TRUE, ... )
 }

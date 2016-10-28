@@ -16,7 +16,8 @@ importe le contenu du dossier de tuiles et génère un objet base
 }
 \examples{
 \dontrun{
-  images <- jpegs( system.file("base", package = "tipixel" ) )
+  path   <- system.file("base", package = "tipixel" )
+  images <- list.files( path, pattern= "jpg$", full.names = TRUE )
   generate_base(images, size = 25)
 }
 }
