@@ -99,7 +99,7 @@ show_base_quality <- function( img, base = base_samples, size, min_distance = 0,
 #' @importFrom assertthat assert_that
 #' @importFrom grDevices col2rgb
 #' @export
-gridize <- function( img, size = 10, grid_col = "white" ){
+show_grid <- function( img, size = 10, grid_col = "white" ){
   img <- as_bitmap(img)
   rgb <- as.raw( col2rgb(grid_col) )
 
