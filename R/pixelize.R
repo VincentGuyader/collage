@@ -93,7 +93,14 @@ show_base_quality <- function( img, base = base_samples, size, min_distance = 0,
 #' @examples
 #' \dontrun{
 #'   img <- image_read( sample_image() )
+#'   # a grid of 10x10 tiles
 #'   show_grid( img, size = 10, grid_col = "white" )
+#'
+#'   # a grid with 10 lines
+#'   show_grid( img, size = lines_cut(img, 10) )
+#'
+#'   # a grid with 10 columns
+#'   show_grid( img, size = columns_cut(img, 10) )
 #' }
 #' @importFrom assertthat assert_that
 #' @importFrom grDevices col2rgb

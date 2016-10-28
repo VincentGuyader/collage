@@ -19,7 +19,14 @@ Adds a grid to show the parts of the image to be replaced by tiles
 \examples{
 \dontrun{
   img <- image_read( sample_image() )
+  # a grid of 10x10 tiles
   show_grid( img, size = 10, grid_col = "white" )
+
+  # a grid with 10 lines
+  show_grid( img, size = lines_cut(img, 10) )
+
+  # a grid with 10 columns
+  show_grid( img, size = columns_cut(img, 10) )
 }
 }
 
