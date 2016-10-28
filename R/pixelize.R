@@ -84,25 +84,25 @@ show_base_quality <- function( img, base = base_samples, size, min_distance = 0,
   image_read(base_mask( distances, width, height, size, min_distance, max(distances)))
 }
 
-#' adds a grid to show the parts of the image to be replaced by tiles
+#' Adds a grid to show the parts of the image to be replaced by tiles
+#'
+#' @param img image
+#' @param size pixel size
+#' @param grid_col color to use for the grid
 #'
 #' @examples
 #' \dontrun{
-#'   img <- sample_image()
-#'   g <- gridize( file = img, width = 10, height = 10, col = "white", size = 2)
+#'   img <- image_read( sample_image() )
+#'   g <- gridize( img, size = 10, grid_col = "white" )
 #'   plot( as.raster(g) )
 #' }
 #' @importFrom assertthat assert_that
 #' @importFrom grDevices col2rgb
 #' @export
-gridize <- function( img = readJPEG(file), width = NA, height = NA, size = 1, col = "white", average = FALSE, file ){
-  if( missing(file) ) assert_that(is_image(img))
-  rgb <- as.vector( col2rgb(col) ) / 256
+gridize <- function( img, size = 10, grid_col = "white" ){
+  img <- as_bitmap(img)
+  rgb <- as.raw( col2rgb(grid_col) )
 
-  dims <- auto_dim(dim(img), width, height)
-  width <- dims[1]
-  height <- dims[2]
-
-  gridize_cpp( img, width, height, size, rgb, average )
+  image_read( add_grid_cpp( img, size, rgb) )
 }
 

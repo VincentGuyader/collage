@@ -32,10 +32,6 @@ RawVector collage( List tiles, int width, int height, IntegerVector best_tiles, 
 
 }
 
-const Rbyte WHITE  = 255 ;
-const Rbyte BLACK  = 0 ;
-const Rbyte OPAQUE = 255 ;
-
 inline Rbyte grayscale( double d, double min, double max ){
   Rbyte value ;
   if( d < min ){

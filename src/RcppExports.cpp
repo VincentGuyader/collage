@@ -50,19 +50,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// gridize_cpp
-NumericVector gridize_cpp(NumericVector img, int width, int height, int size, NumericVector rgb, bool mean);
-RcppExport SEXP tipixel_gridize_cpp(SEXP imgSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP sizeSEXP, SEXP rgbSEXP, SEXP meanSEXP) {
+// add_grid_cpp
+RawVector add_grid_cpp(RawVector img, int size, RawVector grid_color);
+RcppExport SEXP tipixel_add_grid_cpp(SEXP imgSEXP, SEXP sizeSEXP, SEXP grid_colorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type img(imgSEXP);
-    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
-    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    Rcpp::traits::input_parameter< RawVector >::type img(imgSEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type rgb(rgbSEXP);
-    Rcpp::traits::input_parameter< bool >::type mean(meanSEXP);
-    rcpp_result_gen = Rcpp::wrap(gridize_cpp(img, width, height, size, rgb, mean));
+    Rcpp::traits::input_parameter< RawVector >::type grid_color(grid_colorSEXP);
+    rcpp_result_gen = Rcpp::wrap(add_grid_cpp(img, size, grid_color));
     return rcpp_result_gen;
 END_RCPP
 }

@@ -13,7 +13,7 @@ find_best_tiles <- function(img, size, base) {
     .Call('tipixel_find_best_tiles', PACKAGE = 'tipixel', img, size, base)
 }
 
-gridize_cpp <- function(img, width, height, size, rgb, mean = FALSE) {
-    .Call('tipixel_gridize_cpp', PACKAGE = 'tipixel', img, width, height, size, rgb, mean)
+add_grid_cpp <- function(img, size, grid_color) {
+    .Call('tipixel_add_grid_cpp', PACKAGE = 'tipixel', img, size, grid_color)
 }
 
