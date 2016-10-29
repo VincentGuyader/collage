@@ -23,8 +23,7 @@ RawVector add_grid_cpp( RawVector img, int size, RawVector grid_color){
     return q + 4 ;
   } ;
 
-  for( int i=0; i<nr; i++){
-
+  tbb::parallel_for(0, nr, [&](int i){
     int row_start = row_steps[i] ;
     int row_end   = row_steps[i+1] ;
 
@@ -55,7 +54,7 @@ RawVector add_grid_cpp( RawVector img, int size, RawVector grid_color){
       }
     }
 
-  }
+  }) ;
 
   out.attr("dim") = IntegerVector::create( 4, width, height ) ;
   return out ;
