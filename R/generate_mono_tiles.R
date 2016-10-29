@@ -10,7 +10,8 @@
 #'   dir  <- tempfile()
 #'   generate_mono_tiles(comb, dir)
 #' }
-#' @importFrom grDevices jpeg rgb
+#' @importFrom grDevices jpeg rgb dev.off
+#' @importFrom graphics par plot
 #' @export
 generate_mono_tiles <- function(comb, dir, size = 25) {
   try(dir.create(dir))

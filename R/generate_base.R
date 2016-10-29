@@ -26,7 +26,7 @@ generate_base <- function(files, size = 25){
 
   base     <- data_frame( R = grab(1), G = grab(2), B = grab(3))
   geometry <- sprintf( "%dx%d!", size, size )
-  tiles    <- image_scale(images, geometry) %>% lapply(first)
+  tiles    <- lapply( image_scale(images, geometry), first)
 
   structure( list( base=base, read=tiles, size = size), class ="unebase" )
 }
