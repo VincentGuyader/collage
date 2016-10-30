@@ -1,4 +1,4 @@
-#' makes tiles from jpegs in a directory
+#' Generates a tile base from a set of files
 #'
 #' importe le contenu du dossier de tuiles et génère un objet base
 #' @param files image files

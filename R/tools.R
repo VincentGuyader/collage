@@ -12,3 +12,24 @@ jpeg_to_bitmap <- function( jp ){
   class(out) <- c("bitmap", "rgba")
   out
 }
+
+#' Crops a square in the center of the image
+#'
+#' @param an image, typically loaded with \code{\link[magick]{image_read}} or some
+#' other function from \code{magick}
+#' @return a square image
+#' @export
+image_center_crop <- function(img){
+  info <- image_info(img)
+  width <- info$width
+  height <- info$height
+
+  geometry <- if( width > height){
+    offset <- ( width - height ) / 2
+    sprintf( "%dx%d+%d", height, height, offset)
+  } else {
+    offset <- (height - width )  / 2
+    sprintf( "%dx%d+0+%d", width, width, offset)
+  }
+  image_crop(img, geometry = geometry)
+}

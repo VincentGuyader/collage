@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate_base.R
 \name{generate_base}
 \alias{generate_base}
-\title{makes tiles from jpegs in a directory}
+\title{Generates a tile base from a set of files}
 \usage{
 generate_base(files, size = 25)
 }
