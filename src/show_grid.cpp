@@ -19,7 +19,7 @@ RawVector add_grid_cpp( RawVector img, int size, RawVector grid_color){
 
   auto add_grid_pixel = [&](Rbyte* q){
     std::copy( grid_color.begin(), grid_color.end(), q ) ;
-    q[3] = OPAQUE ;
+    q[3] = 0xff ;
     return q + 4 ;
   } ;
 

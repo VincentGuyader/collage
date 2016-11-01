@@ -35,9 +35,9 @@ RawVector collage( List tiles, int width, int height, IntegerVector best_tiles, 
 inline Rbyte grayscale( double d, double min, double max ){
   Rbyte value ;
   if( d < min ){
-    value = WHITE ;
+    value = 0xff ;
   } else if( d > max ) {
-    value = BLACK ;
+    value = 0 ;
   } else {
     d = 1 - (d - min) / (max - min) ;
     value = (Rbyte)(255*d) ;
@@ -61,7 +61,7 @@ RawVector base_mask( NumericVector distances, int width, int height, int size, d
         Rbyte* q  = out.begin() + offset ;
         for( int jj=0; jj<size; jj++, q += 4){
           std::fill( q, q + 3, value) ;
-          q[3] = OPAQUE ;
+          q[3] = 0xff ;
         }
       }
     }
