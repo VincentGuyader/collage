@@ -7,7 +7,7 @@
 image_center_crop(img)
 }
 \arguments{
-\item{an}{image, typically loaded with \code{\link[magick]{image_read}} or some
+\item{img}{an image, typically loaded with \code{\link[magick]{image_read}} or some
 other function from \code{magick}}
 }
 \value{
