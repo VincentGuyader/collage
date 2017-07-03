@@ -1,4 +1,4 @@
-#include <tipixel.h>
+#include "tipixel.h"
 
 // [[Rcpp::export]]
 RawVector collage( List tiles, int width, int height, IntegerVector best_tiles, int size ){

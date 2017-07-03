@@ -1,4 +1,4 @@
-#include <tipixel.h>
+#include "tipixel.h"
 
 // [[Rcpp::export]]
 RawVector add_grid_cpp( RawVector img, int size, RawVector grid_color){

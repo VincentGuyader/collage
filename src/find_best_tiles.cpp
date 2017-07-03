@@ -1,4 +1,4 @@
-#include <tipixel.h>
+#include "tipixel.h"
 
 inline double square(double x){
   return x*x;
