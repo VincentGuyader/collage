@@ -2,8 +2,8 @@
 % Please edit documentation in R/bases.R
 \docType{data}
 \name{kittens}
-\alias{base_samples}
 \alias{kittens}
+\alias{base_samples}
 \title{Bases of sample images}
 \format{An object of class \code{unebase} of length 3.}
 \usage{
@@ -19,4 +19,3 @@ Bases of sample images
   base_samples
 }
 \keyword{datasets}
-

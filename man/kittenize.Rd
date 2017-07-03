@@ -17,4 +17,3 @@ version of \code{\link{pixelize}} using kittens
   kittenize(file = sample_image())
 }
 }
-

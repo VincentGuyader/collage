@@ -15,4 +15,3 @@ the full path of a sample image
 \description{
 Get the path of a sample image
 }
-

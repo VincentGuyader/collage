@@ -29,4 +29,3 @@ Adds a grid to show the parts of the image to be replaced by tiles
   show_grid( img, size = columns_cut(img, 10) )
 }
 }
-

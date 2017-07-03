@@ -16,4 +16,3 @@ a square image
 \description{
 Crops a square in the center of the image
 }
-

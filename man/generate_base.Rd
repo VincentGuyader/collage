@@ -21,4 +21,3 @@ importe le contenu du dossier de tuiles et génère un objet base
   generate_base(images, size = 25)
 }
 }
-

@@ -23,4 +23,3 @@ pixelize
   pixelize( file = img, size = 10)
 }
 }
-

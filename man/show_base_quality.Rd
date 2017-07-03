@@ -30,4 +30,3 @@ to the average color of the pixel (distance is between 0 and 1),
 
 The rendered image is a gray scale of these distances.
 }
-

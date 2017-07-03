@@ -23,4 +23,3 @@ generate monochromatic tiles
   generate_mono_tiles(comb, dir)
 }
 }
-

@@ -15,11 +15,12 @@ Imports:
     Rcpp,
     RcppParallel,
     assertthat, 
-    magick
+    magick,
+    purrr
 LinkingTo:
     Rcpp,
     RcppParallel
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1.9000
 SystemRequirements: C++11
 URL: https://github.com/ThinkRstat/tipixel
 Encoding: UTF-8

@@ -18,4 +18,3 @@ a number of columns, in addition the \code{lost} attribute
 \description{
 get the right size to split the image into a given number of columns
 }
-
