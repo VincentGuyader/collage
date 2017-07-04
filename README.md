@@ -134,6 +134,6 @@ tiles\_animals
 The `tiles_animals` function scraps data. For example, the `kittens` and `puppies` have been generated with :
 
 ``` r
-kittens <- tiles_animals(what = "bebe,chats", pages = 1:10)
-puppies <- tiles_animals(what = "bebe,chiens", pages = 1:10)
+kittens <- tiles_animals(what = "bebe,chats", pages = 1:20)
+puppies <- tiles_animals(what = "bebe,chiens", pages = 1:20)
 ```
