@@ -6,7 +6,7 @@ as_bitmap <- function(img){
   img
 }
 
-#' pixelize
+#' pixel_replace
 #'
 #' @param img image to process
 #' @param tiles tiles to use, e.g. \code{samples}
@@ -15,12 +15,11 @@ as_bitmap <- function(img){
 #' @examples
 #' \dontrun{
 #'   img <- sample_image()
-#'   pixelize( file = img, size = 10)
+#'   pixel_replace( file = img, size = 10)
 #' }
-#' @importFrom assertthat assert_that
 #' @importFrom magick image_read
 #' @export
-pixelize <- function(img, tiles = samples, size = 10 ) {
+pixel_replace <- function(img, tiles = samples, size = 10 ) {
   img <- as_bitmap(img)
 
   best_tiles  <- find_best_tiles(img, size, tiles)
@@ -38,18 +37,6 @@ pixelize <- function(img, tiles = samples, size = 10 ) {
 
   image_read(out)
 }
-
-#' kittenize
-#'
-#' version of \code{\link{pixelize}} using kittens
-#'
-#' @param \dots see \code{\link{pixelize}}
-#' @examples
-#' \dontrun{
-#'   kittenize(file = sample_image())
-#' }
-#' @export
-kittenize <- function(...) pixelize(..., tiles = kittens)
 
 #' visual representation of the quality of the tiles
 #'
@@ -70,7 +57,7 @@ kittenize <- function(...) pixelize(..., tiles = kittens)
 #'
 #' @importFrom magick image_read
 #' @export
-quality_mask <- function( img, tiles = samples, size, min_distance = 0, max_distance ){
+pixel_quality <- function( img, tiles = samples, size, min_distance = 0, max_distance ){
   img <- as_bitmap(img)
   best_tiles  <- find_best_tiles(img, size, tiles )
   distances <- attr(best_tiles, "distances")
@@ -91,19 +78,19 @@ quality_mask <- function( img, tiles = samples, size, min_distance = 0, max_dist
 #' @examples
 #' \dontrun{
 #'   img <- image_read( sample_image() )
+#'
 #'   # a grid of 10x10 tiles
-#'   show_grid( img, size = 10, grid_col = "white" )
+#'   pixel_grid( img, size = 10, grid_col = "white" )
 #'
 #'   # a grid with 10 lines
-#'   show_grid( img, size = lines_cut(img, 10) )
+#'   pixel_grid( img, size = lines_cut(img, 10) )
 #'
 #'   # a grid with 10 columns
-#'   show_grid( img, size = columns_cut(img, 10) )
+#'   pixel_grid( img, size = columns_cut(img, 10) )
 #' }
-#' @importFrom assertthat assert_that
 #' @importFrom grDevices col2rgb
 #' @export
-show_grid <- function( img, size = 10, grid_col = "white" ){
+pixel_grid <- function( img, size = 10, grid_col = "white" ){
   img <- as_bitmap(img)
   rgb <- as.raw( col2rgb(grid_col) )
 

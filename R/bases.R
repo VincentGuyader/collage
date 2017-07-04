@@ -1,5 +1,5 @@
 
-#' @rdname bases
+#' @rdname samples
 #' @docType data
 #' @examples
 #'   samples

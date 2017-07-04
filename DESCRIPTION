@@ -7,17 +7,17 @@ Authors@R: c(
     person("Romain", "Francois", , "romain@thinkr.fr", role = "aut")
     )
 Description: Makes an image mosaic from a set of images.
-License: GPL-3
+License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
     grDevices,
     tibble,
     Rcpp,
     RcppParallel,
-    assertthat, 
     magick,
     purrr,
-    magrittr
+    magrittr,
+    dplyr
 LinkingTo:
     Rcpp,
     RcppParallel

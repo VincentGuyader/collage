@@ -8,6 +8,8 @@ tiles_mono(colors, size = 25L)
 }
 \arguments{
 \item{colors}{a vector of colors that can be handled by \code{\link[grDevices]{col2rgb}}}
+
+\item{size}{size of generated tiles}
 }
 \value{
 a tiles tibble.

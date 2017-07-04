@@ -7,5 +7,9 @@
 sample_image <- function(i){
   path <- system.file( "base", package = "tipixel")
   images <- list.files( path, pattern = "[.]jpe?g$", full.names = TRUE)
-  if( missing(i) ) sample(images, 1) else images[i]
+  if( missing(i) ) {
+    i <- sample(length(images), 1)
+  }
+
+  images[i]
 }

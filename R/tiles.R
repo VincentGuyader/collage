@@ -49,6 +49,7 @@ mono_tile_bitmap <- function(r, g, b, a, size){
 #' monochromatic tiles
 #'
 #' @param colors a vector of colors that can be handled by \code{\link[grDevices]{col2rgb}}
+#' @param size size of generated tiles
 #'
 #' @return a tiles tibble.
 #' @seealso \code{\link{tiles}}
@@ -64,4 +65,3 @@ tiles_mono <- function( colors, size = 25L ){
   out$tile = pmap( with(out,list(red,green,blue,alpha)), mono_tile_bitmap, size = size)
   out
 }
-
