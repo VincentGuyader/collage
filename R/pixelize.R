@@ -65,6 +65,7 @@ pixel_quality <- function( img, tiles = samples, size, min_distance = 0, max_dis
   if( missing(max_distance) ){
     max_distance <- max(distances)
   }
+  distances[is.nan(distances)] <- 1
   image_read(base_mask( distances, width, height, size, min_distance, max(distances)))
 }
 
