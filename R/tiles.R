@@ -35,5 +35,33 @@ tiles <- function(files, size = 25L){
   scaled <- image_square_bitmap(images, 1L)
   tiles  <- image_square_bitmap(images, size)
   grab   <- function(i) map_raw(scaled, extract2, i)
-  tibble( R = grab(1), G = grab(2), B = grab(3), tile = tiles)
+  tibble( red = grab(1), green = grab(2), blue = grab(3), tile = tiles)
 }
+
+columns <- function(m){
+  set_names( map(seq_len(ncol(m)), ~m[,.]), colnames(m) )
+}
+
+mono_tile_bitmap <- function(r, g, b, a){
+  structure( array( c(r,g,b,a), dim = c(4,1,1) ), class = c( "bitmap", "rgba") )
+}
+
+#' monochromatic tiles
+#'
+#' @param colors a vector of colors that can be handled by \code{\link[grDevices]{col2rgb}}
+#'
+#' @return a tiles tibble.
+#' @seealso \code{\link{tiles}}
+#'
+#' @importFrom grDevices col2rgb
+#' @importFrom tibble as_tibble
+#' @importFrom dplyr mutate_all
+#' @importFrom purrr pmap
+#' @export
+tiles_mono <- function( colors ){
+  m <- t( col2rgb(colors, alpha = TRUE) )
+  out <- as_tibble( map(columns(m), as.raw) )
+  out$tile = pmap( with(out,list(red,green,blue,alpha)), mono_tile_bitmap )
+  out
+}
+
