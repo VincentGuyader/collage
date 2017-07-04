@@ -3,7 +3,6 @@
 .RData
 .Ruserdata
 .DS_Store
-*.jpg
 *.o
 *.so
 inst/doc
