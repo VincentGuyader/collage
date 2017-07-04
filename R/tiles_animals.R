@@ -2,7 +2,6 @@
 #' @importFrom magrittr %>%
 #' @importFrom xml2 read_html
 #' @importFrom rvest html_node html_text
-#' @export
 npages <- function( what = "bebe,chats" ){
   url <- sprintf( "http://www.photos-animaux.com/photos,%s.html", what )
   read_html(url) %>%
@@ -21,9 +20,14 @@ scrap <- function(page = 1, what = "bebe,chats" ){
     html_attr("src")
 }
 
+#' Get urls of animal pictures
+#'
+#' @param what type of pictures
+#' @param pages the pages to download
+#'
 #' @importFrom purrr map flatten_chr
 #' @export
-scrap_animals <- function(what = "bebe,chats", pages, .progress = "text", ...){
+scrap_animals <- function(what = "bebe,chats", pages ){
   if(missing(pages)){
     pages <- seq_len(npages(what))
   }
@@ -32,13 +36,24 @@ scrap_animals <- function(what = "bebe,chats", pages, .progress = "text", ...){
     flatten_chr()
 }
 
+#' Tiles from animal pictures
+#'
+#' @param what type of pictures
+#' @param pages the pages to download
+#'
+#' @examples
+#' \dontrun{
+#'
+#'   kittens <- tiles_animals( what = "bebe,chats", pages = 1:10 )
+#'   puppies <- tiles_animals( what = "bebe,chiens", pages = 1:10 )
+#' }
 #' @importFrom purrr walk2
 #' @export
-tiles_animals <- function(size = 25, what = "bebe,chats", pages, .progress = "text", ...){
+tiles_animals <- function(size = 25, what = "bebe,chats", pages){
   dir.create( tf <- tempfile() )
   on.exit( unlink(tf, recursive = TRUE))
 
-  urls <- scrap_animals(what = what, pages = pages, .progress = .progress, ...)
+  urls <- scrap_animals(what = what, pages = pages)
   dest <- file.path( tf, basename(urls) )
 
   walk2( urls, dest, download.file, quiet = TRUE  )

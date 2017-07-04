@@ -6,3 +6,4 @@
 *.jpg
 *.o
 *.so
+inst/doc
