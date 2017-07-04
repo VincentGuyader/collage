@@ -4,7 +4,7 @@ Title: Makes an image mosaic from a set of images
 Version: 0.1.4
 Authors@R: c(
     person("Vincent", "Guyader", , "vincent@thinkr.fr", c("aut", "cre")),
-    person("Romain", "Francois", , "romain@purrple.cat", role = "aut")
+    person("Romain", "Francois", , "romain@thinkr.fr", role = "aut")
     )
 Description: Makes an image mosaic from a set of images.
 License: GPL-3
