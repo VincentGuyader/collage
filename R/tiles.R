@@ -35,15 +35,15 @@ tiles <- function(files, size = 25L){
   scaled <- image_square_bitmap(images, 1L)
   tiles  <- image_square_bitmap(images, size)
   grab   <- function(i) map_raw(scaled, extract2, i)
-  tibble( red = grab(1), green = grab(2), blue = grab(3), tile = tiles)
+  tibble( red = grab(1), green = grab(2), blue = grab(3), alpha = grab(4), tile = tiles)
 }
 
 columns <- function(m){
   set_names( map(seq_len(ncol(m)), ~m[,.]), colnames(m) )
 }
 
-mono_tile_bitmap <- function(r, g, b, a){
-  structure( array( c(r,g,b,a), dim = c(4,1,1) ), class = c( "bitmap", "rgba") )
+mono_tile_bitmap <- function(r, g, b, a, size){
+  structure( array( rep( c(r,g,b,a), size*size ), dim = c(4,size, size) ), class = c( "bitmap", "rgba") )
 }
 
 #' monochromatic tiles
@@ -58,10 +58,10 @@ mono_tile_bitmap <- function(r, g, b, a){
 #' @importFrom dplyr mutate_all
 #' @importFrom purrr pmap
 #' @export
-tiles_mono <- function( colors ){
+tiles_mono <- function( colors, size = 25L ){
   m <- t( col2rgb(colors, alpha = TRUE) )
   out <- as_tibble( map(columns(m), as.raw) )
-  out$tile = pmap( with(out,list(red,green,blue,alpha)), mono_tile_bitmap )
+  out$tile = pmap( with(out,list(red,green,blue,alpha)), mono_tile_bitmap, size = size)
   out
 }
 

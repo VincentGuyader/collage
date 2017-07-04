@@ -9,9 +9,8 @@ as_bitmap <- function(img){
 #' pixelize
 #'
 #' @param img image to process
-#' @param base tile base, e.g. \code{base_samples}
-#' @param size number of pixels, each square of \code{size} times \code{size} is replaced by the
-#'             closest tile from \code{base}
+#' @param tiles tiles to use, e.g. \code{samples}
+#' @param size number of pixels, each square of \code{size} times \code{size} is replaced by the closest tile
 #'
 #' @examples
 #' \dontrun{
@@ -21,22 +20,21 @@ as_bitmap <- function(img){
 #' @importFrom assertthat assert_that
 #' @importFrom magick image_read
 #' @export
-pixelize <- function(img, base = base_samples, size = 10 ) {
+pixelize <- function(img, tiles = samples, size = 10 ) {
   img <- as_bitmap(img)
 
-  best_tiles  <- find_best_tiles(img, size, base$base )
+  best_tiles  <- find_best_tiles(img, size, tiles)
   distances <- attr(best_tiles, "distances")
+  tile_size <- ncol(tiles$tile[[1]])
 
-  tiles     <- base$read
-  tile_size <- base$size
   width     <- attr(best_tiles, "width")
   height    <- attr(best_tiles, "height")
 
-  out <- collage( tiles, width, height, best_tiles, tile_size )
+  out <- collage( tiles$tile, width, height, best_tiles, tile_size )
   attr( out, "quality") <- summary(distances)
 
   used_tiles <- length( unique( best_tiles ) )
-  attr( out, "tiles_use" ) <- list( percent = used_tiles/nrow(base$base), n = used_tiles )
+  attr( out, "tiles_use" ) <- list( percent = used_tiles/nrow(tiles), n = used_tiles )
 
   image_read(out)
 }
@@ -51,9 +49,9 @@ pixelize <- function(img, base = base_samples, size = 10 ) {
 #'   kittenize(file = sample_image())
 #' }
 #' @export
-kittenize <- function(...) pixelize(..., base = kittens)
+kittenize <- function(...) pixelize(..., tiles = kittens)
 
-#' visual representation of the quality of the base
+#' visual representation of the quality of the tiles
 #'
 #' splits the image in pixels of \code{size} x \code{size}
 #'
@@ -63,7 +61,7 @@ kittenize <- function(...) pixelize(..., base = kittens)
 #' The rendered image is a gray scale of these distances.
 #'
 #' @param img image to pixelize
-#' @param base tile base to use
+#' @param tiles tile base to use
 #' @param size size (height and width) of each pixel
 #' @param min_distance anything below this value is represented in white
 #' @param max_distance anything above this value is represented in black
@@ -72,9 +70,9 @@ kittenize <- function(...) pixelize(..., base = kittens)
 #'
 #' @importFrom magick image_read
 #' @export
-show_base_quality <- function( img, base = base_samples, size, min_distance = 0, max_distance ){
+quality_mask <- function( img, tiles = samples, size, min_distance = 0, max_distance ){
   img <- as_bitmap(img)
-  best_tiles  <- find_best_tiles(img, size, base$base )
+  best_tiles  <- find_best_tiles(img, size, tiles )
   distances <- attr(best_tiles, "distances")
   width <- attr(best_tiles, "width")
   height <- attr(best_tiles, "height")

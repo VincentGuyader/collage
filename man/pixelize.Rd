@@ -4,15 +4,14 @@
 \alias{pixelize}
 \title{pixelize}
 \usage{
-pixelize(img, base = base_samples, size = 10)
+pixelize(img, tiles = samples, size = 10)
 }
 \arguments{
 \item{img}{image to process}
 
-\item{base}{tile base, e.g. \code{base_samples}}
+\item{tiles}{tiles to use, e.g. \code{samples}}
 
-\item{size}{number of pixels, each square of \code{size} times \code{size} is replaced by the
-closest tile from \code{base}}
+\item{size}{number of pixels, each square of \code{size} times \code{size} is replaced by the closest tile}
 }
 \description{
 pixelize

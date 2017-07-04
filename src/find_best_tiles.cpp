@@ -20,9 +20,9 @@ IntegerVector find_best_tiles( RawVector img, int size, DataFrame base ){
   int ncol = dim[1], nrow = dim[2] ;
 
   // the rgb vectors for the base
-  RawVector R = base["R"] ;
-  RawVector G = base["G"] ;
-  RawVector B = base["B"] ;
+  RawVector R = base["red"] ;
+  RawVector G = base["green"] ;
+  RawVector B = base["blue"] ;
   int nbase = R.size() ;
 
   auto get_distance = [&](int i, double r, double g, double b){
