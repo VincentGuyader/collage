@@ -30,7 +30,10 @@ image_square_bitmap <- function( images, size = 25){
 #' @importFrom magrittr %>%
 #' @export
 tiles <- function(files, size = 25L){
-  images <- image_read(files)
+  images <- image_read(files) %>%
+    as.list() %>%
+    map( image_center_crop ) %>%
+    image_join()
 
   scaled <- image_square_bitmap(images, 1L)
   tiles  <- image_square_bitmap(images, size)

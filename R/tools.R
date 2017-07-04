@@ -2,12 +2,11 @@ image_center_crop_geometry <- function(img){
   info <- image_info(img)
   width <- info$width
   height <- info$height
-
   geometry <- if( width > height){
-    offset <- ( width - height ) / 2
+    offset <- floor( ( width - height ) / 2 )
     sprintf( "%dx%d+%d", height, height, offset)
   } else {
-    offset <- (height - width )  / 2
+    offset <- floor( (height - width )  / 2 )
     sprintf( "%dx%d+0+%d", width, width, offset)
   }
   geometry
