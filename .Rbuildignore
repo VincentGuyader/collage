@@ -3,3 +3,4 @@
 raw
 ^README\.Rmd$
 ^README-.*\.png$
+images

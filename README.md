@@ -19,7 +19,7 @@ pixel_replace( tigrou, tiles = kittens, size = 25)
 #> 1    png   650    600       sRGB        0
 ```
 
-![](/var/folders/9k/s6066bbx22s7g9gy6sg4qy3w0000gn/T//RtmpyUjyvp/file8c9413fe8c77.png)
+![](images/pixel_replace.png)
 
 pixel\_quality
 --------------
@@ -32,7 +32,7 @@ pixel_quality( tigrou, tiles = kittens, size = 25)
 #> 1    png   650    600       sRGB        0
 ```
 
-![](/var/folders/9k/s6066bbx22s7g9gy6sg4qy3w0000gn/T//RtmpyUjyvp/file8c9411519f25.png)
+![](images/pixel_quality.png)
 
 pixel\_grid
 -----------
@@ -45,7 +45,7 @@ pixel_grid( tigrou, size = 25)
 #> 1    png   665    624       sRGB        0
 ```
 
-![](/var/folders/9k/s6066bbx22s7g9gy6sg4qy3w0000gn/T//RtmpyUjyvp/file8c9435a5d3cd.png)
+![](images/pixel_grid.png)
 
 tiles
 -----
@@ -126,7 +126,7 @@ pixel_replace( tigrou, tiles = rtiles, size = 25)
 #> 1    png   650    600       sRGB        0
 ```
 
-![](/var/folders/9k/s6066bbx22s7g9gy6sg4qy3w0000gn/T//RtmpyUjyvp/file8c94e772ff5.png)
+![](images/pixel_replace_rcolors.png)
 
 tiles\_animals
 --------------

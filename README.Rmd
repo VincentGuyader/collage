@@ -16,14 +16,6 @@ knitr::opts_chunk$set(
 library(tipixel)
 library(magick)
 library(tibble)
-
-temp <- function(x){
-tf <- tempfile( fileext = ".png")
-image_write(x, tf) 
-tf
-}
-
-
 ```
 
 Meet Tigrou
@@ -43,10 +35,10 @@ pixel_replace( tigrou, tiles = kittens, size = 25)
 ```
 
 ```{r echo = FALSE}
-tf <- temp( pixel_replace( tigrou, tiles = kittens, size = 25) )
+image_write( pixel_replace( tigrou, tiles = kittens, size = 25), path = "images/pixel_replace.png" )
 ```
 
-![](`r tf`)
+![](images/pixel_replace.png)
 
 ## pixel_quality
 
@@ -57,10 +49,10 @@ pixel_quality( tigrou, tiles = kittens, size = 25)
 ```
 
 ```{r echo = FALSE}
-tf <- temp( pixel_quality( tigrou, tiles = kittens, size = 25) )
+image_write( pixel_quality( tigrou, tiles = kittens, size = 25), path = "images/pixel_quality.png" )
 ```
 
-![](`r tf`)
+![](images/pixel_quality.png)
 
 ## pixel_grid
 
@@ -71,10 +63,10 @@ pixel_grid( tigrou, size = 25)
 ```
 
 ```{r echo = FALSE}
-tf <- temp( pixel_grid( tigrou, size = 25) )
+image_write( pixel_grid( tigrou, size = 25), path = "images/pixel_grid.png" )
 ```
 
-![](`r tf`)
+![](images/pixel_grid.png)
 
 ## tiles
 
@@ -112,10 +104,10 @@ pixel_replace( tigrou, tiles = rtiles, size = 25)
 ```
 
 ```{r echo = FALSE}
-tf <- temp( pixel_replace( tigrou, tiles = rtiles, size = 25) )
+image_write( pixel_replace( tigrou, tiles = rtiles, size = 25), path = "images/pixel_replace_rcolors.png" )
 ```
 
-![](`r tf`)
+![](images/pixel_replace_rcolors.png)
 
 ## tiles_animals
 
