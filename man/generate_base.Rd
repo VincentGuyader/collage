@@ -4,7 +4,7 @@
 \alias{generate_base}
 \title{Generates a tile base from a set of files}
 \usage{
-generate_base(files, size = 25)
+generate_base(files, size = 25L)
 }
 \arguments{
 \item{files}{image files}
@@ -17,7 +17,7 @@ importe le contenu du dossier de tuiles et génère un objet base
 \examples{
 \dontrun{
   path   <- system.file("base", package = "tipixel" )
-  images <- list.files( path, pattern= "jpg$", full.names = TRUE )
-  generate_base(images, size = 25)
+  files <- list.files( path, pattern= "jpg$", full.names = TRUE )
+  generate_base(files, size = 25)
 }
 }

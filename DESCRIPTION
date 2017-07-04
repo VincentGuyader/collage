@@ -16,7 +16,8 @@ Imports:
     RcppParallel,
     assertthat, 
     magick,
-    purrr
+    purrr,
+    magrittr
 LinkingTo:
     Rcpp,
     RcppParallel
