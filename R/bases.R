@@ -1,8 +1,14 @@
 
-#' @rdname samples
+#' sample tiles
+#'
+#' @name samples
 #' @docType data
-#' @examples
-#'   samples
 "samples"
 
-globalVariables(c("samples"))
+#' @rdname samples
+#' @name samples
+#' @docType data
+"kittens"
+
+#' @importFrom utils globalVariables
+globalVariables( c("samples", "kittens") )

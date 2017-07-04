@@ -2,7 +2,6 @@ as_bitmap <- function(img){
   if( inherits(img, "magick-image")){
     img <- img[[1]]
   }
-  assert_that( inherits(img, "bitmap") )
   img
 }
 

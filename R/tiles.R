@@ -38,6 +38,7 @@ tiles <- function(files, size = 25L){
   tibble( red = grab(1), green = grab(2), blue = grab(3), alpha = grab(4), tile = tiles)
 }
 
+#' @importFrom purrr set_names
 columns <- function(m){
   set_names( map(seq_len(ncol(m)), ~m[,.]), colnames(m) )
 }

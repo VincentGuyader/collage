@@ -9,6 +9,7 @@ Authors@R: c(
 Description: Makes an image mosaic from a set of images.
 License: MIT + file LICENSE
 LazyData: TRUE
+Depends: R (>= 2.10)
 Imports:
     grDevices,
     tibble,
@@ -17,7 +18,9 @@ Imports:
     magick,
     purrr,
     magrittr,
-    dplyr
+    dplyr,
+    xml2,
+    rvest
 LinkingTo:
     Rcpp,
     RcppParallel
