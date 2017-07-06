@@ -12,14 +12,16 @@ temp_image <- function(img){
 shinyServer(function(input, output, session) {
 
   source_image <- reactive( {
-    input$go
-    file1 <- isolate( input$file1 )
+    file1 <- input$file1
     path <- if(is.null( file1 )) {
       system.file( "tigrou", "tigrou.jpg", package = "collage" )
     } else {
       file1$datapath
     }
-    image_read(path)
+    withProgress(min = 0, max = 1, message = "reading image", value = .3, {
+      image_read(path)
+    })
+
   })
 
   size <- reactive({
@@ -27,15 +29,21 @@ shinyServer(function(input, output, session) {
   })
 
   grid_image   <- reactive( {
-    temp_image( collage_grid( source_image(), size = size() ) )
+    withProgress(min = 0, max = 1, message = "grid", value = .3, {
+      temp_image( collage_grid( source_image(), size = size() ) )
+    })
   })
 
   collage_image <- reactive({
-    temp_image(collage( source_image(), size = size(), tiles = base() ))
+    withProgress(min = 0, max = 1, message = "collage", value = .3, {
+      temp_image(collage( source_image(), size = size(), tiles = base() ))
+    })
   })
 
   mask_image <- reactive({
-    temp_image(collage_quality( source_image(), size = size(), tiles = base() ))
+    withProgress(min = 0, max = 1, message = "mask", value = .3, {
+      temp_image(collage_quality( source_image(), size = size(), tiles = base() ))
+    })
   })
 
   base <- reactive({

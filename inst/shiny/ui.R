@@ -31,24 +31,23 @@ shinyUI(
 
         splitLayout(
           fileInput("file1", "Choose an image : ", accept = "image/*" ),
-          sliderInput("lines", "number of lines", min = 10, max = 200, value = 20)
+          sliderInput("lines", "number of lines", min = 10, max = 200, value = 20 )
         ),
 
-        splitLayout(
-          selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens"),
-          actionButton("go", label = "Update" )
-        ),
+        selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens"),
 
-        fluidRow(
-          column(6, fluidImageOutput("grid_image", height = 200 )),
-          column(6, fluidImageOutput("mask_image", height = 200 ))
-        ),
         tags$br(),
+
         JcropImagePreviewOutput("preview", width = "100%" )
       ),
       mainPanel(
-        br(), br(), br(),
-        JcropImageOutput("image", height = "600px")
+        tabsetPanel(
+          tabPanel( "Collage", JcropImageOutput("image", height = "600px") ),
+          tabPanel( "Grid"   , fluidImageOutput("grid_image", width = "100%" )),
+          tabPanel( "Mask"   , fluidImageOutput("mask_image", width = "100%" ))
+        )
+
+
       )
     )
 
