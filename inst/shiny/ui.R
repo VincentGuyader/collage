@@ -31,10 +31,13 @@ shinyUI(
 
         splitLayout(
           fileInput("file1", "Choose an image : ", accept = "image/*" ),
-          sliderInput("size", "size (width and height) of pixels", min = 2, max = 100, value = 20)
+          sliderInput("lines", "number of lines", min = 10, max = 200, value = 20)
         ),
 
-        selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens"),
+        splitLayout(
+          selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens"),
+          actionButton("go", label = "Update" )
+        ),
 
         fluidRow(
           column(6, fluidImageOutput("grid_image", height = 200 )),
