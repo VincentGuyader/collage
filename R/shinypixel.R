@@ -1,14 +1,16 @@
 #' Run shiny app
 #'
+#' @param display.mode display mode
+#' @param \dots see \code{\link[shiny]{runApp}}
 #' @export
 #' @examples
 #' \dontrun{
-#' collage::shinypixel()
+#' collage::shinycollage()
 #' }
-shinypixel <- function() {
-  appDir <- system.file("shinypixel", package = "collage")
+shinycollage <- function(display.mode = "normal", ...) {
+  appDir <- system.file("shiny", package = "collage")
   if (appDir == "") {
-    stop("Could not find . Try re-installing `collage`.", call. = FALSE)
+    stop("Could not find. Try re-installing `collage`.", call. = FALSE)
   }
-  shiny::runApp(appDir, display.mode = "normal")
+  shiny::runApp(appDir, display.mode = display.mode, ... )
 }

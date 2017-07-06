@@ -46,8 +46,8 @@ collage <- function(img, tiles = samples, size = 10 ) {
 #'
 #' The rendered image is a gray scale of these distances.
 #'
-#' @param img image to pixelize
-#' @param tiles tile base to use
+#' @param img image to transform into a collage
+#' @param tiles tiles to use
 #' @param size size (height and width) of each pixel
 #' @param min_distance anything below this value is represented in white
 #' @param max_distance anything above this value is represented in black

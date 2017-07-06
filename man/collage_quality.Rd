@@ -7,9 +7,9 @@
 collage_quality(img, tiles = samples, size, min_distance = 0, max_distance)
 }
 \arguments{
-\item{img}{image to pixelize}
+\item{img}{image to transform into a collage}
 
-\item{tiles}{tile base to use}
+\item{tiles}{tiles to use}
 
 \item{size}{size (height and width) of each pixel}
 

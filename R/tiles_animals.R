@@ -44,8 +44,8 @@ scrap_animals <- function(what = "bebe,chats", pages ){
 #' @examples
 #' \dontrun{
 #'
-#'   kittens <- tiles_animals( what = "bebe,chats", pages = 1:10 )
-#'   puppies <- tiles_animals( what = "bebe,chiens", pages = 1:10 )
+#'   kittens <- tiles_animals( size = 50, what = "bebe,chats", pages = 1:20 )
+#'   puppies <- tiles_animals( size = 50, what = "bebe,chiens", pages = 1:20 )
 #' }
 #' @importFrom purrr walk2
 #' @export
