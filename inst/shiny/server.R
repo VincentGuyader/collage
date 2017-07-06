@@ -12,8 +12,12 @@ temp_image <- function(img){
 shinyServer(function(input, output, session) {
 
   source_image <- reactive( {
-    req(input$file1)
-    image_read(input$file1$datapath)
+    path <- if(is.null(input$file1)){
+      system.file( "tigrou", "tigrou.jpg", package = "collage" )
+    } else {
+      input$file1$datapath
+    }
+    image_read(path)
   })
 
   grid_image   <- reactive( {

@@ -44,6 +44,7 @@ shinyUI(
         JcropImagePreviewOutput("preview", width = "100%" )
       ),
       mainPanel(
+        br(), br(), br(),
         JcropImageOutput("image", height = "600px")
       )
     )
