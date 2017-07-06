@@ -36,7 +36,7 @@ shinyServer(function(input, output, session) {
 
   collage_image <- reactive({
     withProgress(min = 0, max = 1, message = "collage", value = .3, {
-      temp_image(collage( source_image(), size = size(), tiles = base() ))
+      temp_image( collage( source_image(), size = size(), tiles = base() ))
     })
   })
 
@@ -64,5 +64,16 @@ shinyServer(function(input, output, session) {
   output$mask_image <- renderFluidImage(mask_image())
 
   output$collage_image <- renderFluidImage(collage_image())
+
+  output$dl <- downloadHandler(
+    filename = function() {
+      collage_image()
+    },
+    content = function(con) {
+      file.copy(collage_image(), con)
+    },
+    contentType = "image/png"
+  )
+
 
 })

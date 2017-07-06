@@ -34,7 +34,11 @@ shinyUI(
           sliderInput("lines", "number of lines", min = 10, max = 200, value = 20 )
         ),
 
-        selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens"),
+        splitLayout(
+          selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens"),
+          downloadButton("dl", label = "Download collage" )
+        ),
+
 
         tags$br(),
 
