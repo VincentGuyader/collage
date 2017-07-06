@@ -1,0 +1,19 @@
+.navbar{
+  background-color: #F2E0F7;
+  
+}
+
+.navbar-brand{
+  font-size: 30px ;
+  font-weight: bold ;
+  color: #4C0B5F !important;
+}
+
+.nav{ 
+  color: white !important ;
+}
+
+.nav li.active{
+  background-color: #E2A9F3;
+  
+}
