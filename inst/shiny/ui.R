@@ -34,9 +34,13 @@ shinyUI(
           sliderInput("lines", "number of lines", min = 10, max = 200, value = 20 )
         ),
 
-        splitLayout(
-          selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens"),
-          downloadButton("dl", label = "Download collage" )
+        fluidRow(
+          column(6,
+            selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens")
+          ),
+          column(6,
+            downloadButton("dl", label = "Download collage" )
+          )
         ),
 
 
