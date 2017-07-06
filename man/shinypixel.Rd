@@ -11,6 +11,6 @@ Run shiny app
 }
 \examples{
 \dontrun{
-tipixel::shinypixel()
+collage::shinypixel()
 }
 }

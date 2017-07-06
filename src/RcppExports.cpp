@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // collage
 RawVector collage(List tiles, int width, int height, IntegerVector best_tiles, int size);
-RcppExport SEXP tipixel_collage(SEXP tilesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP best_tilesSEXP, SEXP sizeSEXP) {
+RcppExport SEXP collage_collage(SEXP tilesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP best_tilesSEXP, SEXP sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -22,7 +22,7 @@ END_RCPP
 }
 // base_mask
 RawVector base_mask(NumericVector distances, int width, int height, int size, double min_distance, double max_distance);
-RcppExport SEXP tipixel_base_mask(SEXP distancesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP sizeSEXP, SEXP min_distanceSEXP, SEXP max_distanceSEXP) {
+RcppExport SEXP collage_base_mask(SEXP distancesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP sizeSEXP, SEXP min_distanceSEXP, SEXP max_distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -38,7 +38,7 @@ END_RCPP
 }
 // find_best_tiles
 IntegerVector find_best_tiles(RawVector img, int size, DataFrame base);
-RcppExport SEXP tipixel_find_best_tiles(SEXP imgSEXP, SEXP sizeSEXP, SEXP baseSEXP) {
+RcppExport SEXP collage_find_best_tiles(SEXP imgSEXP, SEXP sizeSEXP, SEXP baseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -51,7 +51,7 @@ END_RCPP
 }
 // add_grid_cpp
 RawVector add_grid_cpp(RawVector img, int size, RawVector grid_color);
-RcppExport SEXP tipixel_add_grid_cpp(SEXP imgSEXP, SEXP sizeSEXP, SEXP grid_colorSEXP) {
+RcppExport SEXP collage_add_grid_cpp(SEXP imgSEXP, SEXP sizeSEXP, SEXP grid_colorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -64,14 +64,14 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"tipixel_collage", (DL_FUNC) &tipixel_collage, 5},
-    {"tipixel_base_mask", (DL_FUNC) &tipixel_base_mask, 6},
-    {"tipixel_find_best_tiles", (DL_FUNC) &tipixel_find_best_tiles, 3},
-    {"tipixel_add_grid_cpp", (DL_FUNC) &tipixel_add_grid_cpp, 3},
+    {"collage_collage", (DL_FUNC) &collage_collage, 5},
+    {"collage_base_mask", (DL_FUNC) &collage_base_mask, 6},
+    {"collage_find_best_tiles", (DL_FUNC) &collage_find_best_tiles, 3},
+    {"collage_add_grid_cpp", (DL_FUNC) &collage_add_grid_cpp, 3},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_tipixel(DllInfo *dll) {
+RcppExport void R_init_collage(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

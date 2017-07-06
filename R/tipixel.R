@@ -1,7 +1,7 @@
-#' tipixel
+#' collage
 #' @docType package
-#' @name tipixel
+#' @name collage
 #' @importFrom Rcpp sourceCpp
 #' @importFrom RcppParallel RcppParallelLibs
-#' @useDynLib tipixel
+#' @useDynLib collage
 NULL

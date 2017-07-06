@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r echo = FALSE}
-library(tipixel)
+library(collage)
 library(magick)
 library(tibble)
 ```
@@ -23,12 +23,12 @@ Meet Tigrou
 ![](inst/tigrou/tigrou.jpg)
 
 ```{r}
-tigrou <- image_read( system.file("tigrou", "tigrou.jpg", package = "tipixel") )
+tigrou <- image_read( system.file("tigrou", "tigrou.jpg", package = "collage") )
 ```
 
 ## pixel_replace
 
-Tigrou with every 25x25 replaced by another kitty 
+Tigrou with every 25x25 replaced by another kitty
 
 ```{r}
 pixel_replace( tigrou, tiles = kittens, size = 25)
@@ -40,7 +40,7 @@ image_write( pixel_replace( tigrou, tiles = kittens, size = 25), path = "images/
 
 ![](images/pixel_replace.png)
 
-with every 10x10 replaced by a useR 2017 attendee: 
+with every 10x10 replaced by a useR 2017 attendee:
 
 ```{r}
 pixel_replace( tigrou, tiles = useR2017, size = 10)
@@ -54,7 +54,7 @@ image_write( pixel_replace( tigrou, tiles = useR2017, size = 10), path = "images
 
 ## pixel_quality
 
-A measure of the quality of the tiles. 
+A measure of the quality of the tiles.
 
 ```{r}
 pixel_quality( tigrou, tiles = kittens, size = 25)
@@ -82,33 +82,33 @@ image_write( pixel_grid( tigrou, size = 25), path = "images/pixel_grid.png" )
 
 ## tiles
 
-The tiles argument of these functions expect a tibble similar to the `kittens` (or `puppies`) that is shipped 
-with the package: 
+The tiles argument of these functions expect a tibble similar to the `kittens` (or `puppies`) that is shipped
+with the package:
 
 ```{r}
 kittens
 puppies
 ```
 
-Each row represent a tile, which has a given color (identified by the `red`, `green`, `blue` and `alpha` columns). 
-The `tile` column is a list column holding the data for the tiles. 
+Each row represent a tile, which has a given color (identified by the `red`, `green`, `blue` and `alpha` columns).
+The `tile` column is a list column holding the data for the tiles.
 
 ```{r}
 kittens$tile[[1]]
 ```
 
-The `tiles` function can make one of these tiles tibbles: 
+The `tiles` function can make one of these tiles tibbles:
 
 ```{r}
-files   <- list.files( system.file("base", package = "tipixel"), pattern = "jpg$", full.names = TRUE )
+files   <- list.files( system.file("base", package = "collage"), pattern = "jpg$", full.names = TRUE )
 samples <- tiles( files, size = 25 )
 samples
 ```
 
-## tiles_mono 
+## tiles_mono
 
 The `tiles_mono` function generates monochromatic tiles. For example, here is Tigrou
-with each 25x25 square replaced by the closest R color. 
+with each 25x25 square replaced by the closest R color.
 
 ```{r}
 rtiles <- tiles_mono(colors())
@@ -123,11 +123,10 @@ image_write( pixel_replace( tigrou, tiles = rtiles, size = 25), path = "images/p
 
 ## tiles_animals
 
-The `tiles_animals` function scraps data. For example, the `kittens` and 
-`puppies` have been generated with : 
+The `tiles_animals` function scraps data. For example, the `kittens` and
+`puppies` have been generated with :
 
 ```{r, eval=FALSE}
 kittens <- tiles_animals(what = "bebe,chats", pages = 1:20)
 puppies <- tiles_animals(what = "bebe,chiens", pages = 1:20)
 ```
-

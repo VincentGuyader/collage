@@ -3,12 +3,12 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' tipixel::shinypixel()
+#' collage::shinypixel()
 #' }
 shinypixel <- function() {
-  appDir <- system.file("shinypixel", package = "tipixel")
+  appDir <- system.file("shinypixel", package = "collage")
   if (appDir == "") {
-    stop("Could not find . Try re-installing `tipixel`.", call. = FALSE)
+    stop("Could not find . Try re-installing `collage`.", call. = FALSE)
   }
   shiny::runApp(appDir, display.mode = "normal")
 }

@@ -5,7 +5,7 @@ Meet Tigrou
 ![](inst/tigrou/tigrou.jpg)
 
 ``` r
-tigrou <- image_read( system.file("tigrou", "tigrou.jpg", package = "tipixel") )
+tigrou <- image_read( system.file("tigrou", "tigrou.jpg", package = "collage") )
 ```
 
 pixel\_replace
@@ -105,7 +105,7 @@ kittens$tile[[1]]
 The `tiles` function can make one of these tiles tibbles:
 
 ``` r
-files   <- list.files( system.file("base", package = "tipixel"), pattern = "jpg$", full.names = TRUE )
+files   <- list.files( system.file("base", package = "collage"), pattern = "jpg$", full.names = TRUE )
 samples <- tiles( files, size = 25 )
 samples
 #> # A tibble: 54 x 5

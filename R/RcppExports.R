@@ -2,18 +2,18 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 collage <- function(tiles, width, height, best_tiles, size) {
-    .Call('tipixel_collage', PACKAGE = 'tipixel', tiles, width, height, best_tiles, size)
+    .Call('collage_collage', PACKAGE = 'collage', tiles, width, height, best_tiles, size)
 }
 
 base_mask <- function(distances, width, height, size, min_distance, max_distance) {
-    .Call('tipixel_base_mask', PACKAGE = 'tipixel', distances, width, height, size, min_distance, max_distance)
+    .Call('collage_base_mask', PACKAGE = 'collage', distances, width, height, size, min_distance, max_distance)
 }
 
 find_best_tiles <- function(img, size, base) {
-    .Call('tipixel_find_best_tiles', PACKAGE = 'tipixel', img, size, base)
+    .Call('collage_find_best_tiles', PACKAGE = 'collage', img, size, base)
 }
 
 add_grid_cpp <- function(img, size, grid_color) {
-    .Call('tipixel_add_grid_cpp', PACKAGE = 'tipixel', img, size, grid_color)
+    .Call('collage_add_grid_cpp', PACKAGE = 'collage', img, size, grid_color)
 }
 

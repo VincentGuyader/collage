@@ -1,6 +1,6 @@
 library(shiny)
 library(purrple)
-library(tipixel)
+library(collage)
 library(plyr)
 library(magick)
 library(magrittr)
@@ -111,6 +111,6 @@ shinyServer(function(input, output, session) {
     })
     do.call( div, links )
   })
-  
-  
+
+
 })

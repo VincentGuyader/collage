@@ -5,7 +5,7 @@
 #'
 #' @export
 sample_image <- function(i){
-  path <- system.file( "base", package = "tipixel")
+  path <- system.file( "base", package = "collage")
   images <- list.files( path, pattern = "[.]jpe?g$", full.names = TRUE)
   if( missing(i) ) {
     i <- sample(length(images), 1)

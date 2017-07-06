@@ -1,12 +1,12 @@
-Package: tipixel
+Package: collage
 Type: Package
-Title: Makes an image mosaic from a set of images
+Title: Image collage
 Version: 0.1.4
 Authors@R: c(
     person("Vincent", "Guyader", , "vincent@thinkr.fr", c("aut", "cre")),
     person("Romain", "Francois", , "romain@thinkr.fr", role = "aut")
     )
-Description: Makes an image mosaic from a set of images.
+Description: Image collage.
 License: MIT + file LICENSE
 LazyData: TRUE
 Depends: R (>= 2.10)
@@ -26,7 +26,7 @@ LinkingTo:
     RcppParallel
 RoxygenNote: 6.0.1.9000
 SystemRequirements: C++11
-URL: https://github.com/ThinkRstat/tipixel
+URL: https://github.com/ThinkRstat/collage
 Encoding: UTF-8
 Suggests:
     knitr,

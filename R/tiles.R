@@ -20,12 +20,12 @@ image_square_bitmap <- function( images, size = 25){
 #' @return a tibble with the columns R, G, B (raw vectors) and tile
 #' @examples
 #' \dontrun{
-#'   path  <- system.file("base", package = "tipixel" )
+#'   path  <- system.file("base", package = "collage" )
 #'   files <- list.files( path, pattern= "jpg$", full.names = TRUE )
 #'   tiles(files, size = 25)
 #' }
 #' @importFrom tibble tibble
-#' @importFrom magick image_read image_scale
+#' @importFrom magick image_read image_scale image_join
 #' @importFrom purrr map map_df
 #' @importFrom magrittr %>%
 #' @export

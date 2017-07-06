@@ -19,7 +19,7 @@ Generates a tile base from a set of files
 }
 \examples{
 \dontrun{
-  path  <- system.file("base", package = "tipixel" )
+  path  <- system.file("base", package = "collage" )
   files <- list.files( path, pattern= "jpg$", full.names = TRUE )
   tiles(files, size = 25)
 }
