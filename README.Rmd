@@ -40,6 +40,18 @@ image_write( pixel_replace( tigrou, tiles = kittens, size = 25), path = "images/
 
 ![](images/pixel_replace.png)
 
+with every 10x10 replaced by a useR 2017 attendee: 
+
+```{r}
+pixel_replace( tigrou, tiles = useR2017, size = 10)
+```
+
+```{r echo = FALSE}
+image_write( pixel_replace( tigrou, tiles = useR2017, size = 10), path = "images/pixel_replace_useR.png" )
+```
+
+![](images/pixel_replace_useR.png)
+
 ## pixel_quality
 
 A measure of the quality of the tiles. 

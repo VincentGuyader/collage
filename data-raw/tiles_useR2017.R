@@ -32,4 +32,6 @@ pics <- tibble(
 
 data2 <- right_join( data, pics, by = "avatar" )
 
+tiles_useR2017 <- tiles( file.path( tf, data2$pic ), size = 50 )
+tiles_useR2017 <- bind_cols( tiles_useR2017, select( data2, id, position, company, avatar )
 
