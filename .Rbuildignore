@@ -4,3 +4,4 @@ raw
 ^README\.Rmd$
 ^README-.*\.png$
 images
+^data-raw$

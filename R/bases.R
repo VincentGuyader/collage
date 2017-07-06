@@ -15,5 +15,10 @@
 #' @docType data
 "puppies"
 
+#' @rdname samples
+#' @name samples
+#' @docType data
+"useR2017"
+
 #' @importFrom utils globalVariables
-globalVariables( c("samples", "kittens", "puppies") )
+globalVariables( c("samples", "kittens", "puppies", "useR2017") )
