@@ -5,57 +5,60 @@ Meet Tigrou
 ![](inst/tigrou/tigrou.jpg)
 
 ``` r
+library(collage)
+library(magick)
+
 tigrou <- image_read( system.file("tigrou", "tigrou.jpg", package = "collage") )
 ```
 
-pixel\_replace
---------------
+collage
+-------
 
 Tigrou with every 25x25 replaced by another kitty
 
 ``` r
-pixel_replace( tigrou, tiles = kittens, size = 25)
+collage( tigrou, tiles = kittens, size = 25)
 #>   format width height colorspace filesize
 #> 1    png   650    600       sRGB        0
 ```
 
-![](images/pixel_replace.png)
+![](images/collage.png)
 
 with every 10x10 replaced by a useR 2017 attendee:
 
 ``` r
-pixel_replace( tigrou, tiles = useR2017, size = 10)
+collage( tigrou, tiles = useR2017, size = 10)
 #>   format width height colorspace filesize
 #> 1    png  3200   3000       sRGB        0
 ```
 
-![](images/pixel_replace_useR.png)
+![](images/collage_useR.png)
 
-pixel\_quality
---------------
+collage\_quality
+----------------
 
 A measure of the quality of the tiles.
 
 ``` r
-pixel_quality( tigrou, tiles = kittens, size = 25)
+collage_quality( tigrou, tiles = kittens, size = 25)
 #>   format width height colorspace filesize
 #> 1    png   650    600       sRGB        0
 ```
 
-![](images/pixel_quality.png)
+![](images/collage_quality.png)
 
-pixel\_grid
------------
+collage\_grid
+-------------
 
 Showing the grid
 
 ``` r
-pixel_grid( tigrou, size = 25)
+collage_grid( tigrou, size = 25)
 #>   format width height colorspace filesize
 #> 1    png   665    624       sRGB        0
 ```
 
-![](images/pixel_grid.png)
+![](images/collage_grid.png)
 
 tiles
 -----
@@ -131,12 +134,12 @@ The `tiles_mono` function generates monochromatic tiles. For example, here is Ti
 
 ``` r
 rtiles <- tiles_mono(colors())
-pixel_replace( tigrou, tiles = rtiles, size = 25)
+collage( tigrou, tiles = rtiles, size = 25)
 #>   format width height colorspace filesize
 #> 1    png   650    600       sRGB        0
 ```
 
-![](images/pixel_replace_rcolors.png)
+![](images/collage_rcolors.png)
 
 tiles\_animals
 --------------

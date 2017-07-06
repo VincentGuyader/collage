@@ -5,9 +5,9 @@
 
 using namespace Rcpp;
 
-// collage
-RawVector collage(List tiles, int width, int height, IntegerVector best_tiles, int size);
-RcppExport SEXP collage_collage(SEXP tilesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP best_tilesSEXP, SEXP sizeSEXP) {
+// collage_impl
+RawVector collage_impl(List tiles, int width, int height, IntegerVector best_tiles, int size);
+RcppExport SEXP collage_collage_impl(SEXP tilesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP best_tilesSEXP, SEXP sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -16,7 +16,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type height(heightSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type best_tiles(best_tilesSEXP);
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(collage(tiles, width, height, best_tiles, size));
+    rcpp_result_gen = Rcpp::wrap(collage_impl(tiles, width, height, best_tiles, size));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -64,7 +64,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"collage_collage", (DL_FUNC) &collage_collage, 5},
+    {"collage_collage_impl", (DL_FUNC) &collage_collage_impl, 5},
     {"collage_base_mask", (DL_FUNC) &collage_base_mask, 6},
     {"collage_find_best_tiles", (DL_FUNC) &collage_find_best_tiles, 3},
     {"collage_add_grid_cpp", (DL_FUNC) &collage_add_grid_cpp, 3},

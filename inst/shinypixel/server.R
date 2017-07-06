@@ -39,7 +39,7 @@ shinyServer(function(input, output, session) {
     temp_image(show_grid( source_image(), size = input$size) )
   })
 
-  pixel_image <- reactive({
+  collage_image <- reactive({
     temp_image(pixelize( source_image(), size = input$size, base = base() ))
   })
 
@@ -56,13 +56,13 @@ shinyServer(function(input, output, session) {
   baseSummary <-  reactive({
     nrow(base()$base)
   })
-  output$image <- renderJcropImage( pixel_image() , opacity = .3, aspect_ratio = 1  )
+  output$image <- renderJcropImage( collage_image() , opacity = .3, aspect_ratio = 1  )
   output$preview <- renderJcropImagePreview( JcropImagePreview("image", input$image_change) )
 
   output$grid_image <- renderFluidImage(grid_image())
   output$mask_image <- renderFluidImage(mask_image())
 
-  output$pixel_image <- renderFluidImage(pixel_image())
+  output$collage_image <- renderFluidImage(collage_image())
   output$nbImages <- renderText(baseSummary())
 
   output$base_images <- renderUI({

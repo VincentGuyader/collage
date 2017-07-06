@@ -1,7 +1,7 @@
 #include "tipixel.h"
 
 // [[Rcpp::export]]
-RawVector collage( List tiles, int width, int height, IntegerVector best_tiles, int size ){
+RawVector collage_impl( List tiles, int width, int height, IntegerVector best_tiles, int size ){
   int n = 4 * ( width * size ) * ( height * size ) ;
   RawVector out = no_init(n) ;
 

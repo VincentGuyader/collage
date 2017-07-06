@@ -5,7 +5,7 @@ as_bitmap <- function(img){
   img
 }
 
-#' pixel_replace
+#' Image collage
 #'
 #' @param img image to process
 #' @param tiles tiles to use, e.g. \code{samples}
@@ -14,11 +14,11 @@ as_bitmap <- function(img){
 #' @examples
 #' \dontrun{
 #'   img <- sample_image()
-#'   pixel_replace( file = img, size = 10)
+#'   collage( file = img, size = 10)
 #' }
 #' @importFrom magick image_read
 #' @export
-pixel_replace <- function(img, tiles = samples, size = 10 ) {
+collage <- function(img, tiles = samples, size = 10 ) {
   img <- as_bitmap(img)
 
   best_tiles  <- find_best_tiles(img, size, tiles)
@@ -28,7 +28,7 @@ pixel_replace <- function(img, tiles = samples, size = 10 ) {
   width     <- attr(best_tiles, "width")
   height    <- attr(best_tiles, "height")
 
-  out <- collage( tiles$tile, width, height, best_tiles, tile_size )
+  out <- collage_impl( tiles$tile, width, height, best_tiles, tile_size )
   attr( out, "quality") <- summary(distances)
 
   used_tiles <- length( unique( best_tiles ) )
@@ -56,7 +56,7 @@ pixel_replace <- function(img, tiles = samples, size = 10 ) {
 #'
 #' @importFrom magick image_read
 #' @export
-pixel_quality <- function( img, tiles = samples, size, min_distance = 0, max_distance ){
+collage_quality <- function( img, tiles = samples, size, min_distance = 0, max_distance ){
   img <- as_bitmap(img)
   best_tiles  <- find_best_tiles(img, size, tiles )
   distances <- attr(best_tiles, "distances")
@@ -80,17 +80,17 @@ pixel_quality <- function( img, tiles = samples, size, min_distance = 0, max_dis
 #'   img <- image_read( sample_image() )
 #'
 #'   # a grid of 10x10 tiles
-#'   pixel_grid( img, size = 10, grid_col = "white" )
+#'   collage_grid( img, size = 10, grid_col = "white" )
 #'
 #'   # a grid with 10 lines
-#'   pixel_grid( img, size = lines_cut(img, 10) )
+#'   collage_grid( img, size = lines_cut(img, 10) )
 #'
 #'   # a grid with 10 columns
-#'   pixel_grid( img, size = columns_cut(img, 10) )
+#'   collage_grid( img, size = columns_cut(img, 10) )
 #' }
 #' @importFrom grDevices col2rgb
 #' @export
-pixel_grid <- function( img, size = 10, grid_col = "white" ){
+collage_grid <- function( img, size = 10, grid_col = "white" ){
   img <- as_bitmap(img)
   rgb <- as.raw( col2rgb(grid_col) )
 
@@ -132,4 +132,3 @@ lines_cut <- function(img, n = 10){
 columns_cut <- function(img, n = 10){
   image_cut( img, n, direction = "columns")
 }
-
