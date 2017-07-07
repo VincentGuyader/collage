@@ -9,6 +9,8 @@
 \alias{puppies}
 \alias{samples}
 \alias{useR2017}
+\alias{samples}
+\alias{emojis}
 \title{sample tiles}
 \format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 54 rows and 5 columns.}
 \usage{
@@ -19,6 +21,8 @@ kittens
 puppies
 
 useR2017
+
+emojis
 }
 \description{
 sample tiles

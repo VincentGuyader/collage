@@ -17,7 +17,7 @@ Tiles from animal pictures
 \examples{
 \dontrun{
 
-  kittens <- tiles_animals( what = "bebe,chats", pages = 1:10 )
-  puppies <- tiles_animals( what = "bebe,chiens", pages = 1:10 )
+  kittens <- tiles_animals( size = 50, what = "bebe,chats", pages = 1:20 )
+  puppies <- tiles_animals( size = 50, what = "bebe,chiens", pages = 1:20 )
 }
 }
