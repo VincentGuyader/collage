@@ -50,7 +50,8 @@ shinyServer(function(input, output, session) {
     switch( input$db,
       puppies = puppies,
       kittens = kittens,
-      useR    = useR2017
+      useR    = useR2017,
+      emojis  = emojis
     )
   })
 

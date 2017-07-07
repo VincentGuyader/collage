@@ -36,7 +36,7 @@ shinyUI(
 
         fluidRow(
           column(6,
-            selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR"), selected = "kittens")
+            selectInput("db", label = "Tiles", choices = c("kittens", "puppies", "useR", "emojis"), selected = "kittens")
           ),
           column(6,
             downloadButton("dl", label = "Download collage" )

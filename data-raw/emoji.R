@@ -27,3 +27,6 @@ files <- list.files( tf )
 o <- order( as.numeric( files, str_replace( files, ".png", "" )) )
 files <- files[o]
 
+emojis <- emojis %>%
+  bind_cols( data ) %>%
+  select( -img, -datasrc, -dest )
