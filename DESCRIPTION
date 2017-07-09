@@ -20,7 +20,8 @@ Imports:
     magrittr,
     dplyr,
     xml2,
-    rvest
+    rvest,
+    utils
 LinkingTo:
     Rcpp,
     RcppParallel
@@ -30,5 +31,6 @@ URL: https://github.com/ThinkRstat/collage
 Encoding: UTF-8
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown, 
+    shiny
 VignetteBuilder: knitr

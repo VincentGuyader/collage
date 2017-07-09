@@ -16,6 +16,6 @@ Run shiny app
 }
 \examples{
 \dontrun{
-collage::shinycollage()
+  shinycollage()
 }
 }

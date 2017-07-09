@@ -40,6 +40,7 @@ scrap_animals <- function(what = "bebe,chats", pages ){
 #'
 #' @param what type of pictures
 #' @param pages the pages to download
+#' @param size tile size
 #'
 #' @examples
 #' \dontrun{
@@ -48,6 +49,7 @@ scrap_animals <- function(what = "bebe,chats", pages ){
 #'   puppies <- tiles_animals( size = 50, what = "bebe,chiens", pages = 1:20 )
 #' }
 #' @importFrom purrr walk2
+#' @importFrom utils download.file
 #' @export
 tiles_animals <- function(size = 25, what = "bebe,chats", pages){
   dir.create( tf <- tempfile() )

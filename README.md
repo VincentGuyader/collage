@@ -1,5 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis-CI Build Status](https://travis-ci.org/ThinkRstat/collage.svg?branch=master)](https://travis-ci.org/ThinkRstat/collage)
+
 Meet Tigrou
 
 ![](inst/tigrou/tigrou.jpg)

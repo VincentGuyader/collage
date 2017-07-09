@@ -5,7 +5,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' collage::shinycollage()
+#'   shinycollage()
 #' }
 shinycollage <- function(display.mode = "normal", ...) {
   appDir <- system.file("shiny", package = "collage")

@@ -7,6 +7,8 @@
 tiles_animals(size = 25, what = "bebe,chats", pages)
 }
 \arguments{
+\item{size}{tile size}
+
 \item{what}{type of pictures}
 
 \item{pages}{the pages to download}
