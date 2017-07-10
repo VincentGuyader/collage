@@ -6,3 +6,4 @@
 *.o
 *.so
 inst/doc
+data-raw/emojis

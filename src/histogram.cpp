@@ -20,10 +20,10 @@ DataFrame magick_image_histogram( RawVector img ){
       }
     }
   }
-  IntegerVector idx = seq(0,255) ;
+  IntegerVector tone = seq(0,255) ;
 
   return DataFrame::create(
-    _["intensity"] = idx,
+    _["tone"] = tone,
     _["red"] = red,
     _["green"] = green,
     _["blue"] = blue
