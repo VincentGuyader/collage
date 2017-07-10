@@ -133,3 +133,21 @@ The `tiles_animals` function scraps data. For example, the `kittens` and
 kittens <- tiles_animals(what = "bebe,chats", pages = 1:20)
 puppies <- tiles_animals(what = "bebe,chiens", pages = 1:20)
 ```
+
+## histograms
+
+Histograms are a tool used in photography to visualise brightness of images. `image_histogram_data` 
+measures the number of pixels for each tone (from 0 to 255) in a picture. 
+
+```{r}
+image_histogram_data(tigrou)
+```
+
+Then `image_histogram_brightness` and `image_histogram_rgb` shows brightness and individual 
+channel histograms: 
+
+```{r histograms}
+image_histogram_brightness(tigrou)
+image_histogram_rgb(tigrou)
+```
+

@@ -56,7 +56,6 @@ image_histogram_brightness <- function(im, coefficients = c(0.3, 0.6, 0.1)){
 
   ggplot(h) +
     aes(xmin = tone - 0.5, xmax = tone +.5, ymin = 0, ymax = brightness) +
-    theme_void() +
     geom_rect( fill = h$col ) +
     guides(colour = FALSE)
 }

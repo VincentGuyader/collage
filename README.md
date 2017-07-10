@@ -1,7 +1,7 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/ThinkRstat/collage.svg?branch=master)](https://travis-ci.org/ThinkRstat/collage)
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 Meet Tigrou
 
 ![](inst/tigrou/tigrou.jpg)
@@ -21,7 +21,7 @@ Tigrou with every 25x25 replaced by another kitty
 ``` r
 collage( tigrou, tiles = kittens, size = 25)
 #>   format width height colorspace filesize
-#> 1    png   650    600       sRGB        0
+#> 1    png  1300   1200       sRGB        0
 ```
 
 ![](images/collage.png)
@@ -104,7 +104,7 @@ Each row represent a tile, which has a given color (identified by the `red`, `gr
 
 ``` r
 kittens$tile[[1]]
-#> 4 channel 25x25 bitmap array: 'bitmap' raw [1:4, 1:25, 1:25] 0c 0e 0d ff ...
+#> 4 channel 50x50 bitmap array: 'bitmap' raw [1:4, 1:50, 1:50] 0d 0f 0e ff ...
 ```
 
 The `tiles` function can make one of these tiles tibbles:
@@ -152,3 +152,40 @@ The `tiles_animals` function scraps data. For example, the `kittens` and `puppie
 kittens <- tiles_animals(what = "bebe,chats", pages = 1:20)
 puppies <- tiles_animals(what = "bebe,chiens", pages = 1:20)
 ```
+
+histograms
+----------
+
+Histograms are a tool used in photography to visualise brightness of images. `image_histogram_data` measures the number of pixels for each tone (from 0 to 255) in a picture.
+
+``` r
+image_histogram_data(tigrou)
+#> # A tibble: 256 x 4
+#>     tone   red green  blue
+#>    <int> <int> <int> <int>
+#>  1     0     1    23    77
+#>  2     1     4     2   134
+#>  3     2    39    15   173
+#>  4     3   107    98   147
+#>  5     4   130   166   331
+#>  6     5   101   137   522
+#>  7     6   273   280   757
+#>  8     7   425   461   878
+#>  9     8   595   636  1157
+#> 10     9   620   692  1731
+#> # ... with 246 more rows
+```
+
+Then `image_histogram_brightness` and `image_histogram_rgb` shows brightness and individual channel histograms:
+
+``` r
+image_histogram_brightness(tigrou)
+```
+
+![](README-histograms-1.png)
+
+``` r
+image_histogram_rgb(tigrou)
+```
+
+![](README-histograms-2.png)
