@@ -48,6 +48,8 @@ histogram_luminosity <- function(im){
     guides(colour = FALSE)
 }
 
+#' @importFrom dplyr select mutate case_when
+#' @importFrom tidyr gather
 #' @rdname histogram
 #' @export
 histogram_rgb <- function(im){
