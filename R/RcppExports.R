@@ -13,6 +13,10 @@ find_best_tiles <- function(img, size, base) {
     .Call('collage_find_best_tiles', PACKAGE = 'collage', img, size, base)
 }
 
+magick_image_histogram <- function(img) {
+    .Call('collage_magick_image_histogram', PACKAGE = 'collage', img)
+}
+
 add_grid_cpp <- function(img, size, grid_color) {
     .Call('collage_add_grid_cpp', PACKAGE = 'collage', img, size, grid_color)
 }

@@ -49,6 +49,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// magick_image_histogram
+DataFrame magick_image_histogram(RawVector img);
+RcppExport SEXP collage_magick_image_histogram(SEXP imgSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< RawVector >::type img(imgSEXP);
+    rcpp_result_gen = Rcpp::wrap(magick_image_histogram(img));
+    return rcpp_result_gen;
+END_RCPP
+}
 // add_grid_cpp
 RawVector add_grid_cpp(RawVector img, int size, RawVector grid_color);
 RcppExport SEXP collage_add_grid_cpp(SEXP imgSEXP, SEXP sizeSEXP, SEXP grid_colorSEXP) {
@@ -67,6 +78,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"collage_collage_impl", (DL_FUNC) &collage_collage_impl, 5},
     {"collage_base_mask", (DL_FUNC) &collage_base_mask, 6},
     {"collage_find_best_tiles", (DL_FUNC) &collage_find_best_tiles, 3},
+    {"collage_magick_image_histogram", (DL_FUNC) &collage_magick_image_histogram, 1},
     {"collage_add_grid_cpp", (DL_FUNC) &collage_add_grid_cpp, 3},
     {NULL, NULL, 0}
 };

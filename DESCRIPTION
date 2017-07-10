@@ -21,7 +21,9 @@ Imports:
     dplyr,
     xml2,
     rvest,
-    utils
+    utils,
+    tidyr,
+    ggplot2
 LinkingTo:
     Rcpp,
     RcppParallel
