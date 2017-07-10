@@ -38,8 +38,8 @@
 #'
 #' @export
 image_histogram_data <- function(im){
-  magick_image_histogram( im[[1]] ) %>%
-    as_tibble()
+  bitmap <- im[[1]]
+  as_tibble(magick_image_histogram(bitmap))
 }
 
 #' @param coefficients luma coefficients
