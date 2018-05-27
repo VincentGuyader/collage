@@ -15,7 +15,7 @@ Imports:
     tibble,
     Rcpp,
     RcppParallel,
-    magick,
+    magick (>= 1.6),
     purrr,
     magrittr,
     dplyr,

@@ -34,11 +34,12 @@
 #'
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr mutate
+#' @importFrom magick image_data
 #' @importFrom magrittr %>%
 #'
 #' @export
 image_histogram_data <- function(im){
-  bitmap <- im[[1]]
+  bitmap <- image_data(im, 'rgba')
   as_tibble(magick_image_histogram(bitmap))
 }
 
