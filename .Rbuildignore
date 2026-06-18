@@ -5,4 +5,7 @@ raw
 ^README-.*\.png$
 images
 ^data-raw$
-^\.travis\.yml$
+^\.github$
+^examples$
+^codecov\.yml$
+^\.covrignore$
