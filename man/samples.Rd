@@ -3,16 +3,22 @@
 \docType{data}
 \name{samples}
 \alias{samples}
-\alias{samples}
 \alias{kittens}
-\alias{samples}
 \alias{puppies}
-\alias{samples}
 \alias{useR2017}
-\alias{samples}
 \alias{emojis}
 \title{sample tiles}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 54 rows and 5 columns.}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 54 rows and 5 columns.
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 400 rows and 5 columns.
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 400 rows and 5 columns.
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 320 rows and 9 columns.
+
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2373 rows and 6 columns.
+}
 \usage{
 samples
 

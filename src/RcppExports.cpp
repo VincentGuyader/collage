@@ -5,9 +5,14 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // collage_impl
 RawVector collage_impl(List tiles, int width, int height, IntegerVector best_tiles, int size);
-RcppExport SEXP collage_collage_impl(SEXP tilesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP best_tilesSEXP, SEXP sizeSEXP) {
+RcppExport SEXP _collage_collage_impl(SEXP tilesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP best_tilesSEXP, SEXP sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -22,7 +27,7 @@ END_RCPP
 }
 // base_mask
 RawVector base_mask(NumericVector distances, int width, int height, int size, double min_distance, double max_distance);
-RcppExport SEXP collage_base_mask(SEXP distancesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP sizeSEXP, SEXP min_distanceSEXP, SEXP max_distanceSEXP) {
+RcppExport SEXP _collage_base_mask(SEXP distancesSEXP, SEXP widthSEXP, SEXP heightSEXP, SEXP sizeSEXP, SEXP min_distanceSEXP, SEXP max_distanceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -38,7 +43,7 @@ END_RCPP
 }
 // find_best_tiles
 IntegerVector find_best_tiles(RawVector img, int size, DataFrame base);
-RcppExport SEXP collage_find_best_tiles(SEXP imgSEXP, SEXP sizeSEXP, SEXP baseSEXP) {
+RcppExport SEXP _collage_find_best_tiles(SEXP imgSEXP, SEXP sizeSEXP, SEXP baseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -51,7 +56,7 @@ END_RCPP
 }
 // magick_image_histogram
 DataFrame magick_image_histogram(RawVector img);
-RcppExport SEXP collage_magick_image_histogram(SEXP imgSEXP) {
+RcppExport SEXP _collage_magick_image_histogram(SEXP imgSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -62,7 +67,7 @@ END_RCPP
 }
 // add_grid_cpp
 RawVector add_grid_cpp(RawVector img, int size, RawVector grid_color);
-RcppExport SEXP collage_add_grid_cpp(SEXP imgSEXP, SEXP sizeSEXP, SEXP grid_colorSEXP) {
+RcppExport SEXP _collage_add_grid_cpp(SEXP imgSEXP, SEXP sizeSEXP, SEXP grid_colorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -75,11 +80,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"collage_collage_impl", (DL_FUNC) &collage_collage_impl, 5},
-    {"collage_base_mask", (DL_FUNC) &collage_base_mask, 6},
-    {"collage_find_best_tiles", (DL_FUNC) &collage_find_best_tiles, 3},
-    {"collage_magick_image_histogram", (DL_FUNC) &collage_magick_image_histogram, 1},
-    {"collage_add_grid_cpp", (DL_FUNC) &collage_add_grid_cpp, 3},
+    {"_collage_collage_impl", (DL_FUNC) &_collage_collage_impl, 5},
+    {"_collage_base_mask", (DL_FUNC) &_collage_base_mask, 6},
+    {"_collage_find_best_tiles", (DL_FUNC) &_collage_find_best_tiles, 3},
+    {"_collage_magick_image_histogram", (DL_FUNC) &_collage_magick_image_histogram, 1},
+    {"_collage_add_grid_cpp", (DL_FUNC) &_collage_add_grid_cpp, 3},
     {NULL, NULL, 0}
 };
 

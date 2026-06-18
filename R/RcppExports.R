@@ -2,22 +2,22 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 collage_impl <- function(tiles, width, height, best_tiles, size) {
-    .Call('collage_collage_impl', PACKAGE = 'collage', tiles, width, height, best_tiles, size)
+    .Call('_collage_collage_impl', PACKAGE = 'collage', tiles, width, height, best_tiles, size)
 }
 
 base_mask <- function(distances, width, height, size, min_distance, max_distance) {
-    .Call('collage_base_mask', PACKAGE = 'collage', distances, width, height, size, min_distance, max_distance)
+    .Call('_collage_base_mask', PACKAGE = 'collage', distances, width, height, size, min_distance, max_distance)
 }
 
 find_best_tiles <- function(img, size, base) {
-    .Call('collage_find_best_tiles', PACKAGE = 'collage', img, size, base)
+    .Call('_collage_find_best_tiles', PACKAGE = 'collage', img, size, base)
 }
 
 magick_image_histogram <- function(img) {
-    .Call('collage_magick_image_histogram', PACKAGE = 'collage', img)
+    .Call('_collage_magick_image_histogram', PACKAGE = 'collage', img)
 }
 
 add_grid_cpp <- function(img, size, grid_color) {
-    .Call('collage_add_grid_cpp', PACKAGE = 'collage', img, size, grid_color)
+    .Call('_collage_add_grid_cpp', PACKAGE = 'collage', img, size, grid_color)
 }
 
