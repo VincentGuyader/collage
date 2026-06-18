@@ -58,7 +58,7 @@ image_histogram_brightness <- function(im, coefficients = c(0.3, 0.6, 0.1)){
   ggplot(h) +
     aes(xmin = tone - 0.5, xmax = tone +.5, ymin = 0, ymax = brightness) +
     geom_rect( fill = h$col ) +
-    guides(colour = FALSE)
+    guides(colour = "none")
 }
 
 #' @rdname image_histogram
@@ -85,6 +85,6 @@ image_histogram_rgb <- function(im){
     ) +
     geom_rect( aes(ymax = value), fill = h$colour) +
     facet_wrap(~col, nrow = 3) +
-    guides(colour = FALSE)+
+    guides(colour = "none")+
     ggtitle("")
 }
