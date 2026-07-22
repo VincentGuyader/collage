@@ -98,14 +98,10 @@ mosaic_checksum <- function(img, tiles, size) {
     tile_size
   )
   # digest of the raw mosaic bitmap, before magick re-encoding
-  paste0(
-    "md5:",
-    tools::md5sum(local({
-      f <- tempfile()
-      writeBin(as.raw(out), con = f)
-      f
-    }))[[1]]
-  )
+  f <- tempfile()
+  on.exit(unlink(f), add = TRUE)
+  writeBin(as.raw(out), con = f)
+  paste0("md5:", tools::md5sum(f)[[1]])
 }
 
 rows <- list()
@@ -115,7 +111,8 @@ for (sc in scenarios) {
   src <- image_scale(tigrou, geometry = as.character(sc$width))
   tiles <- get_base(sc$base)
   info <- image_info(src)
-  n_blocks <- (info$width %/% sc$size) * (info$height %/% sc$size)
+  # ceiling division: matches the C++ get_steps() grid
+  n_blocks <- ceiling(info$width / sc$size) * ceiling(info$height / sc$size)
 
   checksum <- mosaic_checksum(img = src, tiles = tiles, size = sc$size)
   golden_rows[[sc$label]] <- data.frame(
