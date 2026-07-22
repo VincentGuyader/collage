@@ -9,3 +9,4 @@ images
 ^examples$
 ^codecov\.yml$
 ^\.covrignore$
+^dev$
