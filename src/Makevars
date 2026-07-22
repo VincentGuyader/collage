@@ -1,1 +1,2 @@
-PKG_CPPFLAGS = -I../inst/include
+PKG_CPPFLAGS = -I../inst/include -DRCPP_PARALLEL_USE_TBB=1
+PKG_LIBS += $(shell "${R_HOME}/bin/Rscript" -e "RcppParallel::RcppParallelLibs()")
