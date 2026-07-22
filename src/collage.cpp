@@ -2,28 +2,24 @@
 
 // [[Rcpp::export]]
 RawVector collage_impl( List tiles, int width, int height, IntegerVector best_tiles, int size ){
-  int n = 4 * ( width * size ) * ( height * size ) ;
+  // R_xlen_t: the mosaic can exceed 2^31 bytes for large images
+  R_xlen_t n = 4 * (R_xlen_t)( width * size ) * ( height * size ) ;
   RawVector out = no_init(n) ;
 
   // store the tiles into a std::vector of NumericVector so that
   // they can be used in parallel
   std::vector<RawVector> tiles_vector( tiles.begin(), tiles.end() ) ;
 
+  // one output pixel row at a time so that writes to `out` are sequential;
+  // the tiles being read are small enough to stay in cache
+  int out_row = 4 * width * size ;
   tbb::parallel_for( 0, height, [&](int i){
-    int k = i*width ;
-    for( int j=0; j<width; j++, k++){    // columns
-      // fill the given position with the best tile
-
-      int offset = i * 4 * size * width * size + 4 * j * size ;
-
-      Rbyte* p = tiles_vector[ best_tiles[k] ].begin() ;
-      Rbyte* q = out.begin() + offset ;
-
-      // copy each row of the tile into the output's pixel (size*size)
-      for( int ii = 0; ii < size; ii++){
+    for( int ii = 0; ii < size; ii++){
+      Rbyte* q = out.begin() + (R_xlen_t)(i * size + ii) * out_row ;
+      const int* bt = best_tiles.begin() + i * width ;
+      for( int j=0; j<width; j++, q += 4 * size){
+        const Rbyte* p = tiles_vector[ bt[j] ].begin() + ii * 4 * size ;
         std::copy( p, p + 4 * size, q ) ;
-        p += 4 * size ;
-        q += 4 * width * size ;
       }
     }
   }) ;
