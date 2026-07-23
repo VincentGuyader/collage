@@ -7,3 +7,10 @@
 *.so
 inst/doc
 data-raw/emojis
+
+# R CMD check / build artifacts
+*.Rcheck/
+*.tar.gz
+
+# generated example mosaics (reproducible via examples/build_examples.R)
+examples/output/

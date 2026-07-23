@@ -19,14 +19,23 @@ IntegerVector find_best_tiles( RawVector img, int size, DataFrame base ){
   IntegerVector dim = img.attr("dim") ;
   int ncol = dim[1], nrow = dim[2] ;
 
-  // the rgb vectors for the base
+  // the rgb vectors for the base, converted to double once so that the
+  // per-block search loop below does not redo the raw -> double conversion
+  // nbase times per block
   RawVector R = base["red"] ;
   RawVector G = base["green"] ;
   RawVector B = base["blue"] ;
   int nbase = R.size() ;
 
+  std::vector<double> Rd(nbase), Gd(nbase), Bd(nbase) ;
+  for( int i=0; i<nbase; i++){
+    Rd[i] = R[i] ;
+    Gd[i] = G[i] ;
+    Bd[i] = B[i] ;
+  }
+
   auto get_distance = [&](int i, double r, double g, double b){
-    return square(r-R[i]) + square(g-G[i]) + square(b-B[i]);
+    return square(r-Rd[i]) + square(g-Gd[i]) + square(b-Bd[i]);
   } ;
 
   IntegerVector row_steps = get_steps( nrow, size ) ;
@@ -48,22 +57,22 @@ IntegerVector find_best_tiles( RawVector img, int size, DataFrame base ){
       int col_start = col_steps[j] ;
       int col_end = col_steps[j+1] ;
 
-      double red = 0.0 ;
-      double green = 0.0 ;
-      double blue = 0.0 ;
+      // integer accumulation is exact here (sums of bytes) and cheaper
+      // than accumulating in double
+      long long red_sum = 0, green_sum = 0, blue_sum = 0 ;
 
       for( int ii=row_start; ii<row_end; ii++){
-        Rbyte* p = img.begin() + 4*( ii*ncol + col_start );
+        const Rbyte* p = img.begin() + 4*( ii*ncol + col_start );
         for(int jj=col_start; jj<col_end; jj++, p+=4){
-          red += p[0] ;
-          green += p[1] ;
-          blue += p[2] ;
+          red_sum += p[0] ;
+          green_sum += p[1] ;
+          blue_sum += p[2] ;
         }
       }
       int npixels = (row_end-row_start) * (col_end - col_start) ;
-      red = red / npixels ;
-      green = green / npixels ;
-      blue = blue / npixels ;
+      double red = (double)red_sum / npixels ;
+      double green = (double)green_sum / npixels ;
+      double blue = (double)blue_sum / npixels ;
 
       double distance = get_distance(0, red, green, blue) ;
       int best = 0 ;

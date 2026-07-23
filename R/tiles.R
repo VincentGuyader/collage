@@ -9,7 +9,7 @@ image_square_bitmap <- function( images, size = 25){
   geometry <- sprintf( "%dx%d!", size, size )
   image_scale(images, geometry) %>%
     as.list() %>%
-    map( extract2, 1L )
+    map( image_data, channels = "rgba" )
 }
 
 #' Generates a tile base from a set of files
@@ -25,7 +25,7 @@ image_square_bitmap <- function( images, size = 25){
 #'   tiles(files, size = 25)
 #' }
 #' @importFrom tibble tibble
-#' @importFrom magick image_read image_scale image_join
+#' @importFrom magick image_read image_scale image_join image_data
 #' @importFrom purrr map map_df
 #' @importFrom magrittr %>%
 #' @export
